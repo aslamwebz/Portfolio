@@ -16,7 +16,7 @@ import Contact from './Components/Contact.vue'
 
 
             <!-- hero section -->
-            <div class="lg:2/6 xl:w-2/4 mt-20 lg:mt-30 text-left">
+            <div class="lg:w-2/6 xl:w-2/4 mt-20 lg:mt-30 text-left">
                 <div class="text-2xl font-semibold text-[#728afb] leading-none">Greetings! 👋 I'm</div>
                 <div class="text-6xl font-semibold text-gray-900 leading-none">Mohamed Aslam</div>
                 <div class="text-3xl font-semibold text-gray-900 leading-none">Full Stack developer</div>
@@ -31,8 +31,8 @@ import Contact from './Components/Contact.vue'
                 </a>
             </div>
             <div class="mt-12 lg:mt-32 lg:ml-20 text-left">
-                <bottom type="button"
-                    class="flex items-center justify-center w-12 h-12 rounded-full bg-cool-gray-100 text-gray-800 animate-bounce hover:text-gray-900 hover:bg-cool-gray-50 transition duration-300 ease-in-out cursor-pointer">
+                <button type="button"
+                    class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 text-gray-800 animate-bounce hover:text-gray-900 hover:bg-gray-50 transition duration-300 ease-in-out cursor-pointer">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,7 +52,7 @@ import Contact from './Components/Contact.vue'
             <!-- Footer -->
             <Footer></Footer>
         </div>
-        <div class="area" >
+        <div class="area">
             <ul class="circles">
                 <li></li>
                 <li></li>
@@ -83,8 +83,7 @@ import Contact from './Components/Contact.vue'
 }
 
 .area{
-    background: #4e54c8;
-    background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+    background: linear-gradient(to left, #8f94fb, #4e54c8);
     width: 100%;
     height:100vh;
 }
