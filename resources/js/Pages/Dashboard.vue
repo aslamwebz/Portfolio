@@ -14,7 +14,7 @@ import Hero from "@/Pages/Components/Hero.vue";
 
     <AuthenticatedLayout>
 
-        <div class="py-6">
+        <div>
             <!-- hero section -->
             <Hero></Hero>
 

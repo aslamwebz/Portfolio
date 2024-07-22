@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <div class="lg:w-2/6 xl:w-2/4 mt-10 lg:mt-20 text-left py-10 bg-white rounded context  col-span-1">
+    <div class="min-h-screen flex items-center">
+        <div class="text-left py-10 brounded context col-span-1 p-4">
             <div class="text-2xl font-semibold text-[#728afb] leading-none">Greetings! 👋 I'm</div>
-            <div class="text-6xl font-semibold text-gray-900 leading-none">Mohamed Aslam</div>
-            <div class="text-3xl font-semibold text-gray-900 leading-none">Full Stack developer</div>
+            <div class="text-6xl font-semibold text-[#9ea2b6]  leading-none">Mohamed Aslam</div>
+            <div class="text-3xl font-semibold text-[#9ea2b6]  leading-none">Backend/Full Stack developer</div>
             <div class="mt-6 mb-8 text-xl font-light text-[#9ea2b6] antialiased">Driven by a passion for innovation
                 and backed by years of experience, I specialize in the intricate world of back-end development. From
                 crafting efficient databases to optimizing server-side processes, I'm committed to building the
