@@ -6,6 +6,7 @@ import Services from './Components/Services.vue';
 import Footer from './Components/Footer.vue';
 import Contact from './Components/Contact.vue'
 import Hero from "@/Pages/Components/Hero.vue";
+import Skills from "@/Pages/Components/Skills.vue";
 </script>
 
 <template>
@@ -16,18 +17,22 @@ import Hero from "@/Pages/Components/Hero.vue";
 
         <div>
             <!-- hero section -->
-            <Hero></Hero>
+            <Hero />
 
             <!-- Services -->
-            <Services></Services>
+            <Services />
+
+            <!-- Services -->
+            <Skills />
 
             <!-- Resume Experience Section -->
-            <Resume></Resume>
+            <Resume />
 
             <!-- Resume Experience Section -->
-            <Contact></Contact>
+            <Contact />
+
             <!-- Footer -->
-            <Footer></Footer>
+            <Footer  />
         </div>
 
     </AuthenticatedLayout>

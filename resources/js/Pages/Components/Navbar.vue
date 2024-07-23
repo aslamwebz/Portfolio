@@ -1,7 +1,7 @@
 <template>
     <Disclosure as="nav" class="bg-white sticky top-0" v-slot="{ open }">
         <div class="mx-auto max-w-[84%] px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between"  :class="{ 'scrolled': scrollPosition > 10 , 'h-32 ': scrollPosition < 10 }">
+            <div class="relative flex items-center justify-between"  :class="{ 'scrolled': scrollPosition > 2 , 'h-32 ': scrollPosition < 2 }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <DisclosureButton
