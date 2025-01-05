@@ -20,6 +20,11 @@ Route::get('/', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+
+Route::get('/autozone', function () {
+    return Inertia::render('Autozone/index');
+})->name('autozone.index');
+
 // Products
 Route::get('/products', [ProductController::class, 'index'])->name('product.index');
 

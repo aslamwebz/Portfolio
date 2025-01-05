@@ -1,7 +1,7 @@
 <template>
-    <div class="skill-item text-[50px] font-normal">
+    <div class="p-4 skill-item text-[50px] font-normal">
         <div class="skill-item-content">
-            <i :class="iconClass"></i>
+            <i :class="icon"></i>
             <p>{{ skillName }}</p>
         </div>
     </div>
@@ -10,7 +10,7 @@
 <script>
 export default {
     props: {
-        iconClass: {
+        icon: {
             type: String,
             required: true
         },
@@ -24,8 +24,6 @@ export default {
 
 <style scoped>
 .skill-item {
-    border: 1px solid black;
-    border-radius: 20px;
     font-size: 44px;
     height: 90px;
     width: 90px;

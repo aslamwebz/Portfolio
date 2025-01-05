@@ -1,11 +1,11 @@
 <template>
-    <div class="services py-12">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">My Services</h2>
+    <div class="py-12 services">
+        <div class="mb-12 text-center">
+            <h2 class="mb-4 text-3xl font-bold">My Services</h2>
             <p class="text-gray-600">There are many variations of passages of Lorem Ipsum available but the majority
                 have suffered alteration in some form.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 ">
             <ServiceCard v-for="service in services" :key="service.title" :icon="service.icon" :title="service.title"
                 :description="service.description" />
         </div>
@@ -45,4 +45,6 @@ const services = [
 .services {
     background-color: #f9f9f9;
 }
+
+
 </style>

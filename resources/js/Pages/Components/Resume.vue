@@ -16,32 +16,39 @@ import ResumeEntry from './ResumeEntry.vue';
 
 const entries = [
     {
-        title: 'UI/UX Designer',
-        company: 'Google INC',
-        location: 'New York',
-        period: '2011 - 2013',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        title: 'PHP Backend Developer',
+        company: 'FULLSTRIPE TECHNOLOGIES S.R.O.',
+        location: 'Remote, Czechia',
+        period: '07/05/2021 – CURRENT',
+        description: 'Spearheaded web application development using PHP, Laravel, and Vue.js. Enhanced user experience through robust authentication systems and diverse payment gateways. Optimized codebase for 30% better performance and integrated real-time chat systems.'
     },
     {
-        title: 'Web Designer',
-        company: 'Facebook INC',
-        location: 'New York',
-        period: '2014 - 2018',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        title: 'WordPress and PHP Web Developer',
+        company: 'REMOTE - OFFICE ONE',
+        location: 'Sri Lanka',
+        period: '07/2019 – 11/2020',
+        description: 'Transformed design mockups into functional WordPress websites. Developed custom plugins, integrated external APIs, and maintained web projects documentation. Focused on troubleshooting and clean coding practices.'
     },
     {
-        title: 'Specialization Course',
-        company: 'Stanford University',
-        location: 'New York',
-        period: '2017 - 2018',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        title: 'System Administrator',
+        company: 'QATARLINE',
+        location: 'Doha, Qatar',
+        period: '01/2017 – 05/2019',
+        description: 'Managed routers, switches, and wireless devices. Handled IT security administration and system backup. Configured and monitored network infrastructure, ensuring smooth operation and security.'
     },
     {
-        title: 'Bachelor Degree',
-        company: 'Stanford University',
-        location: 'New York',
-        period: '2019 - 2021',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        title: 'IT Administrator',
+        company: 'AURA TECH SOLUTIONS',
+        location: 'Colombo, Sri Lanka',
+        period: '12/2015 – 12/2016',
+        description: 'Provided system and network administration, technical support, and server installation. Designed and implemented network systems, ensuring access and security throughout customer destinations.'
+    },
+    {
+        title: 'Technical Support Engineer',
+        company: 'VG ENGINEERING',
+        location: 'Doha, Qatar',
+        period: '12/2013 – 05/2015',
+        description: 'Provided level 3 technical support and managed incoming tickets. Administered Active Directory and ensured reliable technical service for both onsite and remote support.'
     }
 ];
 

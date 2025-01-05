@@ -19,21 +19,6 @@
             <p class=" mt-4">{{ description }}</p>
         </div>
     </div>
-    <!-- <div class="relative w-8">
-        <div class="bg-blue-500 w-4 h-4 rounded-full z-10"></div>
-    </div>
-    <div class="w-[50%] px-2" :class="[isLeftAligned ? 'text-left' : 'text-right']">
-        <h3 class="text-xl font-bold">{{ title }}</h3>
-        <p class="text-gray-600">{{ company }} | {{ location }}</p>
-        <span class="inline-block bg-blue-500 text-white text-sm px-2 py-1 rounded mt-2">{{ period }}</span>
-        <p class="text-gray-600 mt-4">{{ description }}</p>
-    </div>
-    <div class="w-[50%]" :class="[isLeftAligned ? 'text-left' : 'text-right']">
-        <h3 class="text-xl font-bold">{{ title }}</h3>
-        <p class="text-gray-600">{{ company }} | {{ location }}</p>
-        <span class="inline-block bg-blue-500 text-white text-sm px-2 py-1 rounded mt-2">{{ period }}</span>
-        <p class="text-gray-600 mt-4">{{ description }}</p>
-    </div> -->
 </template>
 
 <script setup>

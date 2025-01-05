@@ -4,9 +4,9 @@ import { Head } from '@inertiajs/vue3';
 import Resume from './Components/Resume.vue';
 import Services from './Components/Services.vue';
 import Footer from './Components/Footer.vue';
-import Contact from './Components/Contact.vue'
 import Hero from "@/Pages/Components/Hero.vue";
-import Skills from "@/Pages/Components/Skills.vue";
+import About from "@/Pages/Components/About.vue";
+
 </script>
 
 <template>
@@ -19,25 +19,20 @@ import Skills from "@/Pages/Components/Skills.vue";
             <!-- hero section -->
             <Hero />
 
-            <!-- Services -->
-            <Services />
+            <!-- about section -->
+            <About />
 
             <!-- Services -->
-            <Skills />
+            <Services />
 
             <!-- Resume Experience Section -->
             <Resume />
 
-            <!-- Resume Experience Section -->
-            <Contact />
-
             <!-- Footer -->
-            <Footer  />
+            <Footer />
         </div>
 
     </AuthenticatedLayout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

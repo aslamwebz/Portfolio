@@ -1,24 +1,17 @@
 <template>
     <div>
-        <section id="my-skills" class="section-padding py-[55px] px-[5px]">
-            <div class="container">
-                <div class="row">
-                    <div>
-                        <div class="section-title text-[50px] text-center my-[50px]">
-                            <h2>Professional Skills</h2>
+        <section id="my-skills" class="p-6 mt-4">
+            <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
+                <transition name="icon-bounce">
+                    <div class="grid grid-cols-3 gap-4 text-center lg:grid-cols-8">
+                        <div class="p-4 font-normal skill-item" v-for="skill in skills">
+                            <div class="skill-item-content">
+                                <i :class="skill.icon"></i>
+                                <p>{{ skill.skillName }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="container mt-5">
-                <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
-                    <transition name="icon-bounce">
-                        <div class="md:flex justify-between w-full">
-                            <SkillItem v-for="skill in skills" :key="skill.skillName" :iconClass="skill.iconClass"
-                                :skillName="skill.skillName" />
-                        </div>
-                    </transition>
-                </div>
+                </transition>
             </div>
         </section>
     </div>
@@ -26,28 +19,59 @@
 
 <script setup>
 
-import SkillItem from './SkillItem.vue';
 import { ref } from 'vue';
 
 const skills = ref(
     [
-        { iconClass: 'fa-brands fa-laravel', skillName: 'Laravel' },
-        { iconClass: 'fa-brands fa-php', skillName: 'PHP' },
-        { iconClass: 'fa-solid fa-database', skillName: 'Databases' },
-        { iconClass: 'fa-brands fa-js', skillName: 'JavaScript' },
-        { iconClass: 'fa-solid fa-j', skillName: 'JQuery' },
-        { iconClass: 'fa-brands fa-git', skillName: 'GIT' },
-        { iconClass: 'fa-brands fa-bootstrap', skillName: 'BOOTSTRAP' },
-        { iconClass: 'fa-brands fa-sass', skillName: 'SASS' },
-        { iconClass: 'fa-brands fa-css3-alt', skillName: 'CSS3' },
-        { iconClass: 'fa-brands fa-html5', skillName: 'HTML5' },
-        { iconClass: 'fa-regular fa-image', skillName: 'Photoshop' }
+        { icon: 'devicon-laravel-original colored', skillName: 'Laravel' },
+        { icon: 'devicon-php-plain colored', skillName: 'PHP' },
+        { icon: 'devicon-javascript-plain colored', skillName: 'Javascript' },
+        { icon: 'devicon-livewire-plain-wordmark colored', skillName: 'Livewire' },
+        { icon: 'devicon-vuejs-plain colored', skillName: 'VueJS' },
+        { icon: 'devicon-tailwindcss-original colored', skillName: 'Tailwind Css' },
     ]
 );
 
 </script>
 
 <style scoped>
+.skill-item {
+    font-size: 50px;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.skill-item {
+    height: 90px;
+    width: 90px;
+    position: relative;
+    justify-content: center;
+}
+
+.skill-item-content>p {
+    display: none;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    font-weight: bold;
+    -webkit-transition: .3s;
+    transition: .3s;
+    /* text-align: center; */
+    margin: 0;
+}
+
+.skill-item:hover p {
+    display: block;
+}
+
+.skill-item:hover p {
+    display: block;
+}
+
 .icon-bounce-enter-active,
 .icon-bounce-leave-active {
     transition: transform 0.5s;

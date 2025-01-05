@@ -1,9 +1,9 @@
 <template>
-    <div class="service-card p-6 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105">
-        <div class="icon text-6xl mb-4">
+    <div class="p-6 text-center transition-transform transform rounded-lg shadow-lg service-card hover:scale-105">
+        <div class="mb-4 text-6xl icon">
             <i :class="icon"></i>
         </div>
-        <h3 class="text-xl font-bold mb-2">{{ title }}</h3>
+        <h3 class="mb-2 text-xl font-bold">{{ title }}</h3>
         <p class="text-gray-600">{{ description }}</p>
     </div>
 </template>
