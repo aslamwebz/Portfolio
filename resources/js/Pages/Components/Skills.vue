@@ -3,7 +3,7 @@
         <section id="my-skills" class="p-6 mt-4">
             <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
                 <transition name="icon-bounce">
-                    <div class="grid grid-cols-3 gap-4 text-center lg:grid-cols-8">
+                    <div class="grid text-center lg:grid-cols-8">
                         <div class="p-4 font-normal skill-item" v-for="skill in skills">
                             <div class="skill-item-content">
                                 <i :class="skill.icon"></i>
@@ -28,6 +28,7 @@ const skills = ref(
         { icon: 'devicon-javascript-plain colored', skillName: 'Javascript' },
         { icon: 'devicon-livewire-plain-wordmark colored', skillName: 'Livewire' },
         { icon: 'devicon-vuejs-plain colored', skillName: 'VueJS' },
+        { icon: 'devicon-tailwindcss-original colored', skillName: 'Tailwind Css' },
         { icon: 'devicon-tailwindcss-original colored', skillName: 'Tailwind Css' },
     ]
 );

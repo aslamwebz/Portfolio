@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section id="my-skills" class="p-6 mt-4">
+        <section id="my-skills" class="mb-4">
             <div class="">
                 <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
                     <transition name="icon-bounce">
