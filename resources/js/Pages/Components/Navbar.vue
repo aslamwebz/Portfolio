@@ -1,5 +1,5 @@
 <template>
-    <Disclosure as="nav" class="sticky top-0 bg-white z-50" v-slot="{ open }">
+    <Disclosure as="nav" class="sticky top-0 bg-white z-50 mx-[14%]" v-slot="{ open }">
         <div class="px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between nav" :style="{ height: navbarHeight + 'rem' }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
@@ -51,8 +51,8 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const scrollY = ref(0);
-const defaultHeight = 6; // default height of the navbar
-const scrolledHeight = 8;  // height of the navbar when scrolled
+const defaultHeight = 5; // default height of the navbar
+const scrolledHeight = 7;  // height of the navbar when scrolled
 
 
 onBeforeMount(() => {

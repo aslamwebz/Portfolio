@@ -15,9 +15,7 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <!-- Primary Navigation Menu -->
-         <div class="mx-[14%]">
              <Navbar />
-         </div>
 
         <div class="main-content relative mx-[6%]">
 

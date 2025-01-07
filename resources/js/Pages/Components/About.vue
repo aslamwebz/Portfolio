@@ -1,27 +1,35 @@
 <template>
     <div>
-        <div class="container mx-auto py-8">
+        <div class="container mx-auto py-8 ">
             <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
-                <div class="col-span-4 sm:col-span-3">
-                    <div class="bg-white shadow-2xl  rounded-lg p-6">
+                <div class="bg-gray-700 col-span-4 sm:col-span-3 rounded shadow-black shadow-2xl">
+                    <div class=" px-4 py-2 relative">
+                        <div class="flex space-x-2 absolute left-4">
+                            <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
+                        </div>
+                        <div class="text-white text-[20px] text-center">aboutMe.php</div>
+                    </div>
+                    <div class="bg-gray-800 p-6">
                         <div class="flex flex-col items-center">
                             <img src="https://randomuser.me/api/portraits/men/94.jpg"
                                 class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
 
                             </img>
                             <h1 class="text-xl font-bold">John Doe</h1>
-                            <p class="text-gray-700">Software Developer</p>
+                            <p class="text-white">Software Developer</p>
                             <div class="mt-6 flex flex-wrap gap-4 justify-center">
                                 <a href="#"
                                     class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
                                 <a href="#"
-                                    class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Resume</a>
+                                    class="bg-gray-300 hover:bg-gray-400 text-white py-2 px-4 rounded">Resume</a>
                             </div>
                         </div>
                         <hr class="my-6 border-t border-gray-300">
                         <div class="flex flex-col">
-                            <span class="text-gray-700 uppercase font-bold tracking-wider mb-2">Skills</span>
-                            <ul>
+                            <span class="text-white uppercase font-bold tracking-wider mb-2">Skills</span>
+                            <ul class="text-white">
                                 <li class="mb-2">JavaScript</li>
                                 <li class="mb-2">React</li>
                                 <li class="mb-2">Node.js</li>
@@ -32,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-span-4 sm:col-span-9">
-                    <div class="bg-white shadow rounded-lg p-6">
+                    <div class="bg-white rounded-lg p-6  shadow-2xl">
                         <h2 class="text-xl font-bold mb-4">About Me</h2>
                         <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus
                             est

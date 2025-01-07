@@ -1,6 +1,6 @@
 <template>
-    <div class="flex justify-center">
-        <div class="px-2 py-4 tooltip" :class="[isLeftAligned ? 'text-white' : 'text-right']">
+    <div class="flex justify-center ">
+        <div class="px-2 py-2 tooltip" :class="[isLeftAligned ? 'text-white' : 'text-right']">
             <h3 class="text-xl font-bold">{{ title }}</h3>
             <p class="">{{ company }} | {{ location }}</p>
             <span class="inline-block  text-white text-sm px-2 py-1 rounded mt-2"
@@ -11,7 +11,7 @@
             <div class="w-1 bg-sky-300 absolute inset-y-0 left-1/2 transform -translate-x-1/2"></div>
             <div class="border-4 bg-white border-blue-500 w-4 h-4 rounded-full z-20"></div>
         </div>
-        <div class="px-2 py-4 tooltip" :class="[isLeftAligned ? 'text-left' : 'text-white']">
+        <div class="px-2 py-2 tooltip" :class="[isLeftAligned ? 'text-left' : 'text-white']">
             <h3 class="text-xl font-bold">{{ title }}</h3>
             <p class="">{{ company }} | {{ location }}</p>
             <span class="inline-block text-white text-sm px-2 py-1 rounded mt-2"
