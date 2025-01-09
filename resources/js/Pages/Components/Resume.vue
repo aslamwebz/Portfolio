@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import ResumeEntry from './ResumeEntry.vue';
+import ResumeEntry from '@/Pages/Components/Resume/ResumeEntry.vue';
 
 const entries = [
     {

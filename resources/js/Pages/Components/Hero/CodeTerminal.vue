@@ -23,9 +23,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center shadow-black shadow-2xl my-6">
+  <div class="flex items-center justify-center my-6">
     <!-- Terminal Window -->
-    <div class="bg-gray-800 rounded-lg overflow-hidden">
+    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-black shadow-2xl ">
       <!-- Terminal Header -->
       <div class="bg-gray-700 px-4 py-2 relative">
         <div class="flex space-x-2 absolute left-4">

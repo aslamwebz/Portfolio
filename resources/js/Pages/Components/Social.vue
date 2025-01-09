@@ -1,7 +1,7 @@
 <template>
     <div>
         <section id="my-skills" class="mb-4">
-            <div class="">
+            <div>
                 <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
                     <transition name="icon-bounce">
                         <div class="flex justify-center text-center">

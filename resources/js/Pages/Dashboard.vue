@@ -22,9 +22,7 @@ import About from "@/Pages/Components/About.vue";
             <About />
 
             <!-- Services -->
-            <Services />
-
-
+            <!-- <Services /> -->
 
             <!-- Footer -->
             <Footer />

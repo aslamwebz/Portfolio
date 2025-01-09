@@ -1,7 +1,7 @@
 <template>
-    <Disclosure as="nav" class="sticky top-0 bg-white z-50 mx-[14%]" v-slot="{ open }">
-        <div class="px-2 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between nav" :style="{ height: navbarHeight + 'rem' }">
+    <Disclosure as="nav" class="sticky top-0 bg-white z-50 " v-slot="{ open }">
+        <div class="navbar">
+            <div class="relative flex items-center justify-between nav mx-[12%] sm:px-6 lg:px-8" :style="{ height: navbarHeight + 'rem' }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
                     <!-- Mobile menu button-->
                     <DisclosureButton
@@ -76,6 +76,13 @@ const navigation = [
 
 function handleScroll() {
     scrollY.value = window.scrollY;
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 0) {
+        console.log('hi')
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
 }
 
 function download() {
@@ -100,5 +107,9 @@ function download() {
 <style scoped>
 .nav {
     transition: height 0.3s ease;
+}
+
+.scrolled {
+    border-bottom: 0.5px solid lightgray;
 }
 </style>

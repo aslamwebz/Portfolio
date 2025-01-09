@@ -1,14 +1,14 @@
 <template>
     <div >
         <HeroBackground />
-        <div class=" min-h-screen px-6 mx-auto mt-[4rem]">
+        <div class="min-h-screen px-6 mx-auto">
             <div class="flex flex-col items-center">
                 <img src="img/profile.gif" alt="Mohamed Aslam">
                 <Social />
                 <div class="text-2xl font-semibold text-gradient leading-none from-blue-500 to-purple-500">
                     Greetings! 👋 I'm
                 </div>
-                <div class="text-5xl font-bold  leading-tight">
+                <div class="text-5xl font-bold leading-tight">
                     Mohamed Aslam
                 </div>
                 <CodeTerminal />
