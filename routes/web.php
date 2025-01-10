@@ -20,19 +20,10 @@ Route::get('/', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-
-Route::get('/autozone', function () {
-    return Inertia::render('Autozone/index');
-})->name('autozone.index');
-
 // Products
-Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-
-// Orders
-Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-
-// Clients
-Route::get('/clients', [ClientController::class, 'index'])->name('client.index');
+Route::get('/hearty-meal', function () {
+    return Inertia::render('HeartyMeal/Index');
+})->name('heartyMeal');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
