@@ -50,9 +50,10 @@ import { ref, onBeforeMount, onBeforeUnmount, computed } from 'vue';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
+// Can change the height of the navbar when scrolled
 const scrollY = ref(0);
-const defaultHeight = 5; // default height of the navbar
-const scrolledHeight = 7;  // height of the navbar when scrolled
+const defaultHeight = 6; // default height of the navbar
+const scrolledHeight = 6;  // height of the navbar when scrolled
 
 
 onBeforeMount(() => {

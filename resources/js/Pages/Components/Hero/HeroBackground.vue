@@ -1,9 +1,6 @@
 <template>
     <div>
         <ul id="scene" ref="scene" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15">
-            <li class="layer" data-depth="0.00">
-                <div class="depth-0">Foreground</div>
-            </li>
             <li class="layer" data-depth="0.20">
                 <div class="depth-1 flake1 text-purple-50">
                     <i class="devicon-laravel-original colored"></i>

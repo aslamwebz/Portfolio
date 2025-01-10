@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="container mx-auto py-8 ">
+        <div class="container mx-auto py-8 max-w-7xl">
             <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4 ">
                 <div class="bg-gray-800 col-span-4 sm:col-span-3 rounded-md shadow-black shadow-2xl">
-                    <div class="px-4 py-2 relative">
+                    <div class="bg-gray-700 px-4 py-2 relative rounded-md">
                         <div class="flex space-x-2 absolute left-4">
                             <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
                             <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
@@ -76,8 +76,8 @@
                     </div>
                 </div>
                 <div class="col-span-4 sm:col-span-9 ">
-                    <div class="bg-gray-800 rounded-md shadow-black shadow-2xl ">
-                        <div class=" px-4 py-2 relative rounded-t-lg">
+                    <div class="bg-gray-800 rounded-md shadow-black shadow-2xl">
+                        <div class="bg-gray-700 px-4 py-2 relative rounded-t-lg">
                             <div class="flex space-x-2 absolute left-4">
                                 <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
                                 <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="text-white text-[20px] text-center">aboutMe.php</div>
                         </div>
-                        <div class="bg-gray-800 text-white p-12 text-[1.5rem] ">
+                        <div class="bg-gray-800 text-white p-12 text-[1.5rem] rounded-md">
                             <p class="py-2">
                                 Hello! <b>I'm Aslam, a Web Developer</b> and tech enthusiast who thrives on building
                                 efficient, scalable, and user-focused web solutions. With a strong foundation in backend

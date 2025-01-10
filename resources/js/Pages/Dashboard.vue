@@ -5,6 +5,7 @@ import Services from './Components/Services.vue';
 import Footer from './Components/Footer.vue';
 import Hero from "@/Pages/Components/Hero.vue";
 import About from "@/Pages/Components/About.vue";
+import Projects from './Components/Projects.vue';
 
 </script>
 
@@ -20,6 +21,9 @@ import About from "@/Pages/Components/About.vue";
 
             <!-- about section -->
             <About />
+
+            <!-- Projects -->
+             <Projects />
 
             <!-- Services -->
             <!-- <Services /> -->
