@@ -16,4 +16,14 @@ class HMCategories extends Model
     protected $casts = [
         'icon' => 'array',
     ];
+
+    public function restaurents()
+    {
+        return $this->belongsToMany(Restaurent::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

@@ -6,13 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\HMCategories;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Restaurant;
 
 class HeartyMealController extends Controller
 {
+
     public function index()
     {
-        $products = Product::all();
-        return response()->json($products);
+        return Inertia::render('HeartyMeal/Index', [
+            'restaurants' => Restaurant::with(['dishes'])->get()->map(function ($restaurant) {
+                return [
+                    'id' => $restaurant->id,
+                    'name' => $restaurant->name,
+                    'cuisine' => $restaurant->cuisine,
+                    'image' => $restaurant->image,
+                    'dishes' => $restaurant->dishes->map(function ($dish) {
+                        return [
+                            'id' => $dish->id,
+                            'name' => $dish->name,
+                        ];
+                    }),
+                ];
+            }),
+        ]);
     }
 
     public function indexByCategory(string $category)

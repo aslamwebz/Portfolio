@@ -3,48 +3,48 @@
         <ul id="scene" ref="scene" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15">
             <li class="layer" data-depth="0.20">
                 <div class="depth-1 flake1 text-purple-50">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-laravel-plain colored"></i>
                 </div>
                 <div class="depth-1 flake2">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-vuejs-plain colored"></i>
                 </div>
                 <div class="depth-1 flake3">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-javascript-plain colored"></i>
                 </div>
                 <div class="depth-1 flake4">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-php-plain colored"></i>
                 </div>
             </li>
             <li class="layer" data-depth="0.40">
                 <div class="depth-2 flake1">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-mysql-plain colored"></i>
                 </div>
                 <div class="depth-2 flake2">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-tailwindcss-plain colored"></i>
                 </div>
             </li>
             <li class="layer" data-depth="0.60">
                 <div class="depth-3 flake1">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-git-plain colored"></i>
                 </div>
                 <div class="depth-3 flake2">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-nodejs-plain colored"></i>
                 </div>
                 <div class="depth-3 flake3">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-html5-plain colored"></i>
                 </div>
                 <div class="depth-3 flake4">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-css3-plain colored"></i>
                 </div>
             </li>
             <li class="layer" data-depth="0.80">
                 <div class="depth-4">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-docker-plain colored"></i>
                 </div>
             </li>
             <li class="layer" data-depth="1.00">
                 <div class="depth-5">
-                    <i class="devicon-laravel-original colored"></i>
+                    <i class="devicon-github-original colored"></i>
                 </div>
             </li>
         </ul>

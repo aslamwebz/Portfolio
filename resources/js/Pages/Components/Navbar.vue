@@ -1,5 +1,5 @@
 <template>
-    <Disclosure as="nav" class="sticky top-0 bg-white z-50 " v-slot="{ open }">
+    <Disclosure as="nav" class="sticky top-0 z-50 bg-white " v-slot="{ open }">
         <div class="navbar">
             <div class="relative flex items-center justify-between nav mx-[12%] sm:px-6 lg:px-8" :style="{ height: navbarHeight + 'rem' }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
@@ -18,8 +18,8 @@
                             M Aslam
                         </span>
                     </div>
-                    <div class="hidden sm:block ml-auto">
-                        <div class="flex space-x-4 p-3">
+                    <div class="hidden ml-auto sm:block">
+                        <div class="flex p-3 space-x-4">
                             <a v-for="item in navigation" :key="item.name" :href="item.href"
                                 :class="[item.current ? 'bg-gray-900 text-white' : 'text-black hover:text-[#f39c12]', 'rounded-md px-3 py-2 text-[19px] font-medium']"
                                 :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
@@ -79,7 +79,6 @@ function handleScroll() {
     scrollY.value = window.scrollY;
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 0) {
-        console.log('hi')
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');

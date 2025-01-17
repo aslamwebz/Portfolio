@@ -16,52 +16,47 @@ class HMCategorySeeder extends Seeder
             [
                 'name' => 'Indian Food',
                 'slug' => 'indian-food',
-                'icon' => ['url' => 'indian.png'],
+                'icon' => ['url' => 'img/HeartyMeal/indian.png'],
             ],
             [
                 'name' => 'Salad',
                 'slug' => 'salad',
-                'icon' => ['url' => 'salad.png'],
+                'icon' => ['url' => 'img/HeartyMeal/salad.png'],
             ],
             [
                 'name' => 'Pizza',
                 'slug' => 'pizza',
-                'icon' => ['url' => 'pizza.png'],
+                'icon' => ['url' => 'img/HeartyMeal/pizza.png'],
             ],
             [
                 'name' => 'BBQ',
                 'slug' => 'bbq',
-                'icon' => ['url' => 'bbq.png'],
+                'icon' => ['url' => 'img/HeartyMeal/bbq.jpg'],
             ],
             [
                 'name' => 'Sandwitch',
                 'slug' => 'sandwitch',
-                'icon' => ['url' => 'sandwitch.png'],
+                'icon' => ['url' => 'img/HeartyMeal/sandwich.jpg'],
             ],
             [
                 'name' => 'Meat',
                 'slug' => 'meat',
-                'icon' => ['url' => 'meat.png'],
+                'icon' => ['url' => 'img/HeartyMeal/meat.png'],
             ],
             [
                 'name' => 'Noodles',
                 'slug' => 'noodles',
-                'icon' => ['url' => 'noodles.png'],
+                'icon' => ['url' => 'img/HeartyMeal/noodles.png'],
             ],
             [
                 'name' => 'Sea Food',
                 'slug' => 'sea-food',
-                'icon' => ['url' => 'seafood.png'],
-            ],
-            [
-                'name' => 'Sea Food',
-                'slug' => 'sea-food',
-                'icon' => ['url' => 'seafood.png'],
+                'icon' => ['url' => 'img/HeartyMeal/seafood.png'],
             ],
             [
                 'name' => 'Sri Lankan',
                 'slug' => 'sri-lankan',
-                'icon' => ['url' => 'srilankan.png'],
+                'icon' => ['url' => 'img/HeartyMeal/srilankan.png'],
             ],
         ];
 

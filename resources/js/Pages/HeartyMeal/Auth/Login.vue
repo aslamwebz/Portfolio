@@ -56,10 +56,6 @@
         </div>
     </section>
 </template>
-<div>
-
-    </div>
-</template>
 
 <script setup>
 

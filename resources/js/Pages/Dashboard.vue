@@ -26,7 +26,7 @@ import Projects from './Components/Projects.vue';
              <Projects />
 
             <!-- Services -->
-            <!-- <Services /> -->
+            <Services />
 
             <!-- Footer -->
             <Footer />

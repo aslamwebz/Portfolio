@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="container mx-auto py-8 max-w-7xl">
-            <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4 ">
-                <div class="bg-gray-800 col-span-4 sm:col-span-3 rounded-md shadow-black shadow-2xl">
-                    <div class="bg-gray-700 px-4 py-2 relative rounded-md">
-                        <div class="flex space-x-2 absolute left-4">
+        <div class="container py-8 mx-auto max-w-7xl">
+            <div class="grid grid-cols-4 gap-6 px-4 sm:grid-cols-12 ">
+                <div class="col-span-4 bg-gray-800 rounded-md shadow-2xl sm:col-span-3 shadow-black">
+                    <div class="relative px-4 py-2 bg-gray-700 rounded-md">
+                        <div class="absolute flex space-x-2 left-4">
                             <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
                             <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
                             <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
@@ -13,23 +13,28 @@
                     </div>
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img src="https://randomuser.me/api/portraits/men/94.jpg"
-                                class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
-
-                            </img>
-                            <h1 class="text-xl font-bold">John Doe</h1>
-                            <p class="text-white">Software Developer</p>
-                            <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                            <img
+                                src="https://randomuser.me/api/portraits/men/94.jpg"
+                                class="w-32 h-32 mb-4 bg-gray-300 rounded-full shadow-lg shrink-0 ring-4 ring-gray-700"
+                                alt="Profile picture"
+                            >
+                            <h1 class="mb-2 text-xl font-bold text-white">John Doe</h1>
+                            <p class="text-gray-400">Software Developer</p>
+                            <div class="flex flex-wrap justify-center gap-4 mt-8">
                                 <a href="#"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
+                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105">
+                                    Contact
+                                </a>
                                 <a href="#"
-                                    class="bg-gray-300 hover:bg-gray-400 text-white py-2 px-4 rounded">Resume</a>
+                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-600 hover:scale-105">
+                                    Resume
+                                </a>
                             </div>
                         </div>
-                        <h3 class="font-semibold text-center mt-3 -mb-2">
+                        <h3 class="mt-6 mb-4 font-semibold text-center text-gray-300">
                             Find me on
                         </h3>
-                        <div class="flex justify-center items-center gap-6 my-6">
+                        <div class="flex items-center justify-center gap-6 my-6">
                             <a class="text-white hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href=""
                                 target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-6">
@@ -76,9 +81,9 @@
                     </div>
                 </div>
                 <div class="col-span-4 sm:col-span-9 ">
-                    <div class="bg-gray-800 rounded-md shadow-black shadow-2xl">
-                        <div class="bg-gray-700 px-4 py-2 relative rounded-t-lg">
-                            <div class="flex space-x-2 absolute left-4">
+                    <div class="bg-gray-800 rounded-md shadow-2xl shadow-black">
+                        <div class="relative px-4 py-2 bg-gray-700 rounded-t-lg">
+                            <div class="absolute flex space-x-2 left-4">
                                 <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
                                 <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
                                 <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
@@ -86,33 +91,23 @@
                             <div class="text-white text-[20px] text-center">aboutMe.php</div>
                         </div>
                         <div class="bg-gray-800 text-white p-12 text-[1.5rem] rounded-md">
-                            <p class="py-2">
-                                Hello! <b>I'm Aslam, a Web Developer</b> and tech enthusiast who thrives on building
-                                efficient, scalable, and user-focused web solutions. With a strong foundation in backend
-                                development, I specialize in transforming complex ideas into seamless, functional
-                                applications that drive results.
+                            <p class="py-2 leading-relaxed">
+                                Hello! <b class="text-blue-400">I'm Aslam, a Web Developer</b> and tech enthusiast who thrives on building
+                                efficient, scalable, and user-focused web solutions.
                             </p>
-                            <p class="text-gray-500  py-2">
+                            <p class="py-4 leading-relaxed text-gray-400">
                                 My journey in tech has been fueled by a passion for continuous learning and a curiosity
-                                to
-                                explore the ever-evolving tech landscape. From crafting clean, maintainable code
-                                to optimizing application performance, I approach each project with a focus on precision
-                                and
-                                innovation.
+                                to explore the ever-evolving tech landscape.
                             </p>
-                            <p class="text-gray-500 py-2">
+                            <p class="py-4 leading-relaxed text-gray-400">
                                 Collaboration is at the heart of my work. Whether working alongside designers, product
                                 managers, or fellow developers, I believe the best solutions come from combining diverse
-                                perspectives. I also place a strong emphasis on best practices, testing, and maintaining
-                                the
-                                highest standards of code quality.
+                                perspectives.
                             </p>
-                            <p class="text-gray-500 py-2">
-                                Outside of coding, I’m always on the lookout for new challenges and opportunities to
-                                grow,
-                                staying ahead of the curve with the latest technologies and frameworks.
-
-                                Let’s create something extraordinary together!
+                            <p class="py-4 leading-relaxed text-gray-400">
+                                Outside of coding, I'm always on the lookout for new challenges and opportunities to
+                                grow, staying ahead of the curve with the latest technologies and frameworks.
+                                <span class="block mt-4 text-blue-400">Let's create something extraordinary together!</span>
                             </p>
                             <!-- Resume Experience Section -->
                         </div>
