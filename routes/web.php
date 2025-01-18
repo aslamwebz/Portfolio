@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AIController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -44,6 +45,20 @@ Route::get('/hearty-meal/delivery/{orderId}', function ($orderId) {
         'orderId' => $orderId
     ]);
 });
+
+Route::get('/ai', function () {
+    return Inertia::render('AI/Dashboard');
+})->name('ai');
+
+Route::post('/ai/chat', [AIController::class, 'chat'])->name('ai.chat');
+
+Route::get('/ai/rate-limit', [AIController::class, 'checkRateLimit'])->name('ai.rateLimit');
+
+Route::get('/ai/conversations', [AIController::class, 'getConversations'])->name('ai.conversations');
+
+Route::post('/ai/conversations', [AIController::class, 'saveConversation'])->name('ai.saveConversation');
+
+Route::post('/ai/generate-image', [AIController::class, 'generateImage'])->name('ai.generateImage');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
