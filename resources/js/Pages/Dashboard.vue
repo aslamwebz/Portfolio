@@ -1,12 +1,14 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import Services from './Components/Services.vue';
-import Footer from './Components/Footer.vue';
 import Hero from "@/Pages/Components/Hero.vue";
 import About from "@/Pages/Components/About.vue";
 import Projects from './Components/Projects.vue';
-
+import Services from './Components/Services.vue';
+import Skills from './Components/Skills.vue';
+import Resume from './Components/Resume.vue';
+import Contact from './Components/Contact.vue';
+import Footer from './Components/Footer.vue';
 </script>
 
 <template>
@@ -14,24 +16,31 @@ import Projects from './Components/Projects.vue';
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-
         <div>
-            <!-- hero section -->
+            <!-- Hero section -->
             <Hero />
 
-            <!-- about section -->
+            <!-- About section -->
             <About />
 
+            <!-- Skills section -->
+            <Skills />
+
             <!-- Projects -->
-             <Projects />
+            <Projects />
 
             <!-- Services -->
             <Services />
 
+            <!-- Resume -->
+            <!-- <Resume /> -->
+
+            <!-- Contact -->
+            <Contact />
+
             <!-- Footer -->
             <Footer />
         </div>
-
     </AuthenticatedLayout>
 </template>
 

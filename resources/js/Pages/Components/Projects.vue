@@ -7,25 +7,32 @@ const projects = ref([
         id: 'hearty-meal',
         title: 'Hearty Meal',
         description: 'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
-        image: '/img/hearty-meal.jpg'
+        image: '/img/hearty-meal.jpg',
+        github: 'https://github.com/yourusername/hearty-meal',
+        technologies: ['vue', 'laravel', 'tailwind', 'mysql']
     },
     {
-        id: 'project-2',
-        title: '',
-        description: '',
-        image: ''
+        id: 'portfolio-site',
+        title: 'Developer Portfolio',
+        description: 'My personal portfolio website built with modern technologies to showcase my projects and skills in an interactive way.',
+        image: '/img/portfolio.jpg',
+        github: 'https://github.com/yourusername/portfolio',
+        technologies: ['vue', 'laravel', 'tailwind']
     },
     {
-        id: 'project-3',
-        title: '',
-        description: '',
-        image: ''
+        id: 'chat-app',
+        title: 'Real-time Chat Application',
+        description: 'A real-time messaging platform with features like user authentication, message encryption, and file sharing capabilities.',
+        image: '/img/chat-app.jpg',
+        github: 'https://github.com/yourusername/chat-app',
+        technologies: ['vue', 'node', 'socket.io']
     },
     {
         id: 'project-4',
         title: '',
         description: '',
-        image: ''
+        image: '',
+        technologies: []
     }
 ]);
 </script>

@@ -11,8 +11,8 @@
             "deliveryTime": 30,
             "minOrder": 15,
             "distance": 2.5,
-            "image": "1_main_photo-1579751626657-72bc17010498.png",
-            "coverImage": "1_cover_photo-1555396273-367ea4eb4db5.png",
+            "image": "1_main_1_main_photo-1579751626657-72bc17010498.png",
+            "coverImage": "1_cover_1_cover_photo-1555396273-367ea4eb4db5.png",
             "categories": [
                 "pizza",
                 "italian"
@@ -29,8 +29,8 @@
             "deliveryTime": 25,
             "minOrder": 12,
             "distance": 1.8,
-            "image": "2_main_photo-1571091718767-18b5b1457add.png",
-            "coverImage": "2_cover_photo-1466978913421-dad2ebd01d17.png",
+            "image": "2_main_2_main_photo-1571091718767-18b5b1457add.png",
+            "coverImage": "2_cover_2_cover_photo-1466978913421-dad2ebd01d17.png",
             "categories": [
                 "burgers"
             ]
@@ -47,8 +47,8 @@
             "deliveryTime": 40,
             "minOrder": 20,
             "distance": 3.2,
-            "image": "3_main_photo-1579871494447-9811cf80d66c.png",
-            "coverImage": "3_cover_photo-1611143669185-af224c5e3252.png",
+            "image": "3_main_3_main_photo-1579871494447-9811cf80d66c.png",
+            "coverImage": "3_cover_3_cover_photo-1611143669185-af224c5e3252.png",
             "categories": [
                 "asian"
             ]
@@ -64,8 +64,8 @@
             "deliveryTime": 45,
             "minOrder": 25,
             "distance": 2.7,
-            "image": "4_main_photo-1585937421612-70a008356fbe.png",
-            "coverImage": "4_cover_photo-1517244683847-7456b63c5969.png",
+            "image": "4_main_4_main_photo-1585937421612-70a008356fbe.png",
+            "coverImage": "4_cover_4_cover_photo-1517244683847-7456b63c5969.png",
             "categories": [
                 "indian"
             ]
@@ -81,8 +81,8 @@
             "deliveryTime": 30,
             "minOrder": 15,
             "distance": 2.0,
-            "image": "5_main_photo-1565299585323-38d6b0865b47.png",
-            "coverImage": "5_cover_photo-1513456852971-30c0b8199d4d.png",
+            "image": "5_main_5_main_photo-1565299585323-38d6b0865b47.png",
+            "coverImage": "5_cover_5_cover_photo-1513456852971-30c0b8199d4d.png",
             "categories": [
                 "mexican"
             ]
@@ -98,8 +98,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.3,
-            "image": "6_main_photo-1559314809-0d155014e29e.png",
-            "coverImage": "6_cover_photo-1504674900247-0877df9cc836.png",
+            "image": "6_main_6_main_photo-1559314809-0d155014e29e.png",
+            "coverImage": "6_cover_6_cover_photo-1504674900247-0877df9cc836.png",
             "categories": [
                 "asian",
                 "thai"
@@ -116,8 +116,8 @@
             "deliveryTime": 40,
             "minOrder": 18,
             "distance": 3.0,
-            "image": "7_main_photo-1523986371872-9d3ba2e2a389.png",
-            "coverImage": "7_cover_photo-1530973428-5bf2db2e4d71.png",
+            "image": "7_main_7_main_photo-1523986371872-9d3ba2e2a389.png",
+            "coverImage": "7_cover_7_cover_photo-1530973428-5bf2db2e4d71.png",
             "categories": [
                 "mediterranean"
             ]
@@ -133,8 +133,8 @@
             "deliveryTime": 30,
             "minOrder": 15,
             "distance": 1.5,
-            "image": "8_main_photo-1582878826629-29b7ad1cdc43.png",
-            "coverImage": "8_cover_photo-1555126634-323283e090fa.png",
+            "image": "8_main_8_main_photo-1582878826629-29b7ad1cdc43.png",
+            "coverImage": "8_cover_8_cover_photo-1555126634-323283e090fa.png",
             "categories": [
                 "asian",
                 "vietnamese"
@@ -151,8 +151,8 @@
             "deliveryTime": 45,
             "minOrder": 25,
             "distance": 3.5,
-            "image": "9_main_photo-1529193591184-b1d58069ecdd.png",
-            "coverImage": "9_cover_photo-1534797258760-1bd2cc95a5bd.png",
+            "image": "9_main_9_main_photo-1529193591184-b1d58069ecdd.png",
+            "coverImage": "9_cover_9_cover_photo-1534797258760-1bd2cc95a5bd.png",
             "categories": [
                 "bbq",
                 "american"
@@ -169,8 +169,8 @@
             "deliveryTime": 25,
             "minOrder": 12,
             "distance": 1.7,
-            "image": "10_main_photo-1512621776951-a57141f2eefd.png",
-            "coverImage": "10_cover_photo-1498837167922-ddd27525d352.png",
+            "image": "10_main_10_main_photo-1512621776951-a57141f2eefd.png",
+            "coverImage": "10_cover_10_cover_photo-1498837167922-ddd27525d352.png",
             "categories": [
                 "healthy",
                 "salads"
@@ -187,8 +187,8 @@
             "deliveryTime": 40,
             "minOrder": 20,
             "distance": 2.8,
-            "image": "11_main_photo-1588166524941-3bf61a9c41db.png",
-            "coverImage": "11_cover_photo-1542367592-8849eb950fd8.png",
+            "image": "11_main_11_main_photo-1588166524941-3bf61a9c41db.png",
+            "coverImage": "11_cover_11_cover_photo-1542367592-8849eb950fd8.png",
             "categories": [
                 "indian"
             ]
@@ -204,8 +204,8 @@
             "deliveryTime": 35,
             "minOrder": 15,
             "distance": 3.1,
-            "image": "12_main_photo-1630383249896-25924e75e9c6.png",
-            "coverImage": "12_cover_photo-1630383249896-25924e75e9c6.png",
+            "image": "12_main_12_main_photo-1630383249896-25924e75e9c6.png",
+            "coverImage": "12_cover_12_cover_photo-1630383249896-25924e75e9c6.png",
             "categories": [
                 "indian"
             ]
@@ -221,8 +221,8 @@
             "deliveryTime": 40,
             "minOrder": 25,
             "distance": 2.9,
-            "image": "13_main_photo-1563245372-f21724e3856d.png",
-            "coverImage": "13_cover_photo-1563245372-f21724e3856d.png",
+            "image": "13_main_13_main_photo-1563245372-f21724e3856d.png",
+            "coverImage": "13_cover_13_cover_photo-1563245372-f21724e3856d.png",
             "categories": [
                 "asian",
                 "chinese"
@@ -239,8 +239,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.4,
-            "image": "14_main_photo-1551183053-bf91a1d81141.png",
-            "coverImage": "14_cover_photo-1551183053-bf91a1d81141.png",
+            "image": "14_main_14_main_photo-1551183053-bf91a1d81141.png",
+            "coverImage": "14_cover_14_cover_photo-1551183053-bf91a1d81141.png",
             "categories": [
                 "italian"
             ]
@@ -257,8 +257,8 @@
             "deliveryTime": 45,
             "minOrder": 30,
             "distance": 3.3,
-            "image": "15_main_photo-1590330813083-fc22d4b6a2d4.png",
-            "coverImage": "15_cover_photo-1590330813083-fc22d4b6a2d4.png",
+            "image": "15_main_15_main_photo-1590330813083-fc22d4b6a2d4.png",
+            "coverImage": "15_cover_15_cover_photo-1590330813083-fc22d4b6a2d4.png",
             "categories": [
                 "asian",
                 "korean",
@@ -276,8 +276,8 @@
             "deliveryTime": 30,
             "minOrder": 15,
             "distance": 2.1,
-            "image": "16_main_photo-1593001874117-c99c800e3eb7.png",
-            "coverImage": "16_cover_photo-1593001874117-c99c800e3eb7.png",
+            "image": "16_main_16_main_photo-1593001874117-c99c800e3eb7.png",
+            "coverImage": "16_cover_16_cover_photo-1593001874117-c99c800e3eb7.png",
             "categories": [
                 "mediterranean",
                 "middle-eastern"
@@ -295,8 +295,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.6,
-            "image": "17_main_photo-1591814468924-caf88d1232e1.png",
-            "coverImage": "17_cover_photo-1591814468924-caf88d1232e1.png",
+            "image": "17_main_17_main_photo-1591814468924-caf88d1232e1.png",
+            "coverImage": "17_cover_17_cover_photo-1591814468924-caf88d1232e1.png",
             "categories": [
                 "asian",
                 "japanese"
@@ -313,8 +313,8 @@
             "deliveryTime": 40,
             "minOrder": 25,
             "distance": 3.0,
-            "image": "18_main_photo-1585937421612-70a008356fbe.png",
-            "coverImage": "18_cover_photo-1585937421612-70a008356fbe.png",
+            "image": "18_main_18_main_photo-1585937421612-70a008356fbe.png",
+            "coverImage": "18_cover_18_cover_photo-1585937421612-70a008356fbe.png",
             "categories": [
                 "indian"
             ]
@@ -330,8 +330,8 @@
             "deliveryTime": 45,
             "minOrder": 30,
             "distance": 3.4,
-            "image": "19_main_photo-1615141982883-c7ad0e69fd62.png",
-            "coverImage": "19_cover_photo-1615141982883-c7ad0e69fd62.png",
+            "image": "19_main_19_main_photo-1615141982883-c7ad0e69fd62.png",
+            "coverImage": "19_cover_19_cover_photo-1615141982883-c7ad0e69fd62.png",
             "categories": [
                 "seafood",
                 "american"
@@ -348,8 +348,8 @@
             "deliveryTime": 30,
             "minOrder": 18,
             "distance": 2.2,
-            "image": "20_main_photo-1512621776951-a57141f2eefd.png",
-            "coverImage": "20_cover_photo-1512621776951-a57141f2eefd.png",
+            "image": "20_main_20_main_photo-1512621776951-a57141f2eefd.png",
+            "coverImage": "20_cover_20_cover_photo-1512621776951-a57141f2eefd.png",
             "categories": [
                 "vegan",
                 "healthy"
@@ -366,8 +366,8 @@
             "deliveryTime": 35,
             "minOrder": 15,
             "distance": 2.5,
-            "image": "21_main_photo-1601050690597-df0568f70950.png",
-            "coverImage": "21_cover_photo-1601050690597-df0568f70950.png",
+            "image": "21_main_21_main_photo-1601050690597-df0568f70950.png",
+            "coverImage": "21_cover_21_cover_photo-1601050690597-df0568f70950.png",
             "categories": [
                 "indian"
             ]
@@ -383,8 +383,8 @@
             "deliveryTime": 45,
             "minOrder": 30,
             "distance": 3.2,
-            "image": "22_main_photo-1514362545857-3bc16c4c7d1b.png",
-            "coverImage": "22_cover_photo-1514362545857-3bc16c4c7d1b.png",
+            "image": "22_main_22_main_photo-1514362545857-3bc16c4c7d1b.png",
+            "coverImage": "22_cover_22_cover_photo-1514362545857-3bc16c4c7d1b.png",
             "categories": [
                 "french",
                 "european"
@@ -401,8 +401,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.7,
-            "image": "23_main_photo-1599487488170-d11ec9c172f0.png",
-            "coverImage": "23_cover_photo-1599487488170-d11ec9c172f0.png",
+            "image": "23_main_23_main_photo-1599487488170-d11ec9c172f0.png",
+            "coverImage": "23_cover_23_cover_photo-1599487488170-d11ec9c172f0.png",
             "categories": [
                 "middle-eastern",
                 "turkish"
@@ -419,8 +419,8 @@
             "deliveryTime": 40,
             "minOrder": 25,
             "distance": 2.9,
-            "image": "24_main_photo-1541592106381-b31e9677c0e5.png",
-            "coverImage": "24_cover_photo-1541592106381-b31e9677c0e5.png",
+            "image": "24_main_24_main_photo-1541592106381-b31e9677c0e5.png",
+            "coverImage": "24_cover_24_cover_photo-1541592106381-b31e9677c0e5.png",
             "categories": [
                 "southern",
                 "american"
@@ -437,8 +437,8 @@
             "deliveryTime": 40,
             "minOrder": 25,
             "distance": 3.1,
-            "image": "25_main_photo-1633945274405-b6c8069047b0.png",
-            "coverImage": "25_cover_photo-1633945274405-b6c8069047b0.png",
+            "image": "25_main_25_main_photo-1633945274405-b6c8069047b0.png",
+            "coverImage": "25_cover_25_cover_photo-1633945274405-b6c8069047b0.png",
             "categories": [
                 "indian"
             ]
@@ -454,8 +454,8 @@
             "deliveryTime": 45,
             "minOrder": 35,
             "distance": 3.5,
-            "image": "26_main_photo-1594041680534-e8c8cdebd659.png",
-            "coverImage": "26_cover_photo-1594041680534-e8c8cdebd659.png",
+            "image": "26_main_26_main_photo-1594041680534-e8c8cdebd659.png",
+            "coverImage": "26_cover_26_cover_photo-1594041680534-e8c8cdebd659.png",
             "categories": [
                 "brazilian",
                 "steakhouse"
@@ -472,8 +472,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.8,
-            "image": "27_main_photo-1515443961218-a51367888e4b.png",
-            "coverImage": "27_cover_photo-1515443961218-a51367888e4b.png",
+            "image": "27_main_27_main_photo-1515443961218-a51367888e4b.png",
+            "coverImage": "27_cover_27_cover_photo-1515443961218-a51367888e4b.png",
             "categories": [
                 "spanish",
                 "tapas"
@@ -490,8 +490,8 @@
             "deliveryTime": 40,
             "minOrder": 20,
             "distance": 3.0,
-            "image": "28_main_photo-1582878826629-29b7ad1cdc43.png",
-            "coverImage": "28_cover_photo-1582878826629-29b7ad1cdc43.png",
+            "image": "28_main_28_main_photo-1582878826629-29b7ad1cdc43.png",
+            "coverImage": "28_cover_28_cover_photo-1582878826629-29b7ad1cdc43.png",
             "categories": [
                 "indian"
             ]
@@ -507,8 +507,8 @@
             "deliveryTime": 30,
             "minOrder": 20,
             "distance": 2.3,
-            "image": "29_main_photo-1546069901-ba9599a7e63c.png",
-            "coverImage": "29_cover_photo-1546069901-ba9599a7e63c.png",
+            "image": "29_main_29_main_photo-1546069901-ba9599a7e63c.png",
+            "coverImage": "29_cover_29_cover_photo-1546069901-ba9599a7e63c.png",
             "categories": [
                 "hawaiian",
                 "seafood"
@@ -525,8 +525,8 @@
             "deliveryTime": 35,
             "minOrder": 20,
             "distance": 2.7,
-            "image": "30_main_photo-1585937421612-70a008356fbe.png",
-            "coverImage": "30_cover_photo-1585937421612-70a008356fbe.png",
+            "image": "30_main_30_main_photo-1585937421612-70a008356fbe.png",
+            "coverImage": "30_cover_30_cover_photo-1585937421612-70a008356fbe.png",
             "categories": [
                 "indian"
             ]

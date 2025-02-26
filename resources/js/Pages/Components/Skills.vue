@@ -1,38 +1,62 @@
 <template>
-    <div>
-        <section id="my-skills" class="p-6 mt-4">
-            <div class="skills-content" @mouseover="hover = true" @mouseleave="hover = false">
-                <transition name="icon-bounce">
-                    <div class="grid text-center lg:grid-cols-8">
-                        <div class="p-4 font-normal skill-item" v-for="skill in skills">
-                            <div class="skill-item-content">
-                                <i :class="skill.icon"></i>
-                                <p>{{ skill.skillName }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
+    <section class="container mx-auto py-16 max-w-screen-xl">
+        <div class="p-8 bg-gray-800 rounded-md shadow-2xl shadow-black">
+            <div class="px-4 py-8 mx-auto text-center">
+                <h2 class="mb-4 text-5xl font-bold text-white">Technical Skills</h2>
+                <p class="text-lg text-gray-400 mb-12">
+                    Here are the technologies and tools I specialize in
+                </p>
             </div>
-        </section>
-    </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-laptop-code text-blue-500 mr-3"></i> Frontend
+                    </h3>
+                    <div class="space-y-4">
+                        <SkillBar name="Vue.js" :percentage="90" color="green" />
+                        <SkillBar name="JavaScript" :percentage="85" color="yellow" />
+                        <SkillBar name="HTML/CSS" :percentage="90" color="blue" />
+                        <SkillBar name="Tailwind CSS" :percentage="85" color="cyan" />
+                        <SkillBar name="React" :percentage="70" color="blue" />
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-server text-purple-500 mr-3"></i> Backend
+                    </h3>
+                    <div class="space-y-4">
+                        <SkillBar name="PHP" :percentage="95" color="purple" />
+                        <SkillBar name="Laravel" :percentage="90" color="red" />
+                        <SkillBar name="Node.js" :percentage="75" color="green" />
+                        <SkillBar name="MySQL" :percentage="85" color="blue" />
+                        <SkillBar name="API Development" :percentage="90" color="indigo" />
+                    </div>
+                </div>
+
+                <!-- Other Skills -->
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                        <i class="fas fa-tools text-amber-500 mr-3"></i> Tools & Others
+                    </h3>
+                    <div class="space-y-4">
+                        <SkillBar name="Git/GitHub" :percentage="90" color="orange" />
+                        <SkillBar name="Docker" :percentage="80" color="blue" />
+                        <SkillBar name="CI/CD" :percentage="75" color="green" />
+                        <SkillBar name="AWS" :percentage="70" color="yellow" />
+                        <SkillBar name="System Admin" :percentage="85" color="gray" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script setup>
-
-import { ref } from 'vue';
-
-const skills = ref(
-    [
-        { icon: 'devicon-laravel-original colored', skillName: 'Laravel' },
-        { icon: 'devicon-php-plain colored', skillName: 'PHP' },
-        { icon: 'devicon-javascript-plain colored', skillName: 'Javascript' },
-        { icon: 'devicon-livewire-plain-wordmark colored', skillName: 'Livewire' },
-        { icon: 'devicon-vuejs-plain colored', skillName: 'VueJS' },
-        { icon: 'devicon-tailwindcss-original colored', skillName: 'Tailwind Css' },
-        { icon: 'devicon-tailwindcss-original colored', skillName: 'Tailwind Css' },
-    ]
-);
-
+import SkillBar from './Skills/SkillBar.vue';
 </script>
 
 <style scoped>
