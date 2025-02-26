@@ -1,18 +1,12 @@
 <template>
     <div class="p-6 bg-white rounded-lg shadow-lg">
         <div class="mb-6">
-            <textarea
-                v-model="prompt"
-                rows="4"
+            <textarea v-model="prompt" rows="4"
                 class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Describe the image you want to generate..."
-                :disabled="isGenerating"
-            ></textarea>
+                placeholder="Describe the image you want to generate..." :disabled="isGenerating"></textarea>
             <button
                 class="px-6 py-2 mt-4 text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 disabled:bg-indigo-300"
-                @click="generateImage"
-                :disabled="isGenerating || !prompt.trim()"
-            >
+                @click="generateImage" :disabled="isGenerating || !prompt.trim()">
                 <span v-if="isGenerating">Generating...</span>
                 <span v-else>Generate Image</span>
             </button>
@@ -25,10 +19,7 @@
         </div>
         <div v-else-if="generatedImage" class="overflow-hidden rounded-lg">
             <img :src="generatedImage" alt="Generated image" class="w-full h-auto">
-            <button
-                @click="downloadImage"
-                class="px-4 py-2 mt-4 text-white bg-green-500 rounded-lg hover:bg-green-600"
-            >
+            <button @click="downloadImage" class="px-4 py-2 mt-4 text-white bg-green-500 rounded-lg hover:bg-green-600">
                 Download Image
             </button>
         </div>

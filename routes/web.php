@@ -60,13 +60,17 @@ Route::post('/ai/conversations', [AIController::class, 'saveConversation'])->nam
 
 Route::post('/ai/generate-image', [AIController::class, 'generateImage'])->name('ai.generateImage');
 
+Route::post('/ai/emoji-generator', [App\Http\Controllers\AIController::class, 'emojiGenerator']);
+
+Route::post('/ai/color-palette', [AIController::class, 'colorPalette'])->name('ai.colorPalette');
+
+Route::post('/ai/name-generator', [AIController::class, 'nameGenerator'])->name('ai.nameGenerator');
+Route::post('/ai/check-domains', [AIController::class, 'checkDomains'])->name('ai.checkDomains');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
-
 });
 
 require __DIR__ . '/auth.php';
