@@ -40,20 +40,19 @@ const showAIPopupWithDelay = () => {
     }, 3000); // Show after 3 seconds
 };
 
-// Dismiss the AI popup
-const dismissAIPopup = () => {
+// Close AI popup
+const closeAIPopup = () => {
     showAIPopup.value = false;
     dismissedAIPopup.value = true;
 };
 
-// Navigate to AI works section
+// Navigate to AI works page
 const goToAIWorks = () => {
-    // You can replace this with the actual path to your AI works
-    window.location.href = '/ai';
-    dismissAIPopup();
+    // Replace with your actual navigation logic
+    window.location.href = '/ai-works';
+    closeAIPopup();
 };
 
-// Add and remove scroll event listener
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
 
@@ -81,48 +80,46 @@ onUnmounted(() => {
             <!-- About section -->
             <About />
 
+            <!-- Projects section -->
+            <Projects />
+
+            <!-- Services section -->
+            <Services />
+
             <!-- Skills section -->
             <Skills />
 
-            <!-- Projects -->
-            <Projects />
+            <!-- Resume section -->
+            <Resume />
 
-            <!-- Services -->
-            <Services />
-
-            <!-- Resume -->
-            <!-- <Resume /> -->
-
-            <!-- Contact -->
+            <!-- Contact section -->
             <Contact />
 
-            <!-- Footer -->
+            <!-- Footer section -->
             <Footer />
 
             <!-- Scroll to top button -->
-            <button v-show="showScrollTop" @click="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 15l-6-6-6 6" />
+            <button v-if="showScrollTop" @click="scrollToTop" class="scroll-to-top">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 10l7-7m0 0l7 7m-7-7v18" />
                 </svg>
             </button>
 
             <!-- AI Works Popup -->
             <div v-if="showAIPopup" class="ai-popup">
-                <button @click="dismissAIPopup" class="ai-popup-close" aria-label="Close popup">×</button>
+                <button @click="closeAIPopup" class="ai-popup-close">&times;</button>
                 <div class="ai-popup-content">
                     <div class="ai-popup-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="10" rx="2" />
-                            <circle cx="12" cy="5" r="2" />
-                            <path d="M12 7v4" />
-                            <line x1="8" y1="16" x2="8" y2="16" />
-                            <line x1="16" y1="16" x2="16" y2="16" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                         </svg>
                     </div>
-                    <div class="ai-popup-message">Check out my AI works!</div>
-                    <button @click="goToAIWorks" class="ai-popup-button">View Now</button>
+                    <div class="ai-popup-message">Check out my AI projects!</div>
+                    <button @click="goToAIWorks" class="ai-popup-button">View AI Works</button>
                 </div>
             </div>
         </div>

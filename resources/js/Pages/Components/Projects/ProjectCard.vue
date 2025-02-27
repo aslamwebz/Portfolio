@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { ref, computed } from 'vue';
+
+const props = defineProps({
     project: {
         type: Object,
         required: true,
@@ -9,9 +11,29 @@ defineProps({
     }
 });
 
+const expanded = ref(false);
+const showDetails = ref(false);
+
+const truncatedDescription = computed(() => {
+    return props.project.description.length > 100
+        ? props.project.description.substring(0, 100) + '...'
+        : props.project.description;
+});
+
 const isComingSoon = (project) => {
     return !project.title || !project.description;
 };
+
+// These would ideally come from the project object, but for demo purposes:
+const projectFeatures = [
+    'Responsive design for all device sizes',
+    'User authentication and authorization',
+    'Real-time data updates',
+    'Optimized performance with lazy loading',
+    'Comprehensive error handling'
+];
+
+const projectChallenges = 'One of the main challenges was implementing real-time updates while maintaining performance. This was solved by using a combination of WebSockets for critical updates and polling for less time-sensitive data.';
 </script>
 
 <template>
@@ -28,7 +50,7 @@ const isComingSoon = (project) => {
             <div
                 class="absolute flex flex-col justify-center p-8 transition-all duration-300 opacity-0 inset-6 bg-gradient-to-b from-blue-600/90 to-black/90 group-hover:opacity-100 rounded-2xl">
                 <h3 class="mb-4 text-2xl font-bold text-white">{{ project.title }}</h3>
-                <p class="text-lg text-gray-200">{{ project.description }}</p>
+                <p class="text-lg text-gray-200">{{ truncatedDescription }}</p>
                 <div class="mt-6 flex space-x-4">
                     <a :href="project.id === 'hearty-meal' ? '/hearty-meal' : '#'"
                         class="px-4 py-2 text-sm text-white transition-colors border rounded-full border-white/30 hover:bg-white/10">
@@ -83,6 +105,66 @@ const isComingSoon = (project) => {
                 <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
                 <div class="w-2 h-2 delay-100 bg-blue-400 rounded-full animate-bounce"></div>
                 <div class="w-2 h-2 delay-200 bg-blue-400 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div v-if="showDetails" class="fixed inset-0 flex items-center justify-center z-50">
+        <div class="absolute inset-0 bg-black/70" @click="showDetails = false"></div>
+        <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10 m-4">
+            <button @click="showDetails = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div class="p-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <img :src="project.image" :alt="project.title" class="w-full h-auto rounded-lg">
+
+                        <div class="mt-6">
+                            <h4 class="text-lg font-bold text-white mb-2">Technologies Used</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span v-for="(tech, index) in project.technologies" :key="index"
+                                    class="px-3 py-1 text-sm bg-blue-900/70 text-blue-300 rounded-full">
+                                    {{ tech }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold text-white mb-4">{{ project.title }}</h2>
+                        <p class="text-gray-300 mb-6">{{ project.description }}</p>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-white mb-2">Key Features</h4>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                                <li v-for="(feature, index) in projectFeatures" :key="index">
+                                    {{ feature }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-white mb-2">Challenges & Solutions</h4>
+                            <p class="text-gray-300">
+                                {{ projectChallenges }}
+                            </p>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <a :href="project.github" target="_blank"
+                                class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors flex items-center">
+                                <i class="fab fa-github mr-2"></i> View Code
+                            </a>
+                            <a href="#" target="_blank"
+                                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex items-center">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

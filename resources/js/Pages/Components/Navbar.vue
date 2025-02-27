@@ -1,7 +1,8 @@
 <template>
     <Disclosure as="nav" class="sticky top-0 z-50 bg-white " v-slot="{ open }">
         <div class="navbar">
-            <div class="relative flex items-center justify-between nav mx-[12%] sm:px-6 lg:px-8" :style="{ height: navbarHeight + 'rem' }">
+            <div class="relative flex items-center justify-between nav mx-[12%] sm:px-6 lg:px-8"
+                :style="{ height: navbarHeight + 'rem' }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
                     <!-- Mobile menu button-->
                     <DisclosureButton

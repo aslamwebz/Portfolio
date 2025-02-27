@@ -4,7 +4,7 @@
       <div class="flex justify-between h-16">
         <div class="flex items-center">
           <Link href="/hearty-meal" class="text-2xl font-bold text-gray-900">
-            HeartyMeal
+          HeartyMeal
           </Link>
         </div>
         <div class="flex items-center">

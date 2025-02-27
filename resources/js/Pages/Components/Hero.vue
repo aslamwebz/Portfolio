@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <HeroBackground />
         <div class="min-h-screen px-6 mx-auto">
             <div class="flex flex-col items-center">

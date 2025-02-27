@@ -1,6 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import ProjectCard from '@/Pages/Components/Projects/ProjectCard.vue';
+
+const activeFilter = ref('All');
+
+const filters = ['All', 'Vue', 'Laravel', 'Node', 'AI'];
 
 const projects = ref([
     {
@@ -9,7 +13,8 @@ const projects = ref([
         description: 'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
         image: '/img/hearty-meal.jpg',
         github: 'https://github.com/yourusername/hearty-meal',
-        technologies: ['vue', 'laravel', 'tailwind', 'mysql']
+        technologies: ['vue', 'laravel', 'tailwind', 'mysql'],
+        category: 'Vue'
     },
     {
         id: 'portfolio-site',
@@ -17,7 +22,8 @@ const projects = ref([
         description: 'My personal portfolio website built with modern technologies to showcase my projects and skills in an interactive way.',
         image: '/img/portfolio.jpg',
         github: 'https://github.com/yourusername/portfolio',
-        technologies: ['vue', 'laravel', 'tailwind']
+        technologies: ['vue', 'laravel', 'tailwind'],
+        category: 'Vue'
     },
     {
         id: 'chat-app',
@@ -25,16 +31,26 @@ const projects = ref([
         description: 'A real-time messaging platform with features like user authentication, message encryption, and file sharing capabilities.',
         image: '/img/chat-app.jpg',
         github: 'https://github.com/yourusername/chat-app',
-        technologies: ['vue', 'node', 'socket.io']
+        technologies: ['vue', 'node', 'socket.io'],
+        category: 'Node'
     },
     {
-        id: 'project-4',
-        title: '',
-        description: '',
-        image: '',
-        technologies: []
+        id: 'ai-assistant',
+        title: 'AI Coding Assistant',
+        description: 'An intelligent coding assistant that helps developers write better code faster. Leverages machine learning to provide context-aware suggestions and automate repetitive tasks.',
+        image: '/img/ai-assistant.jpg',
+        github: 'https://github.com/yourusername/ai-assistant',
+        technologies: ['python', 'tensorflow', 'flask', 'vue'],
+        category: 'AI'
     }
 ]);
+
+const filteredProjects = computed(() => {
+    if (activeFilter.value === 'All') {
+        return projects.value;
+    }
+    return projects.value.filter(project => project.category === activeFilter.value);
+});
 </script>
 
 <template>
@@ -47,11 +63,17 @@ const projects = ref([
                 </p>
             </div>
 
+            <!-- Filter buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
+                    class="px-4 py-2 rounded-full transition-colors"
+                    :class="activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'">
+                    {{ filter }}
+                </button>
+            </div>
+
             <div class="grid grid-cols-1 gap-8 p-8 mx-auto md:grid-cols-2 max-w-7xl">
-                <ProjectCard :project="projects[0]" />
-                <ProjectCard :project="projects[1]" />
-                <ProjectCard :project="projects[2]" />
-                <ProjectCard :project="projects[3]" />
+                <ProjectCard v-for="project in filteredProjects" :key="project.id" :project="project" />
             </div>
 
             <div class="p-4 mt-8 text-center">

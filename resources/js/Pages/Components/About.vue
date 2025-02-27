@@ -9,15 +9,13 @@
                             <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
                             <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
                         </div>
-                        <div class="text-white text-[20px] text-center">Profile.php</div>
+                        <div class="text-white text-[16px] text-center">Profile.php</div>
                     </div>
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img
-                                src="https://randomuser.me/api/portraits/men/94.jpg"
+                            <img src="https://randomuser.me/api/portraits/men/94.jpg"
                                 class="w-32 h-32 mb-4 bg-gray-300 rounded-full shadow-lg shrink-0 ring-4 ring-gray-700"
-                                alt="Profile picture"
-                            >
+                                alt="Profile picture">
                             <h1 class="mb-2 text-xl font-bold text-white">John Doe</h1>
                             <p class="text-gray-400">Software Developer</p>
                             <div class="flex flex-wrap justify-center gap-4 mt-8">
@@ -88,11 +86,12 @@
                                 <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
                                 <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
                             </div>
-                            <div class="text-white text-[20px] text-center">aboutMe.php</div>
+                            <div class="text-white text-[16px] text-center">aboutMe.php</div>
                         </div>
-                        <div class="bg-gray-800 text-white p-12 text-[1.5rem] rounded-md">
+                        <div class="bg-gray-800 text-white p-12 text-lg rounded-md">
                             <p class="py-2 leading-relaxed">
-                                Hello! <b class="text-blue-400">I'm Aslam, a Web Developer</b> and tech enthusiast who thrives on building
+                                Hello! <b class="text-blue-400">I'm Aslam, a Web Developer</b> and tech enthusiast who
+                                thrives on building
                                 efficient, scalable, and user-focused web solutions.
                             </p>
                             <p class="py-4 leading-relaxed text-gray-400">
@@ -107,7 +106,8 @@
                             <p class="py-4 leading-relaxed text-gray-400">
                                 Outside of coding, I'm always on the lookout for new challenges and opportunities to
                                 grow, staying ahead of the curve with the latest technologies and frameworks.
-                                <span class="block mt-4 text-blue-400">Let's create something extraordinary together!</span>
+                                <span class="block mt-4 text-blue-400">Let's create something extraordinary
+                                    together!</span>
                             </p>
                             <!-- Resume Experience Section -->
                         </div>

@@ -53,8 +53,8 @@
 </script>
 
 <style scoped>
-    .footer{
-        margin-top: 60px;
-        border-top: 0.5px solid lightgray;
-    }
+.footer {
+    margin-top: 60px;
+    border-top: 0.5px solid lightgray;
+}
 </style>
