@@ -66,7 +66,7 @@ const filteredProjects = computed(() => {
             <!-- Filter buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-8">
                 <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
-                    class="px-4 py-2 rounded-full transition-colors"
+                    class="px-4 py-2 transition-colors rounded-full"
                     :class="activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'">
                     {{ filter }}
                 </button>

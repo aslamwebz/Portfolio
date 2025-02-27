@@ -14,18 +14,18 @@
                     <div class="p-6">
                         <div class="flex flex-col items-center">
                             <img src="https://randomuser.me/api/portraits/men/94.jpg"
-                                class="w-32 h-32 mb-4 bg-gray-300 rounded-full shadow-lg shrink-0 ring-4 ring-gray-700"
-                                alt="Profile picture">
-                            <h1 class="mb-2 text-xl font-bold text-white">John Doe</h1>
-                            <p class="text-gray-400">Software Developer</p>
+                                class="w-40 h-40 mb-6 transition-transform duration-300 bg-gray-300 rounded-full shadow-xl shrink-0 ring-4 ring-blue-500 hover:scale-105"
+                                alt="Mohamed Aslam's profile picture">
+                            <h1 class="mb-2 text-2xl font-bold text-white">Mohamed Aslam</h1>
+                            <p class="px-4 py-1 text-sm text-blue-400 bg-blue-900 rounded-full">Backend Engineer</p>
                             <div class="flex flex-wrap justify-center gap-4 mt-8">
                                 <a href="#"
-                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105">
-                                    Contact
+                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+                                    Contact Me
                                 </a>
                                 <a href="#"
-                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-600 hover:scale-105">
-                                    Resume
+                                    class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-600 hover:scale-105 focus:ring-2 focus:ring-gray-400 focus:outline-none">
+                                    Download CV
                                 </a>
                             </div>
                         </div>
@@ -88,28 +88,48 @@
                             </div>
                             <div class="text-white text-[16px] text-center">aboutMe.php</div>
                         </div>
-                        <div class="bg-gray-800 text-white p-12 text-lg rounded-md">
-                            <p class="py-2 leading-relaxed">
-                                Hello! <b class="text-blue-400">I'm Aslam, a Web Developer</b> and tech enthusiast who
-                                thrives on building
-                                efficient, scalable, and user-focused web solutions.
-                            </p>
-                            <p class="py-4 leading-relaxed text-gray-400">
-                                My journey in tech has been fueled by a passion for continuous learning and a curiosity
-                                to explore the ever-evolving tech landscape.
-                            </p>
-                            <p class="py-4 leading-relaxed text-gray-400">
-                                Collaboration is at the heart of my work. Whether working alongside designers, product
-                                managers, or fellow developers, I believe the best solutions come from combining diverse
-                                perspectives.
-                            </p>
-                            <p class="py-4 leading-relaxed text-gray-400">
-                                Outside of coding, I'm always on the lookout for new challenges and opportunities to
-                                grow, staying ahead of the curve with the latest technologies and frameworks.
-                                <span class="block mt-4 text-blue-400">Let's create something extraordinary
-                                    together!</span>
-                            </p>
-                            <!-- Resume Experience Section -->
+                        <div class="p-12 text-lg text-white bg-gray-800 rounded-md">
+                            <h2 class="mb-6 text-3xl font-bold text-blue-400">About Me</h2>
+                            <div class="space-y-6 leading-relaxed">
+                                <p>
+                                    👋 Hi there! I'm Mohamed Aslam, a passionate Backend Engineer with a deep
+                                    fascination for AI, automation, and building robust web solutions. I specialize in
+                                    crafting high-performance applications using PHP, Laravel, Vue.js, and RESTful APIs.
+                                </p>
+
+                                <p>
+                                    🔧 My expertise lies in:
+                                </p>
+                                <ul class="ml-6 space-y-2 list-disc">
+                                    <li>Backend Development (PHP, Laravel)</li>
+                                    <li>Frontend Development (Vue.js, TailwindCSS)</li>
+                                    <li>API Development & Integration</li>
+                                    <li>Database Design & Optimization</li>
+                                    <li>AI Integration & Automation</li>
+                                </ul>
+
+                                <p>
+                                    🤖 I'm currently exploring the exciting intersection of AI and web development,
+                                    working on:
+                                </p>
+                                <ul class="ml-6 space-y-2 list-disc">
+                                    <li>AI-powered automation solutions</li>
+                                    <li>LLM integrations for enhanced functionality</li>
+                                    <li>Intelligent workflow optimizations</li>
+                                </ul>
+
+                                <p>
+                                    💡 I believe in writing clean, maintainable code and building scalable solutions
+                                    that make a real impact. Whether it's optimizing database queries, implementing
+                                    complex business logic, or creating intuitive user experiences, I'm always up for a
+                                    challenge.
+                                </p>
+
+                                <p class="pt-4 font-semibold text-blue-400">
+                                    Ready to collaborate on your next project? Let's create something amazing together!
+                                    🚀
+                                </p>
+                            </div>
                         </div>
                         <!-- <Resume /> -->
                     </div>
