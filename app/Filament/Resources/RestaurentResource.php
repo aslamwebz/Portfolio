@@ -40,7 +40,9 @@ class RestaurentResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image_name')
                     ->image()
-                    ->required(),
+                    ->required()
+                    ->imagePreviewHeight('250')
+                    ->directory('restaurant-images'),
                 Forms\Components\Textarea::make('image_path')
                     ->required()
                     ->columnSpanFull(),
@@ -61,7 +63,9 @@ class RestaurentResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('working hours')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image_name'),
+                Tables\Columns\ImageColumn::make('image_name')
+                    ->square()
+                    ->size(100),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

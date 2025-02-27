@@ -29,8 +29,11 @@ class HMCategoriesResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('icon')
-                    ->required(),
+                Forms\Components\FileUpload::make('icon')
+                    ->image()
+                    ->required()
+                    ->imagePreviewHeight('100')
+                    ->directory('category-icons'),
             ]);
     }
 
@@ -42,6 +45,9 @@ class HMCategoriesResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\ImageColumn::make('icon')
+                    ->circular()
+                    ->size(40),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

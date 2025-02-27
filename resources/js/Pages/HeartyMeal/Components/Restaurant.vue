@@ -3,21 +3,22 @@
     <div v-else class="container px-4 mx-auto my-8">
         <!-- Restaurant Header -->
         <div class="relative h-64 mb-12 overflow-hidden rounded-lg shadow-lg">
-            <img :src="`/img/HeartyMeal/Restaurents/${restaurant?.coverImage}`" alt="" class="object-cover w-full h-full">
+            <img :src="restaurant.image_path" :alt="restaurant.name" class="object-cover w-full h-full">
             <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h1 class="text-3xl font-bold">{{ restaurant?.name }}</h1>
+                <h1 class="text-3xl font-bold">{{ restaurant.name }}</h1>
                 <div class="flex items-center gap-4 mt-2">
                     <span class="flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        {{ restaurant?.rating }}
+                        {{ restaurant.rating }}
                     </span>
                     <span>•</span>
-                    <span>{{ restaurant?.cuisine.join(', ') }}</span>
+                    <span>{{ restaurant.categories.join(', ') }}</span>
                     <span>•</span>
-                    <span>{{ restaurant?.deliveryTime }} mins</span>
+                    <span>{{ restaurant.deliveryTime }} mins</span>
                 </div>
             </div>
         </div>
@@ -31,13 +32,14 @@
                         <div v-for="item in category?.items" :key="item.id"
                             class="flex gap-6 p-5 transition-all duration-300 bg-white border group rounded-xl hover:shadow-lg hover:border-orange-500">
                             <div class="relative w-32 h-32 overflow-hidden rounded-lg">
-                                <img :src="`/img/HeartyMeal/Foods/${item.image}`" :alt="item.name"
+                                <img :src="item.image_path" :alt="item.title"
                                     class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110">
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-start justify-between">
                                     <div>
-                                        <h3 class="text-lg font-bold transition-colors group-hover:text-orange-500">{{ item.name }}</h3>
+                                        <h3 class="text-lg font-bold transition-colors group-hover:text-orange-500">{{
+                                            item.title }}</h3>
                                         <p class="mt-2 text-sm text-gray-600 line-clamp-2">{{ item.description }}</p>
                                     </div>
                                     <div class="text-right">
@@ -66,7 +68,7 @@
                             <div v-for="item in cart.items" :key="item.id"
                                 class="flex items-center gap-4 py-4 border-b animate-fadeIn">
                                 <div class="flex-1">
-                                    <h3 class="font-medium">{{ item?.name }}</h3>
+                                    <h3 class="font-medium">{{ item?.title }}</h3>
                                     <div class="flex items-center gap-2 mt-1">
                                         <button @click="decreaseQuantity(item)"
                                             class="p-1 text-orange-500 border border-orange-500 rounded-md hover:bg-orange-50">
@@ -99,8 +101,7 @@
                                 <span>Total</span>
                                 <span>${{ total }}</span>
                             </div>
-                            <button
-                                @click="goToCheckout"
+                            <button @click="goToCheckout"
                                 class="w-full py-3 text-white transition-colors bg-orange-500 rounded-lg hover:bg-orange-600">
                                 Checkout
                             </button>
@@ -110,9 +111,7 @@
             </div>
         </div>
 
-        <button
-            v-show="showScrollTop"
-            @click="scrollToTop"
+        <button v-show="showScrollTop" @click="scrollToTop"
             class="fixed p-3 text-white transition-all duration-300 transform bg-orange-500 rounded-full shadow-lg bottom-8 right-8 hover:bg-orange-600 hover:-translate-y-1">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -130,24 +129,22 @@ import { useCartStore } from '@/stores/cartStore';
 import LoadingSpinner from '@/Components/LoadingSpinner.vue';
 
 const props = defineProps({
-    restaurantId: {
-        type: [String, Number],
+    restaurant: {
+        type: Object,
+        required: true
+    },
+    products: {
+        type: Array,
         required: true
     }
 });
 
-// Find restaurant data from restaurants.json
-const findRestaurantDetails = (id) => {
-    return restaurantData.restaurants.find(r => r.id == parseInt(id)) || restaurantData.restaurants[0];
-};
-
-// Find menu data from foods.json
-const findRestaurantMenu = (id) => {
-    return foodData.restaurants.find(r => r.id == parseInt(id)) || foodData.restaurants[0];
-};
-
-const restaurant = ref(null);
-const menuCategories = ref([]);
+const restaurant = ref(props.restaurant);
+const menuCategories = ref([{
+    id: 1,
+    name: 'Menu Items',
+    items: props.products
+}]);
 
 const isLoading = ref(true);
 const cartStore = useCartStore();
@@ -164,17 +161,11 @@ const showScrollTop = ref(false);
 
 onMounted(async () => {
     try {
-        const restaurantDetails = findRestaurantDetails(props.restaurantId);
-        const menuData = findRestaurantMenu(props.restaurantId);
-
-        restaurant.value = {
-            ...restaurantDetails,
-            menuCategories: menuData.menuCategories
-        };
-
-        menuCategories.value = menuData.menuCategories;
-    } finally {
+        // Simulate loading time
+        await new Promise(resolve => setTimeout(resolve, 1000));
         isLoading.value = false;
+    } finally {
+        // Rest of your existing code...
     }
 
     window.addEventListener('scroll', () => {
@@ -220,6 +211,7 @@ const goToCheckout = () => {
 .list-leave-active {
     transition: all 0.3s ease;
 }
+
 .list-enter-from,
 .list-leave-to {
     opacity: 0;
@@ -227,12 +219,18 @@ const goToCheckout = () => {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
 }
 </style>
-

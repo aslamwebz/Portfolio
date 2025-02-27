@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AIController;
+use App\Http\Controllers\HeartyMealController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,15 +23,8 @@ Route::get('/', function () {
 })->name('dashboard');
 
 // Products
-Route::get('/hearty-meal', function () {
-    return Inertia::render('HeartyMeal/Index');
-})->name('heartyMeal');
-
-Route::get('/hearty-meal/restaurant/{id}', function ($id) {
-    return Inertia::render('HeartyMeal/Restaurant', [
-        'id' => $id
-    ]);
-})->name('restaurant');
+Route::get('/hearty-meal', [HeartyMealController::class, 'index'])->name('hearty-meal.index');
+Route::get('/hearty-meal/restaurant/{id}', [HeartyMealController::class, 'getRestaurant'])->name('hearty-meal.restaurant');
 
 Route::get('/hearty-meal/checkout', function () {
     return Inertia::render('HeartyMeal/Components/Checkout');

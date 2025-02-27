@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class HMCategorySeeder extends Seeder
 {
@@ -14,54 +15,52 @@ class HMCategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Indian Food',
-                'slug' => 'indian-food',
-                'icon' => ['url' => 'img/HeartyMeal/indian.png'],
-            ],
-            [
-                'name' => 'Salad',
-                'slug' => 'salad',
-                'icon' => ['url' => 'img/HeartyMeal/salad.png'],
+                'name' => 'All',
+                'slug' => 'all',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/restaurant.png'])
             ],
             [
                 'name' => 'Pizza',
                 'slug' => 'pizza',
-                'icon' => ['url' => 'img/HeartyMeal/pizza.png'],
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/pizza.png'])
             ],
             [
-                'name' => 'BBQ',
-                'slug' => 'bbq',
-                'icon' => ['url' => 'img/HeartyMeal/bbq.jpg'],
+                'name' => 'Burgers',
+                'slug' => 'burgers',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/hamburger.png'])
             ],
             [
-                'name' => 'Sandwitch',
-                'slug' => 'sandwitch',
-                'icon' => ['url' => 'img/HeartyMeal/sandwich.jpg'],
+                'name' => 'Asian',
+                'slug' => 'asian',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/sushi.png'])
             ],
             [
-                'name' => 'Meat',
-                'slug' => 'meat',
-                'icon' => ['url' => 'img/HeartyMeal/meat.png'],
+                'name' => 'Indian',
+                'slug' => 'indian',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/curry.png'])
             ],
             [
-                'name' => 'Noodles',
-                'slug' => 'noodles',
-                'icon' => ['url' => 'img/HeartyMeal/noodles.png'],
+                'name' => 'Mexican',
+                'slug' => 'mexican',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/taco.png'])
             ],
             [
-                'name' => 'Sea Food',
-                'slug' => 'sea-food',
-                'icon' => ['url' => 'img/HeartyMeal/seafood.png'],
+                'name' => 'Italian',
+                'slug' => 'italian',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/spaghetti.png'])
             ],
             [
-                'name' => 'Sri Lankan',
-                'slug' => 'sri-lankan',
-                'icon' => ['url' => 'img/HeartyMeal/srilankan.png'],
+                'name' => 'Healthy',
+                'slug' => 'healthy',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/salad.png'])
             ],
+            [
+                'name' => 'Desserts',
+                'slug' => 'desserts',
+                'icon' => json_encode(['url' => 'https://img.icons8.com/color/96/000000/cake.png'])
+            ]
         ];
 
-        foreach ($categories as $category) {
-            \App\Models\HMCategories::create($category);
-        }
+        DB::table('hmcategories')->insert($categories);
     }
 }

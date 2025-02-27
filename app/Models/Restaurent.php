@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 
-class Restaurant extends Model
+class Restaurent extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
+        'about_us',
         'slug',
         'address',
         'phone',

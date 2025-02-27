@@ -35,7 +35,9 @@ class ProductResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image_name')
                     ->image()
-                    ->required(),
+                    ->required()
+                    ->imagePreviewHeight('250')
+                    ->directory('product-images'),
                 Forms\Components\Textarea::make('image_path')
                     ->required()
                     ->columnSpanFull(),
@@ -54,7 +56,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('image_name'),
+                Tables\Columns\ImageColumn::make('image_name')
+                    ->square()
+                    ->size(100),
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()
                     ->sortable(),
