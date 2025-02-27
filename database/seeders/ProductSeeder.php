@@ -30,8 +30,7 @@ class ProductSeeder extends Seeder
                         'title' => $item['name'],
                         'price' => $item['price'],
                         'description' => $item['description'],
-                        'image_name' => $item['image'],
-                        'image_path' => '/img/HeartyMeal/Foods/' . $item['image'],
+                        'image' => $item['image'],
                         'stock' => 100, // Default stock value
                     ]);
 
