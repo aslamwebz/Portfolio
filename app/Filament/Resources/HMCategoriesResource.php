@@ -33,7 +33,14 @@ class HMCategoriesResource extends Resource
                     ->image()
                     ->required()
                     ->imagePreviewHeight('100')
-                    ->directory('category-icons'),
+                    ->directory('category-icons')
+                    ->storeFileNamesIn('original_filename')
+                    ->afterStateUpdated(function ($state, Forms\Set $set) {
+                        if ($state && is_string($state)) {
+                            $originalName = pathinfo($state, PATHINFO_BASENAME);
+                            $set('icon', json_encode(['url' => 'img/HeartyMeal/Categories/' . $originalName]));
+                        }
+                    }),
             ]);
     }
 
@@ -47,7 +54,14 @@ class HMCategoriesResource extends Resource
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('icon')
                     ->circular()
-                    ->size(40),
+                    ->size(40)
+                    ->state(function ($record) {
+                        if ($record->icon) {
+                            $icon = json_decode($record->icon, true);
+                            return $icon['url'] ?? null;
+                        }
+                        return null;
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

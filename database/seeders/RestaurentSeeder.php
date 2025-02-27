@@ -20,8 +20,7 @@ class RestaurentSeeder extends Seeder
                 'slug' => Str::slug($restaurant['name']),
                 'address' => '123 Food Street',
                 'working hours' => '9:00 AM - 10:00 PM',
-                'image_name' => $restaurant['image'],
-                'image_path' => '/img/HeartyMeal/Restaurents/' . $restaurant['image'],
+                'image' => $restaurant['image'],
             ]);
 
             // Insert restaurant categories relationship

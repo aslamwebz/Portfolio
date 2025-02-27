@@ -123,8 +123,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import restaurantData from './restaurants.json';
-import foodData from './foods.json';
 import { useCartStore } from '@/stores/cartStore';
 import LoadingSpinner from '@/Components/LoadingSpinner.vue';
 

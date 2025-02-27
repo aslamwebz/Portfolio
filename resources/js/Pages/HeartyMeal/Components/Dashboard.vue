@@ -35,7 +35,7 @@
                     :key="restaurant.id"
                     class="overflow-hidden bg-white border group rounded-xl hover:shadow-lg hover:border-orange-500 will-change-transform">
                 <div class="relative overflow-hidden">
-                    <img :src="restaurant.image" :alt="restaurant.name" @error="handleImageError"
+                    <img :src="`img/HeartyMeal/Restaurents/${restaurant.image}`" :alt="restaurant.name" @error="handleImageError"
                         class="object-cover w-full h-48 transition-transform duration-200 transform-gpu group-hover:scale-105">
                     <div
                         class="absolute top-4 right-4 px-3 py-1.5 text-sm font-semibold bg-white/90 backdrop-blur-sm rounded-lg shadow">
@@ -231,7 +231,7 @@ const scrollRight = () => {
 const handleImageError = (e) => {
     console.error('Image failed to load:', e.target.src);
     // Optionally set a fallback image
-    e.target.src = '/img/placeholder.jpg';
+    e.target.src = '/img/placeholder.png';
 };
 </script>
 

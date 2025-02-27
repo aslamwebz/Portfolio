@@ -33,14 +33,11 @@ class ProductResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\FileUpload::make('image_name')
+                Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
                     ->imagePreviewHeight('250')
-                    ->directory('product-images'),
-                Forms\Components\Textarea::make('image_path')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->directory('HeartyMeal/Foods'),
                 Forms\Components\TextInput::make('stock')
                     ->required()
                     ->numeric(),
@@ -56,7 +53,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('image_name')
+                Tables\Columns\ImageColumn::make('image')
                     ->square()
                     ->size(100),
                 Tables\Columns\TextColumn::make('stock')

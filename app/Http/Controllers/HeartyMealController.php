@@ -33,7 +33,7 @@ class HeartyMealController extends Controller
                     'id' => $restaurant->id,
                     'name' => $restaurant->name,
                     'slug' => $restaurant->slug,
-                    'image' => $restaurant->image_path,
+                    'image' => $restaurant->image,
                     'rating' => 4.5, // Default value or from your data
                     'deliveryTime' => 30, // Default value or from your data
                     'minOrder' => 15, // Default value or from your data
@@ -78,7 +78,7 @@ class HeartyMealController extends Controller
         $restaurantData = [
             'id' => $restaurant->id,
             'name' => $restaurant->name,
-            'image_path' => $restaurant->image_path,
+            'image' => $restaurant->image,
             'rating' => 4.5, // Default value or from your data
             'categories' => $categories,
             'deliveryTime' => 30, // Default value or from your data

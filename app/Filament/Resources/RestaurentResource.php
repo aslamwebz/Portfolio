@@ -38,14 +38,11 @@ class RestaurentResource extends Resource
                 Forms\Components\TextInput::make('working hours')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('image_name')
+                Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
                     ->imagePreviewHeight('250')
-                    ->directory('restaurant-images'),
-                Forms\Components\Textarea::make('image_path')
-                    ->required()
-                    ->columnSpanFull(),
+                    ->directory('HeartyMeal/Restaurants'),
             ]);
     }
 
@@ -63,7 +60,7 @@ class RestaurentResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('working hours')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image_name')
+                Tables\Columns\ImageColumn::make('image')
                     ->square()
                     ->size(100),
                 Tables\Columns\TextColumn::make('created_at')
