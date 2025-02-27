@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RestaurentResource\Pages;
-use App\Filament\Resources\RestaurentResource\RelationManagers;
-use App\Models\Restaurent;
+use App\Filament\Resources\restaurantResource\Pages;
+use App\Filament\Resources\restaurantResource\RelationManagers;
+use App\Models\restaurant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class RestaurentResource extends Resource
+class restaurantResource extends Resource
 {
-    protected static ?string $model = Restaurent::class;
+    protected static ?string $model = restaurant::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -95,9 +95,9 @@ class RestaurentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRestaurents::route('/'),
-            'create' => Pages\CreateRestaurent::route('/create'),
-            'edit' => Pages\EditRestaurent::route('/{record}/edit'),
+            'index' => Pages\Listrestaurants::route('/'),
+            'create' => Pages\Createrestaurant::route('/create'),
+            'edit' => Pages\Editrestaurant::route('/{record}/edit'),
         ];
     }
 }

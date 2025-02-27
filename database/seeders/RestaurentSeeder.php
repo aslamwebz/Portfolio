@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class RestaurentSeeder extends Seeder
+class restaurantSeeder extends Seeder
 {
     public function run()
     {
@@ -14,7 +14,7 @@ class RestaurentSeeder extends Seeder
 
         foreach ($restaurants as $restaurant) {
             // Insert restaurant
-            $restaurantId = DB::table('restaurents')->insertGetId([
+            $restaurantId = DB::table('restaurants')->insertGetId([
                 'name' => $restaurant['name'],
                 'about us' => 'Welcome to ' . $restaurant['name'],
                 'slug' => Str::slug($restaurant['name']),
@@ -30,8 +30,8 @@ class RestaurentSeeder extends Seeder
                     ->first();
 
                 if ($category) {
-                    DB::table('restaurent_categories')->insert([
-                        'restaurent_id' => $restaurantId,
+                    DB::table('restaurant_categories')->insert([
+                        'restaurant_id' => $restaurantId,
                         'category_id' => $category->id
                     ]);
                 }

@@ -17,18 +17,18 @@ class HeartyMealController extends Controller
         $categories = DB::table('hmcategories')
             ->select('id', 'name', 'slug', 'icon')
             ->get()
-            ->map(function($category) {
+            ->map(function ($category) {
                 $category->icon = json_decode($category->icon)->url;
                 return $category;
             });
 
-        $restaurants = DB::table('restaurents')
-            ->select('restaurents.*')
-            ->join('restaurent_categories', 'restaurents.id', '=', 'restaurent_categories.restaurent_id')
-            ->join('hmcategories', 'restaurent_categories.category_id', '=', 'hmcategories.id')
+        $restaurants = DB::table('restaurants')
+            ->select('restaurants.*')
+            ->join('restaurant_categories', 'restaurants.id', '=', 'restaurant_categories.restaurant_id')
+            ->join('hmcategories', 'restaurant_categories.category_id', '=', 'hmcategories.id')
             ->distinct()
             ->get()
-            ->map(function($restaurant) {
+            ->map(function ($restaurant) {
                 return [
                     'id' => $restaurant->id,
                     'name' => $restaurant->name,
@@ -39,9 +39,9 @@ class HeartyMealController extends Controller
                     'minOrder' => 15, // Default value or from your data
                     'distance' => 2.5, // Default value or from your data
                     'cuisine' => ['Various'], // Default value or from your data
-                    'categories' => DB::table('restaurent_categories')
-                        ->join('hmcategories', 'restaurent_categories.category_id', '=', 'hmcategories.id')
-                        ->where('restaurent_id', $restaurant->id)
+                    'categories' => DB::table('restaurant_categories')
+                        ->join('hmcategories', 'restaurant_categories.category_id', '=', 'hmcategories.id')
+                        ->where('restaurant_id', $restaurant->id)
                         ->pluck('hmcategories.slug')
                         ->toArray()
                 ];
@@ -55,23 +55,23 @@ class HeartyMealController extends Controller
 
     public function getRestaurant($id)
     {
-        $restaurant = DB::table('restaurents')
-            ->where('restaurents.id', $id)
+        $restaurant = DB::table('restaurants')
+            ->where('restaurants.id', $id)
             ->first();
 
         if (!$restaurant) {
             abort(404);
         }
 
-        $categories = DB::table('restaurent_categories')
-            ->join('hmcategories', 'restaurent_categories.category_id', '=', 'hmcategories.id')
-            ->where('restaurent_id', $id)
+        $categories = DB::table('restaurant_categories')
+            ->join('hmcategories', 'restaurant_categories.category_id', '=', 'hmcategories.id')
+            ->where('restaurant_id', $id)
             ->pluck('hmcategories.name')
             ->toArray();
 
         $products = DB::table('products')
-            ->join('restaurent_products', 'products.id', '=', 'restaurent_products.product_id')
-            ->where('restaurent_products.restaurent_id', $id)
+            ->join('restaurant_products', 'products.id', '=', 'restaurant_products.product_id')
+            ->where('restaurant_products.restaurant_id', $id)
             ->select('products.*')
             ->get();
 
@@ -96,12 +96,14 @@ class HeartyMealController extends Controller
         return response()->json($products);
     }
 
-    public function getCategories(){
+    public function getCategories()
+    {
         $categories = HMCategories::all();
         return response()->json($categories);
     }
 
-    public function getCategory(string $categoryid){
+    public function getCategory(string $categoryid)
+    {
         $category = HMCategories::find($categoryid);
         return response()->json($category);
     }

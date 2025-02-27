@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             HMCategorySeeder::class,
-            RestaurentSeeder::class,
+            restaurantSeeder::class,
             ProductSeeder::class,
         ]);
     }

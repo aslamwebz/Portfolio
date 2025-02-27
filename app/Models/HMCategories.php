@@ -17,9 +17,9 @@ class HMCategories extends Model
         'icon' => 'array',
     ];
 
-    public function restaurents()
+    public function restaurants()
     {
-        return $this->belongsToMany(Restaurent::class);
+        return $this->belongsToMany(restaurant::class);
     }
 
     public function products()

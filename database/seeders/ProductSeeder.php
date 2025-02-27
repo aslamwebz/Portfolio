@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         $restaurantsWithMenu = json_decode(file_get_contents(resource_path('js/Pages/HeartyMeal/Components/foods.json')), true)['restaurants'];
 
         foreach ($restaurantsWithMenu as $restaurant) {
-            $restaurantId = DB::table('restaurents')
+            $restaurantId = DB::table('restaurants')
                 ->where('name', $restaurant['name'])
                 ->value('id');
 
@@ -36,8 +36,8 @@ class ProductSeeder extends Seeder
                     ]);
 
                     // Create restaurant-product relationship
-                    DB::table('restaurent_products')->insert([
-                        'restaurent_id' => $restaurantId,
+                    DB::table('restaurant_products')->insert([
+                        'restaurant_id' => $restaurantId,
                         'product_id' => $productId,
                     ]);
                 }
