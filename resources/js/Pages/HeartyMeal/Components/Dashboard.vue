@@ -35,7 +35,7 @@
                     :key="restaurant.id"
                     class="overflow-hidden bg-white border group rounded-xl hover:shadow-lg hover:border-orange-500 will-change-transform">
                 <div class="relative overflow-hidden">
-                    <img :src="`img/HeartyMeal/restaurants/${restaurant.image}`" :alt="restaurant.name"
+                    <img :src="`img/HeartyMeal/Restaurants/${restaurant.image}`" :alt="restaurant.name"
                         @error="handleImageError"
                         class="object-cover w-full h-48 transition-transform duration-200 transform-gpu group-hover:scale-105">
                     <div

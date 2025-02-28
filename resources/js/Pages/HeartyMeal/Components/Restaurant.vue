@@ -3,7 +3,7 @@
     <div v-else class="container px-4 mx-auto my-8">
         <!-- Restaurant Header -->
         <div class="relative h-64 mb-12 overflow-hidden rounded-lg shadow-lg">
-            <img :src="`/img/HeartyMeal/restaurants/${restaurant?.image}`" alt="" class="object-cover w-full h-full">
+            <img :src="`/img/HeartyMeal/Restaurants/${restaurant?.image}`" alt="" class="object-cover w-full h-full">
             <div class="absolute inset-0 bg-black bg-opacity-40"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <h1 class="text-3xl font-bold">{{ restaurant?.name }}</h1>
@@ -123,10 +123,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import restaurantData from './restaurants.json';
-import foodData from './foods.json';
 import { useCartStore } from '@/stores/cartStore';
 import LoadingSpinner from '@/Components/LoadingSpinner.vue';
+import axios from 'axios';
 
 const props = defineProps({
     restaurantId: {
@@ -135,14 +134,14 @@ const props = defineProps({
     }
 });
 
-// Find restaurant data from restaurants.json
-const findRestaurantDetails = (id) => {
-    return restaurantData.restaurants.find(r => r.id == parseInt(id)) || restaurantData.restaurants[0];
-};
-
-// Find menu data from foods.json
-const findRestaurantMenu = (id) => {
-    return foodData.restaurants.find(r => r.id == parseInt(id)) || foodData.restaurants[0];
+const fetchRestaurantData = async (id) => {
+    try {
+        const response = await axios.get(`/api/restaurants/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching restaurant data:', error);
+        return null;
+    }
 };
 
 const restaurant = ref(null);
@@ -163,15 +162,11 @@ const showScrollTop = ref(false);
 
 onMounted(async () => {
     try {
-        const restaurantDetails = findRestaurantDetails(props.restaurantId);
-        const menuData = findRestaurantMenu(props.restaurantId);
-
-        restaurant.value = {
-            ...restaurantDetails,
-            menuCategories: menuData.menuCategories
-        };
-
-        menuCategories.value = menuData.menuCategories;
+        const data = await fetchRestaurantData(props.restaurantId);
+        if (data) {
+            restaurant.value = data.restaurant;
+            menuCategories.value = data.menuCategories;
+        }
     } finally {
         isLoading.value = false;
     }

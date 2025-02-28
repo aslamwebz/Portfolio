@@ -17,8 +17,7 @@ class restaurant extends Model
         'address',
         'phone',
         'working_hours',
-        'image_name',
-        'image_path'
+        'image',
     ];
 
     protected $casts = [
