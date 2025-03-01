@@ -29,14 +29,14 @@ onMounted(() => {
       <!-- Terminal Header -->
       <div class="bg-gray-700 px-4 py-2 relative">
         <div class="flex space-x-2 absolute left-4">
-          <div class="w-3 h-3 p-2 mt-2 bg-red-500 rounded-full"></div>
-          <div class="w-3 h-3 p-2 mt-2 bg-yellow-500 rounded-full"></div>
-          <div class="w-3 h-3 p-2 mt-2 bg-green-500 rounded-full"></div>
+          <div class="w-2 h-2 p-2 mt-2 bg-red-500 rounded-full"></div>
+          <div class="w-2 h-2 p-2 mt-2 bg-yellow-500 rounded-full"></div>
+          <div class="w-2 h-2 p-2 mt-2 bg-green-500 rounded-full"></div>
         </div>
-        <div class="text-gray-400 text-[20px] text-center">aboutMe.php</div>
+        <div class="text-gray-400 text-[16px] text-center">aboutMe.php</div>
       </div>
       <!-- Terminal Content -->
-      <div class="p-4 font-mono text-[20px]">
+      <div class="p-4 font-mono text-[16px]">
         <div v-for="(line, index) in lines" :key="index" class="min-h-[1.5em]">
           <div v-if="visibleLines.includes(index)"
                :class="['line-content', { 'typewriter-effect': typingStates[index] }]">

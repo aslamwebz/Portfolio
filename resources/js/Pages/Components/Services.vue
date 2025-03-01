@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="container py-8 mx-auto max-w-7xl">
-            <section class="py-20 services">
+            <section class="py-16 services">
                 <div class="px-4 ">
-                    <div class="p-10 mx-auto mb-12 text-center bg-gray-800 rounded-md shadow-2xl sm:col-span-3 shadow-black">
-                        <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl">Services I Offer</h2>
-                        <p class="text-gray-400">Specialized in creating modern, responsive, and user-friendly digital solutions
+                    <div class="p-8 mx-auto mb-10 text-center bg-gray-800 rounded-md shadow-2xl shadow-black">
+                        <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">Services I Offer</h2>
+                        <p class="text-sm text-gray-400">Specialized in creating modern, responsive, and user-friendly digital solutions
                             that help businesses grow and succeed.</p>
                     </div>
                     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

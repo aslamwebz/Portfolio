@@ -70,9 +70,9 @@ const navbarHeight = computed(() => {
 });
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
+    { name: 'Home', href: '#', current: true },
+    { name: 'About', href: '#about', current: false },
+    { name: 'Projects', href: '#projects', current: false },
     { name: 'Contact', href: '#contact', current: false },
 ]
 

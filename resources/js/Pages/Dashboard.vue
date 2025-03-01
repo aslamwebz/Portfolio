@@ -75,25 +75,25 @@ onUnmounted(() => {
     <AuthenticatedLayout>
         <div>
             <!-- Hero section -->
-            <Hero />
+            <Hero id="hero" />
 
             <!-- About section -->
-            <About />
+            <About id="about" />
 
             <!-- Projects section -->
-            <Projects />
+            <Projects id="projects" />
 
             <!-- Services section -->
-            <Services />
+            <Services id="services" />
 
             <!-- Skills section -->
-            <Skills />
+            <Skills id="skills" />
 
             <!-- Resume section -->
-            <Resume />
+            <Resume id="resume" />
 
             <!-- Contact section -->
-            <Contact />
+            <Contact id="contact" />
 
             <!-- Footer section -->
             <Footer />

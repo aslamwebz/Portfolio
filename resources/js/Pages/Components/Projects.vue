@@ -11,7 +11,7 @@ const projects = ref([
         id: 'hearty-meal',
         title: 'Hearty Meal',
         description: 'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
-        image: '/img/hearty-meal.jpg',
+        image: '/img/hm-main.png',
         github: 'https://github.com/yourusername/hearty-meal',
         technologies: ['vue', 'laravel', 'tailwind', 'mysql'],
         category: 'Vue'
@@ -20,29 +20,30 @@ const projects = ref([
         id: 'portfolio-site',
         title: 'Developer Portfolio',
         description: 'My personal portfolio website built with modern technologies to showcase my projects and skills in an interactive way.',
-        image: '/img/portfolio.jpg',
+        image: '/img/portfolio-main.png',
         github: 'https://github.com/yourusername/portfolio',
         technologies: ['vue', 'laravel', 'tailwind'],
         category: 'Vue'
     },
     {
-        id: 'chat-app',
-        title: 'Real-time Chat Application',
-        description: 'A real-time messaging platform with features like user authentication, message encryption, and file sharing capabilities.',
-        image: '/img/chat-app.jpg',
-        github: 'https://github.com/yourusername/chat-app',
-        technologies: ['vue', 'node', 'socket.io'],
-        category: 'Node'
+        id: 'image-generator',
+        title: 'AI Image Generator',
+        description: 'A creative tool that leverages AI to generate unique images from text descriptions. Built with DALL-E API integration and features like style customization and batch generation.',
+        image: '/img/ai-main.png',
+        github: 'https://github.com/yourusername/image-generator',
+        technologies: ['vue', 'node', 'openai-api'],
+        category: 'AI'
     },
     {
-        id: 'ai-assistant',
-        title: 'AI Coding Assistant',
-        description: 'An intelligent coding assistant that helps developers write better code faster. Leverages machine learning to provide context-aware suggestions and automate repetitive tasks.',
-        image: '/img/ai-assistant.jpg',
-        github: 'https://github.com/yourusername/ai-assistant',
-        technologies: ['python', 'tensorflow', 'flask', 'vue'],
+        id: 'chatgpt-clone',
+        title: 'ChatGPT Clone',
+        description: 'A sophisticated chatbot application that mimics ChatGPT functionality. Features include context-aware conversations, code highlighting, and conversation history management.',
+        image: '/img/ai-main.png',
+        github: 'https://github.com/yourusername/chatgpt-clone',
+        technologies: ['vue', 'node', 'openai-api', 'mongodb'],
         category: 'AI'
     }
+
 ]);
 
 const filteredProjects = computed(() => {
@@ -54,7 +55,7 @@ const filteredProjects = computed(() => {
 </script>
 
 <template>
-    <section class="container mx-auto pt-[5rem] max-w-screen-2xl">
+    <section id="projects" class="container mx-auto pt-[5rem] max-w-screen-2xl">
         <div class="py-6 bg-gray-800 rounded-md shadow-2xl shadow-black">
             <div class="px-4 py-8 mx-auto text-center">
                 <h2 class="mb-4 text-5xl font-bold text-white">My Projects</h2>
@@ -72,7 +73,8 @@ const filteredProjects = computed(() => {
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 gap-8 p-8 mx-auto md:grid-cols-2 max-w-7xl">
+            <!-- Adjusted grid for narrower cards with more height -->
+            <div class="grid max-w-6xl grid-cols-1 gap-8 p-8 mx-auto md:grid-cols-2">
                 <ProjectCard v-for="project in filteredProjects" :key="project.id" :project="project" />
             </div>
 

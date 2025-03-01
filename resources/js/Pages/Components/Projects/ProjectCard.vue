@@ -19,10 +19,11 @@ const truncatedDescription = props.project.description.length > 100
 <template>
     <div class="relative bg-gray-800 rounded-xl shadow-lg transition-transform duration-300 hover:scale-[1.02]">
         <!-- Card Content -->
+
         <div class="flex flex-col h-full">
-            <div class="relative h-[200px]">
+            <div class="relative h-[300px]">
                 <img :src="project.image" :alt="project.title"
-                    class="absolute inset-0 object-cover w-full h-full rounded-t-xl" />
+                    class="absolute inset-0 h-[95%] object-fit rounded-t-xl" />
             </div>
 
             <div class="flex flex-col flex-1 p-6">
@@ -52,3 +53,23 @@ const truncatedDescription = props.project.description.length > 100
         </div>
     </div>
 </template>
+
+<style scoped>
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 480px;
+    /* Increased height */
+    max-width: 400px;
+    /* Decreased width */
+    margin: 0 auto;
+}
+
+.project-image {
+    height: 240px;
+    /* Adjust image height */
+    object-fit: cover;
+}
+
+/* ... other styles ... */
+</style>
