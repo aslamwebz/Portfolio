@@ -23,6 +23,7 @@
         "@heroicons/vue": "^2.1.5",
         "@stripe/stripe-js": "^5.5.0",
         "flowbite": "^2.5.2",
+        "lodash": "^4.17.21",
         "lucide-vue-next": "^0.469.0",
         "marked": "^15.0.6",
         "parallax-js": "^3.1.0",

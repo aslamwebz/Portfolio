@@ -8,12 +8,12 @@
           <div class="space-y-4">
             <div v-for="item in cart" :key="item.id" class="flex justify-between">
               <span>{{ item.name }} x {{ item.quantity }}</span>
-              <span>${{ (item.price * item.quantity)}}</span>
+              <span>${{ (item.price * item.quantity) }}</span>
             </div>
             <div class="pt-4 border-t">
               <div class="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>${{ total}}</span>
+                <span>${{ total }}</span>
               </div>
             </div>
           </div>
@@ -30,11 +30,8 @@
                 <div id="card-errors" class="mt-2 text-sm text-red-600"></div>
               </div>
 
-              <button
-                type="submit"
-                class="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-                :disabled="processing"
-              >
+              <button type="submit" class="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+                :disabled="processing">
                 {{ processing ? 'Processing...' : 'Pay Now' }}
               </button>
             </div>

@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 // Products
 Route::get('/hearty-meal', [HeartyMealController::class, 'index'])->name('hearty-meal.index');
-Route::get('/hearty-meal/restaurant/{id}', [HeartyMealController::class, 'getRestaurant'])->name('hearty-meal.restaurant');
+Route::get('/hearty-meal/restaurant/{id}', [HeartyMealController::class, 'restaurant'])->name('hearty-meal.restaurant');
 
 Route::get('/hearty-meal/checkout', function () {
     return Inertia::render('HeartyMeal/Components/Checkout');
@@ -66,5 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/api/restaurants/{id}', [HeartyMealController::class, 'getRestaurant'])->name('api.restaurants.show');
+
+Route::get('/api/search', [HeartyMealController::class, 'search']);
 
 require __DIR__ . '/auth.php';

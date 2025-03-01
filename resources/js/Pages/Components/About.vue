@@ -13,7 +13,7 @@
                     </div>
                     <div class="p-6">
                         <div class="flex flex-col items-center">
-                            <img src="https://randomuser.me/api/portraits/men/94.jpg"
+                            <img src="img/profile.jpg"
                                 class="w-40 h-40 mb-6 transition-transform duration-300 bg-gray-300 rounded-full shadow-xl shrink-0 ring-4 ring-blue-500 hover:scale-105"
                                 alt="Mohamed Aslam's profile picture">
                             <h1 class="mb-2 text-xl font-bold text-white">Mohamed Aslam</h1>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="p-12 text-lg text-white bg-gray-800 rounded-md">
                             <h2 class="mb-6 text-3xl font-bold text-blue-400">About Me</h2>
-                            <div class="text-base text-gray-400 space-y-6 leading-relaxed">
+                            <div class="space-y-6 text-base leading-relaxed text-gray-400">
                                 <p>
                                     👋 Hi there! I'm Mohamed Aslam, a passionate Backend Engineer with a deep
                                     fascination for AI, automation, and building robust web solutions. I specialize in
