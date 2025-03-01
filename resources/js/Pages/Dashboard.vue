@@ -49,7 +49,7 @@ const closeAIPopup = () => {
 // Navigate to AI works page
 const goToAIWorks = () => {
     // Replace with your actual navigation logic
-    window.location.href = '/ai-works';
+    window.location.href = '/ai';
     closeAIPopup();
 };
 

@@ -1,9 +1,9 @@
 <template>
-    <section class="container mx-auto py-16 max-w-screen-xl">
+    <section class="container max-w-screen-xl py-16 mx-auto">
         <div class="p-8 bg-gray-800 rounded-md shadow-2xl shadow-black">
             <div class="px-4 py-8 mx-auto text-center">
                 <h2 class="mb-4 text-4xl font-bold text-white">My Professional Journey</h2>
-                <p class="text-base text-gray-400 mb-12">
+                <p class="mb-12 text-base text-gray-400">
                     Explore my career path and achievements
                 </p>
             </div>
@@ -12,14 +12,14 @@
             <div class="mb-8">
                 <div class="flex flex-wrap justify-center gap-4">
                     <button @click="activeTab = 'experience'"
-                        class="px-6 py-3 rounded-lg transition-all duration-300 bg-blue-600 text-white">
-                        <i class="fas fa-briefcase mr-2"></i>
+                        class="px-6 py-3 text-white transition-all duration-300 bg-blue-600 rounded-lg">
+                        <i class="mr-2 fas fa-briefcase"></i>
                         Experience
                     </button>
                     <!-- Download Resume Button -->
                     <button @click="downloadResume"
-                        class="px-6 py-3 rounded-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700">
-                        <i class="fas fa-download mr-2"></i>
+                        class="px-6 py-3 text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                        <i class="mr-2 fas fa-download"></i>
                         Download Full Resume
                     </button>
                 </div>
@@ -32,19 +32,19 @@
                         :class="{ 'expanded': expandedItems.includes(job.id) }" @mouseenter="hoveredJob = job.id"
                         @mouseleave="hoveredJob = null">
                         <div class="timeline-marker" :class="{ 'pulse': hoveredJob === job.id }"></div>
-                        <div class="timeline-content bg-gray-900 p-6 rounded-xl shadow-lg transform transition-all duration-300"
+                        <div class="p-6 transition-all duration-300 transform bg-gray-900 shadow-lg timeline-content rounded-xl"
                             :class="{ 'scale-105': hoveredJob === job.id, 'border-l-4': expandedItems.includes(job.id) }"
                             :style="expandedItems.includes(job.id) ? 'border-color: #3b82f6' : ''">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="text-xl font-bold text-white flex items-center">
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="flex items-center text-xl font-bold text-white">
                                     <i :class="getJobIcon(job.title)" class="mr-2 text-blue-400"></i>
                                     {{ job.title }}
                                 </h3>
-                                <span class="text-blue-400 text-sm bg-blue-900/50 px-3 py-1 rounded-full">{{ job.period
-                                    }}</span>
+                                <span class="px-3 py-1 text-sm text-blue-400 rounded-full bg-blue-900/50">{{ job.period
+                                }}</span>
                             </div>
-                            <h4 class="text-lg text-blue-300 mb-4 flex items-center">
-                                <i class="fas fa-building mr-2 text-gray-400"></i>
+                            <h4 class="flex items-center mb-4 text-lg text-blue-300">
+                                <i class="mr-2 text-gray-400 fas fa-building"></i>
                                 {{ job.company }}
                                 <span class="ml-2 text-sm text-gray-400">{{ job.location }}</span>
                             </h4>
@@ -54,23 +54,23 @@
                                     {{ job.description.substring(0, 150) }}...
                                 </p>
                                 <div v-else class="animate-fadeIn">
-                                    <p class="text-gray-400 mb-4">{{ job.description }}</p>
-                                    <h5 class="text-white font-semibold mb-2 flex items-center">
-                                        <i class="fas fa-trophy text-yellow-500 mr-2"></i> Key Achievements
+                                    <p class="mb-4 text-gray-400">{{ job.description }}</p>
+                                    <h5 class="flex items-center mb-2 font-semibold text-white">
+                                        <i class="mr-2 text-yellow-500 fas fa-trophy"></i> Key Achievements
                                     </h5>
-                                    <ul class="list-none pl-0 text-gray-400 space-y-3 mb-6">
+                                    <ul class="pl-0 mb-6 space-y-3 text-gray-400 list-none">
                                         <li v-for="(achievement, i) in job.achievements" :key="i"
                                             class="flex items-start">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <i class="mt-1 mr-2 text-green-500 fas fa-check-circle"></i>
                                             <span>{{ achievement }}</span>
                                         </li>
                                     </ul>
-                                    <h5 class="text-white font-semibold mb-2 flex items-center">
-                                        <i class="fas fa-code text-purple-500 mr-2"></i> Technologies Used
+                                    <h5 class="flex items-center mb-2 font-semibold text-white">
+                                        <i class="mr-2 text-purple-500 fas fa-code"></i> Technologies Used
                                     </h5>
                                     <div class="flex flex-wrap gap-2 mt-2">
                                         <span v-for="(tech, i) in job.technologies" :key="i"
-                                            class="px-3 py-1 text-xs bg-gray-800 text-gray-300 rounded-full hover:bg-blue-900 hover:text-blue-200 transition-colors cursor-default">
+                                            class="px-3 py-1 text-xs text-gray-300 transition-colors bg-gray-800 rounded-full cursor-default hover:bg-blue-900 hover:text-blue-200">
                                             {{ tech }}
                                         </span>
                                     </div>
@@ -78,10 +78,10 @@
                             </div>
 
                             <button @click="toggleExpand(job.id)"
-                                class="text-blue-400 hover:text-blue-300 flex items-center bg-gray-800 px-4 py-2 rounded-full transition-all hover:bg-gray-700">
+                                class="flex items-center px-4 py-2 text-blue-400 transition-all bg-gray-800 rounded-full hover:text-blue-300 hover:bg-gray-700">
                                 {{ expandedItems.includes(job.id) ? 'Show Less' : 'Show More' }}
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4 ml-1 transition-transform duration-300" fill="none"
+                                    class="w-4 h-4 ml-1 transition-transform duration-300" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor"
                                     :class="{ 'rotate-180': expandedItems.includes(job.id) }">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
