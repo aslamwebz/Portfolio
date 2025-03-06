@@ -15,18 +15,18 @@
                 </div>
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-[10%]  w-full">
                     <div class="flex items-center flex-shrink-0">
-                        <span class="text-[40px] font-bold">
+                        <span class="text-[30px] font-bold">
                             M Aslam
                         </span>
                     </div>
                     <div class="hidden ml-auto sm:block">
                         <div class="flex p-3 space-x-4">
                             <a v-for="item in navigation" :key="item.name" :href="item.href"
-                                :class="[item.current ? 'bg-gray-900 text-white' : 'text-black hover:text-[#f39c12]', 'rounded-md px-3 py-2 text-[19px] font-medium']"
+                                :class="[item.current ? 'bg-gray-900 text-white' : 'text-black hover:text-[#f39c12]', 'rounded-md px-3 py-2 text-[16px] font-medium']"
                                 :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
                             <div class="right-0">
                                 <Button @click="download" download
-                                    class="px-4 py-2 font-normal tracking-wide text-white transition duration-200 ease-in-out rounded-full outline-none text-nowrap bg-gradient-to-b from-blue-600 to-blue-700 focus:outline-none hover:shadow-lg hover:from-blue-700">
+                                    class="px-4 py-2 text-[14px] tracking-wide text-white transition duration-200 ease-in-out rounded-full outline-none text-nowrap bg-gradient-to-b from-blue-600 to-blue-700 focus:outline-none hover:shadow-lg hover:from-blue-700">
                                     Download My Resume
                                 </Button>
                             </div>
@@ -53,8 +53,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 // Can change the height of the navbar when scrolled
 const scrollY = ref(0);
-const defaultHeight = 6; // default height of the navbar
-const scrolledHeight = 6;  // height of the navbar when scrolled
+const defaultHeight = 5; // default height of the navbar
+const scrolledHeight = 5;  // height of the navbar when scrolled
 
 
 onBeforeMount(() => {

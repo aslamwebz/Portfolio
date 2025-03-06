@@ -58,8 +58,8 @@ const filteredProjects = computed(() => {
     <section id="projects" class="container mx-auto pt-[5rem] max-w-screen-2xl">
         <div class="py-6 bg-gray-800 rounded-md shadow-2xl shadow-black">
             <div class="px-4 py-8 mx-auto text-center">
-                <h2 class="mb-4 text-5xl font-bold text-white">My Projects</h2>
-                <p class="text-lg text-gray-400">
+                <h2 class="mb-4 text-4xl font-bold text-white">My Projects</h2>
+                <p class="text-base text-gray-400">
                     Take a look at some highlighted personal projects, showcasing my skills and passion for development.
                 </p>
             </div>
@@ -67,7 +67,7 @@ const filteredProjects = computed(() => {
             <!-- Filter buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-8">
                 <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
-                    class="px-4 py-2 transition-colors rounded-full"
+                    class="px-4 py-2 text-sm transition-colors rounded-full"
                     :class="activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'">
                     {{ filter }}
                 </button>
@@ -80,7 +80,7 @@ const filteredProjects = computed(() => {
 
             <div class="p-4 mt-8 text-center">
                 <a href="#"
-                    class="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
+                    class="inline-flex items-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
                     View All
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 20 20"
                         fill="currentColor">

@@ -6,9 +6,8 @@ test('example', function () {
     $response->assertStatus(200);
 });
 
-test('see products on products page', function(){
+test('see products on products page', function () {
     $request = $this->get('/products');
 
     $request->assertSee('products');
-
 });

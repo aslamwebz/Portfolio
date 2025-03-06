@@ -8,13 +8,13 @@
                 <div class="text-2xl font-semibold leading-none text-gradient from-blue-500 to-purple-500">
                     Greetings! 👋 I'm
                 </div>
-                <div class="text-5xl font-bold leading-tight">
+                <div class="text-4xl font-bold leading-tight">
                     Mohamed Aslam
                 </div>
                 <CodeTerminal />
                 <div class="mt-8">
                     <a href="#contact"
-                        class="px-8 py-3 text-lg font-medium text-white transition transform rounded-full shadow-lg bg-gradient-to-r from-indigo-600 to-blue-500 hover:scale-105 hover:shadow-xl focus:outline-none">
+                        class="px-8 py-3 font-medium text-white transition transform rounded-full shadow-lg text-md bg-gradient-to-r from-indigo-600 to-blue-500 hover:scale-105 hover:shadow-xl focus:outline-none">
                         Contact Me
                     </a>
                 </div>

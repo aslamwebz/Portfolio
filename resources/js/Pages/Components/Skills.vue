@@ -2,8 +2,8 @@
     <section class="container max-w-screen-xl py-12 mx-auto">
         <div class="p-6 bg-gray-800 rounded-md shadow-2xl shadow-black">
             <div class="px-4 py-6 mx-auto text-center">
-                <h2 class="mb-4 text-2xl font-bold text-white">Technical Skills</h2>
-                <p class="mb-8 text-sm text-gray-400">
+                <h2 class="mb-4 text-xl font-bold text-white">Technical Skills</h2>
+                <p class="mb-8 text-xs text-gray-400">
                     Here are the technologies and tools I specialize in
                 </p>
             </div>
@@ -11,7 +11,7 @@
             <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
                 <!-- Frontend Skills -->
                 <div class="p-6 bg-gray-900 shadow-lg rounded-xl">
-                    <h3 class="flex items-center mb-6 text-xl font-bold text-white">
+                    <h3 class="flex items-center mb-6 text-base font-bold text-white">
                         <i class="mr-3 text-blue-500 fas fa-laptop-code"></i> Frontend
                     </h3>
                     <div class="space-y-4">
@@ -25,7 +25,7 @@
 
                 <!-- Backend Skills -->
                 <div class="p-6 bg-gray-900 shadow-lg rounded-xl">
-                    <h3 class="flex items-center mb-6 text-xl font-bold text-white">
+                    <h3 class="flex items-center mb-6 text-base font-bold text-white">
                         <i class="mr-3 text-purple-500 fas fa-server"></i> Backend
                     </h3>
                     <div class="space-y-4">
@@ -37,7 +37,7 @@
 
                 <!-- AI & Tools Skills -->
                 <div class="p-6 bg-gray-900 shadow-lg rounded-xl">
-                    <h3 class="flex items-center mb-6 text-xl font-bold text-white">
+                    <h3 class="flex items-center mb-6 text-base font-bold text-white">
                         <i class="mr-3 text-pink-500 fas fa-brain"></i> AI & Tools
                     </h3>
                     <div class="space-y-4">

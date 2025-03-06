@@ -27,8 +27,8 @@ const truncatedDescription = props.project.description.length > 100
             </div>
 
             <div class="flex flex-col flex-1 p-6">
-                <h3 class="mb-2 text-xl font-bold text-white">{{ project.title }}</h3>
-                <p class="mb-4 text-gray-300">{{ truncatedDescription }}</p>
+                <h3 class="mb-2 text-lg font-bold text-white">{{ project.title }}</h3>
+                <p class="mb-4 text-sm text-gray-300">{{ truncatedDescription }}</p>
 
                 <!-- Technologies -->
                 <div class="flex flex-wrap gap-2 mb-4">
@@ -41,11 +41,11 @@ const truncatedDescription = props.project.description.length > 100
                 <!-- Actions -->
                 <div class="flex gap-3 mt-auto">
                     <a :href="project.id === 'hearty-meal' ? '/hearty-meal' : '#'"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+                        class="inline-flex items-center px-4 py-2 text-xs font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
                         Learn More →
                     </a>
                     <a v-if="project.github" :href="project.github" target="_blank"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors bg-gray-700 rounded-lg hover:bg-gray-600">
+                        class="inline-flex items-center px-4 py-2 text-xs font-medium text-white transition-colors bg-gray-700 rounded-lg hover:bg-gray-600">
                         <i class="mr-2 fab fa-github"></i> GitHub
                     </a>
                 </div>

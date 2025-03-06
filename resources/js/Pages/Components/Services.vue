@@ -2,18 +2,16 @@
     <div>
         <div class="container py-8 mx-auto max-w-7xl">
             <section class="py-16 services">
-                <div class="px-4 ">
+                <div class="px-4">
                     <div class="p-8 mx-auto mb-10 text-center bg-gray-800 rounded-md shadow-2xl shadow-black">
-                        <h2 class="mb-4 text-2xl font-bold text-white sm:text-3xl">Services I Offer</h2>
-                        <p class="text-sm text-gray-400">Specialized in creating modern, responsive, and user-friendly digital solutions
+                        <h2 class="mb-4 text-xl font-bold text-white sm:text-2xl">Services I Offer</h2>
+                        <p class="text-xs text-gray-400">Specialized in creating modern, responsive, and user-friendly
+                            digital solutions
                             that help businesses grow and succeed.</p>
                     </div>
                     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        <ServiceCard v-for="service in services"
-                            :key="service.title"
-                            :icon="service.icon"
-                            :title="service.title"
-                            :description="service.description"
+                        <ServiceCard v-for="service in services" :key="service.title" :icon="service.icon"
+                            :title="service.title" :description="service.description"
                             :icon-bg-color="service.iconBgColor" />
                     </div>
                 </div>
@@ -47,6 +45,4 @@ const services = [
 ];
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
