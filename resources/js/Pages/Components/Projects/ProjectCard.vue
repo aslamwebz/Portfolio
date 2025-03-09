@@ -40,7 +40,7 @@ const truncatedDescription = props.project.description.length > 100
 
                 <!-- Actions -->
                 <div class="flex gap-3 mt-auto">
-                    <a :href="project.id === 'hearty-meal' ? '/hearty-meal' : '#'"
+                    <a :href="project.link ? project.link : '#'" v-if="project.link !== '' "
                         class="inline-flex items-center px-4 py-2 text-xs font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
                         Learn More →
                     </a>

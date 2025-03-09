@@ -9,40 +9,44 @@ const filters = ['All', 'Vue', 'Laravel', 'Node', 'AI'];
 const projects = ref([
     {
         id: 'hearty-meal',
+        link: '/hearty-meal',
         title: 'Hearty Meal',
         description: 'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
         image: '/img/hm-main.png',
-        github: 'https://github.com/yourusername/hearty-meal',
-        technologies: ['vue', 'laravel', 'tailwind', 'mysql'],
+        github: 'https://github.com/aslamwebz/Portfolio/tree/main/resources/js/Pages/HeartyMeal',
+        technologies: ['php', 'laravel', 'vue', 'tailwind'],
         category: 'Vue'
     },
     {
         id: 'portfolio-site',
+        link: '/',
         title: 'Developer Portfolio',
         description: 'My personal portfolio website built with modern technologies to showcase my projects and skills in an interactive way.',
         image: '/img/portfolio-main.png',
-        github: 'https://github.com/yourusername/portfolio',
-        technologies: ['vue', 'laravel', 'tailwind'],
+        github: 'https://github.com/aslamwebz/portfolio',
+        technologies: ['php', 'laravel', 'vue', 'tailwind'],
         category: 'Vue'
     },
     {
-        id: 'image-generator',
-        title: 'AI Image Generator',
-        description: 'A creative tool that leverages AI to generate unique images from text descriptions. Built with DALL-E API integration and features like style customization and batch generation.',
+        id: 'ai-projects',
+        link: '',
+        title: 'AI Projects',
+        description: 'A collection of AI projects using Python and Crew AI that use AI to enhance functionality and user experiences.',
         image: '/img/ai-main.png',
-        github: 'https://github.com/yourusername/image-generator',
-        technologies: ['vue', 'node', 'openai-api'],
+        github: 'https://github.com/aslamwebz/ai',
+        technologies: ['python', 'crewai', 'Ollama', 'openai', 'streamlit'],
         category: 'AI'
     },
     {
-        id: 'chatgpt-clone',
-        title: 'ChatGPT Clone',
-        description: 'A sophisticated chatbot application that mimics ChatGPT functionality. Features include context-aware conversations, code highlighting, and conversation history management.',
+        id: 'laravel-ai',
+        link: '/ai',
+        title: 'AI Laravel Projects',
+        description: "A collection of Laravel projects that use AI to enhance functionality and user experiences.",
         image: '/img/ai-main.png',
-        github: 'https://github.com/yourusername/chatgpt-clone',
-        technologies: ['vue', 'node', 'openai-api', 'mongodb'],
+        github: 'https://github.com/aslamwebz/Portfolio/blob/dev/app/Http/Controllers/AIController.php',
+        technologies: ['laravel', 'vue', 'openai', 'tailwind'],
         category: 'AI'
-    }
+    },
 
 ]);
 
