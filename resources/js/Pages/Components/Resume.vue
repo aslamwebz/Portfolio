@@ -16,12 +16,7 @@
                         <i class="mr-2 fas fa-briefcase"></i>
                         Experience
                     </button>
-                    <!-- Download Resume Button -->
-                    <button @click="downloadResume"
-                        class="px-6 py-3 text-sm text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                        <i class="mr-2 fas fa-download"></i>
-                        Download Full Resume
-                    </button>
+                   
                 </div>
             </div>
 
@@ -110,18 +105,6 @@ const toggleExpand = (id) => {
     } else {
         expandedItems.value.push(id);
     }
-};
-
-// Function to download resume
-const downloadResume = () => {
-    // Replace with your actual resume PDF URL
-    const resumeUrl = '/resume.pdf';
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = 'Aslam_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
 };
 
 // Function to get appropriate icon for job title

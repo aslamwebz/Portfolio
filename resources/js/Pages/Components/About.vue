@@ -19,11 +19,11 @@
                             <h1 class="mb-2 text-xl font-bold text-white">Mohamed Aslam</h1>
                             <p class="px-4 py-1 text-sm text-blue-400 bg-blue-900 rounded-full">Backend Engineer</p>
                             <div class="flex flex-wrap justify-center gap-4 mt-8">
-                                <a href="#"
+                                <a href="#contact"
                                     class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                                     Contact Me
                                 </a>
-                                <a href="#"
+                                <a href="/api/resume/download" 
                                     class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-600 hover:scale-105 focus:ring-2 focus:ring-gray-400 focus:outline-none">
                                     Download CV
                                 </a>
