@@ -23,7 +23,7 @@
                                     class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                                     Contact Me
                                 </a>
-                                <a href="/api/resume/download" 
+                                <a href="/api/resume/download"
                                     class="px-6 py-2 text-white transition duration-300 ease-in-out transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-600 hover:scale-105 focus:ring-2 focus:ring-gray-400 focus:outline-none">
                                     Download CV
                                 </a>
@@ -48,7 +48,6 @@
                                     </path>
                                 </svg>
                             </a>
-
                         </div>
                         <hr class="my-6 border-t border-gray-300">
 
