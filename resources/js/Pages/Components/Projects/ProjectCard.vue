@@ -17,38 +17,43 @@ const truncatedDescription = props.project.description.length > 100
 </script>
 
 <template>
-    <div class="relative bg-gray-800 rounded-xl shadow-lg transition-transform duration-300 hover:scale-[1.02]">
-        <!-- Card Content -->
-
-        <div class="flex flex-col h-full">
-            <div class="relative h-[300px]">
-                <img :src="project.image" :alt="project.title"
-                    class="absolute inset-0 h-[95%] object-fit rounded-t-xl" />
+    <div class="space-y-4">
+        <div class="flex items-center gap-2">
+            <div class="p-2 rounded-lg bg-blue-500/10">
+                <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
             </div>
+            <h2 class="text-xl font-semibold text-white">{{ project.title }}</h2>
+        </div>
 
-            <div class="flex flex-col flex-1 p-6">
-                <h3 class="mb-2 text-lg font-bold text-white">{{ project.title }}</h3>
-                <p class="mb-4 text-sm text-gray-300">{{ truncatedDescription }}</p>
+        <p class="text-sm text-gray-400">{{ project.description }}</p>
 
-                <!-- Technologies -->
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <span v-for="tech in project.technologies" :key="tech"
-                        class="px-2 py-1 text-xs font-medium text-blue-300 rounded-full bg-blue-900/30">
-                        {{ tech }}
-                    </span>
-                </div>
+        <!-- Technologies -->
+        <div class="flex flex-wrap gap-2">
+            <span v-for="tech in project.technologies" :key="tech"
+                class="px-2 py-1 text-xs font-medium text-blue-300 rounded-full bg-blue-900/30">
+                {{ tech }}
+            </span>
+        </div>
 
-                <!-- Actions -->
-                <div class="flex gap-3 mt-auto">
-                    <a :href="project.link ? project.link : '#'" v-if="project.link !== '' "
-                        class="inline-flex items-center px-4 py-2 text-xs font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
-                        Learn More →
-                    </a>
-                    <a v-if="project.github" :href="project.github" target="_blank"
-                        class="inline-flex items-center px-4 py-2 text-xs font-medium text-white transition-colors bg-gray-700 rounded-lg hover:bg-gray-600">
-                        <i class="mr-2 fab fa-github"></i> GitHub
-                    </a>
-                </div>
+        <div class="flex gap-3">
+            <a v-if="project.link" :href="project.link" class="px-4 py-1.5 text-sm text-white bg-blue-600 rounded-lg">
+                Live Demo
+            </a>
+            <a :href="project.github" class="px-4 py-1.5 text-sm text-white bg-gray-700 rounded-lg">
+                <i class="mr-1 fab fa-github"></i> GitHub
+            </a>
+        </div>
+
+        <div class="flex gap-6">
+            <div>
+                <span class="text-lg font-bold text-white">{{ project.technologies.length }}</span>
+                <span class="ml-2 text-sm text-gray-400">Technologies</span>
+            </div>
+            <div>
+                <span class="text-lg font-bold text-white">{{ project.category }}</span>
+                <span class="ml-2 text-sm text-gray-400">Category</span>
             </div>
         </div>
     </div>

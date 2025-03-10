@@ -16,7 +16,7 @@
                         <i class="mr-2 fas fa-briefcase"></i>
                         Experience
                     </button>
-                   
+
                 </div>
             </div>
 
@@ -125,14 +125,12 @@ const experience = [
         company: 'FULLSTRIPE TECHNOLOGIES',
         location: 'Remote',
         period: '2021 - Present',
-        description: 'Leading the development of web applications using PHP, Laravel, and Vue.js. Responsible for designing and implementing scalable backend solutions, optimizing database performance, and ensuring high-quality code through comprehensive testing.',
+        description: 'Leading the development of web applications using PHP, Laravel, Livewire, and Vue.js. Responsible for designing and implementing scalable backend solutions, optimizing database performance, and ensuring high-quality code through comprehensive testing.',
         achievements: [
             'Reduced API response time by 40% through implementation of efficient caching strategies and query optimization',
             'Developed a custom CMS that increased content management efficiency by 60%',
-            'Implemented CI/CD pipeline that reduced deployment time from hours to minutes',
-            'Mentored junior developers, improving team productivity by 25%'
         ],
-        technologies: ['PHP', 'Laravel', 'Vue.js', 'MySQL', 'Redis', 'Docker', 'Git', 'AWS']
+        technologies: ['PHP', 'Laravel', 'Livewire', 'Vue.js', 'MySQL', 'Git']
     },
     {
         id: 'officeone',
@@ -142,12 +140,10 @@ const experience = [
         period: '2019 - 2021',
         description: 'Specialized in transforming design mockups into functional WordPress websites and developing custom plugins to extend functionality. Worked closely with designers and clients to ensure project requirements were met with high-quality deliverables.',
         achievements: [
-            'Built 20+ custom WordPress themes and plugins for clients across various industries',
+            'Built 10+ custom WordPress sites for clients across various industries',
             'Improved website loading speed by an average of 35% through optimization techniques',
-            'Developed a custom e-commerce solution that increased client sales by 45%',
-            'Created reusable code libraries that reduced development time for new projects by 30%'
         ],
-        technologies: ['WordPress', 'PHP', 'JavaScript', 'MySQL', 'HTML/CSS', 'jQuery', 'WooCommerce']
+        technologies: ['WordPress', 'PHP', 'JavaScript', 'MySQL', 'HTML/CSS', 'jQuery']
     },
     {
         id: 'qatarline',
@@ -159,8 +155,6 @@ const experience = [
         achievements: [
             'Implemented a new backup system that reduced data recovery time by 70%',
             'Upgraded network infrastructure resulting in 99.9% uptime throughout the year',
-            'Developed automated scripts that reduced routine maintenance tasks by 50%',
-            'Led successful migration to cloud services that reduced IT infrastructure costs by 35%'
         ],
         technologies: ['Windows Server', 'Active Directory', 'Exchange Server', 'VMware', 'Cisco Networking', 'PowerShell', 'Cloud Services']
     },
@@ -172,10 +166,7 @@ const experience = [
         period: '2015 - 2017',
         description: 'Provided comprehensive system and network administration, technical support, and server installation services. Managed IT infrastructure and implemented solutions to improve operational efficiency.',
         achievements: [
-            'Designed and implemented a new network architecture that improved performance by 40%',
-            'Reduced IT support ticket resolution time from 48 hours to 4 hours',
-            'Successfully migrated 15 physical servers to virtual environment',
-            'Implemented security protocols that reduced security incidents by 80%'
+
         ],
         technologies: ['Windows Server', 'Linux', 'Networking', 'Virtualization', 'Security', 'Hardware Troubleshooting']
     },
@@ -187,10 +178,7 @@ const experience = [
         period: '2013 - 2015',
         description: 'Provided level 3 technical support and managed Active Directory in a large enterprise environment. Responsible for troubleshooting complex technical issues and maintaining system reliability.',
         achievements: [
-            'Maintained 99.5% uptime for critical business systems',
-            'Implemented automated user provisioning that reduced onboarding time by 60%',
-            'Developed comprehensive documentation that improved support team efficiency',
-            'Led successful migration of 500+ users to new email system with minimal disruption'
+
         ],
         technologies: ['Windows Server', 'Active Directory', 'Exchange', 'Networking', 'Troubleshooting', 'Technical Documentation']
     }

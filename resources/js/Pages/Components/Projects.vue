@@ -1,11 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import ProjectCard from '@/Pages/Components/Projects/ProjectCard.vue';
 
-const activeFilter = ref('All');
-
-const filters = ['All', 'Vue', 'Laravel', 'Node', 'AI'];
-
+const currentIndex = ref(0);
 const projects = ref([
     {
         id: 'hearty-meal',
@@ -47,53 +44,88 @@ const projects = ref([
         technologies: ['laravel', 'vue', 'openai', 'tailwind'],
         category: 'AI'
     },
-
 ]);
 
-const filteredProjects = computed(() => {
-    if (activeFilter.value === 'All') {
-        return projects.value;
-    }
-    return projects.value.filter(project => project.category === activeFilter.value);
-});
+const nextProject = () => {
+    currentIndex.value = (currentIndex.value + 1) % projects.value.length;
+};
+
+const previousProject = () => {
+    currentIndex.value = currentIndex.value === 0
+        ? projects.value.length - 1
+        : currentIndex.value - 1;
+};
+
+const setProject = (index) => {
+    currentIndex.value = index;
+};
+
+const handleImageError = (event) => {
+    event.target.src = '/img/placeholder.png';
+};
 </script>
 
 <template>
-    <section id="projects" class="container mx-auto pt-[5rem] max-w-screen-2xl">
-        <div class="py-6 bg-gray-800 rounded-md shadow-2xl shadow-black">
-            <div class="px-4 py-8 mx-auto text-center">
-                <h2 class="mb-4 text-4xl font-bold text-white">My Projects</h2>
-                <p class="text-base text-gray-400">
-                    Take a look at some highlighted personal projects, showcasing my skills and passion for development.
-                </p>
+    <section id="projects" class="container px-4 py-8 mx-auto max-w-7xl">
+        <div class="p-6 rounded-xl">
+            <div class="p-8 mx-auto my-10 text-center bg-gray-800 rounded-md shadow-2xl shadow-black">
+                <h2 class="text-xl font-bold text-white sm:text-2xl">My Projects</h2>
             </div>
+            <div class="relative space-y-4">
+                <!-- Main Project Image Container -->
+                <div class="relative w-full overflow-hidden bg-gray-900 aspect-video rounded-xl ring-1 ring-gray-700">
+                    <img :src="projects[currentIndex].image" :alt="projects[currentIndex].title"
+                        class="object-cover w-full h-full bg-gray-800" loading="eager" @error="handleImageError">
+                </div>
 
-            <!-- Filter buttons -->
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
-                    class="px-4 py-2 text-sm transition-colors rounded-full"
-                    :class="activeFilter === filter ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'">
-                    {{ filter }}
-                </button>
-            </div>
+                <!-- Project Thumbnails Carousel -->
+                <div class="relative px-4 py-2 bg-gray-900 rounded-xl">
+                    <!-- Navigation Arrows -->
+                    <button @click="previousProject"
+                        class="absolute z-10 p-2 -translate-y-1/2 rounded-full left-2 top-1/2 bg-black/50">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button @click="nextProject"
+                        class="absolute z-10 p-2 -translate-y-1/2 rounded-full right-2 top-1/2 bg-black/50">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
 
-            <!-- Adjusted grid for narrower cards with more height -->
-            <div class="grid max-w-6xl grid-cols-1 gap-8 p-8 mx-auto md:grid-cols-2">
-                <ProjectCard v-for="project in filteredProjects" :key="project.id" :project="project" />
-            </div>
+                    <!-- Thumbnails -->
+                    <div class="flex justify-center gap-2 px-8 py-2">
+                        <button v-for="(project, index) in projects" :key="project.id" @click="setProject(index)"
+                            class="relative w-24 h-16 overflow-hidden transition-all duration-200 rounded-lg ring-1"
+                            :class="[
+                                currentIndex === index
+                                    ? 'ring-blue-500 ring-2 scale-105'
+                                    : 'ring-gray-700 hover:ring-gray-600'
+                            ]">
+                            <img :src="project.image" :alt="project.title" class="object-cover w-full h-full"
+                                loading="eager" @error="handleImageError">
+                            <div class="absolute inset-0" :class="[
+                                currentIndex === index
+                                    ? 'bg-black/30'
+                                    : 'bg-black/50'
+                            ]">
+                                <div
+                                    class="absolute bottom-0 w-full p-1 text-[10px] text-center text-white bg-black/70">
+                                    {{ project.title }}
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
 
-            <div class="p-4 mt-8 text-center">
-                <a href="#"
-                    class="inline-flex items-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
-                    View All
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
+                <!-- Project Details -->
+                <div class="p-6 bg-gray-900 rounded-xl">
+                    <ProjectCard :project="projects[currentIndex]" />
+                </div>
             </div>
         </div>
     </section>
 </template>
+
+<style scoped></style>
