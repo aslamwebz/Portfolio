@@ -1,50 +1,25 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import ProjectCard from '@/Pages/Components/Projects/ProjectCard.vue';
+import axios from 'axios';
 
 const currentIndex = ref(0);
-const projects = ref([
-    {
-        id: 'hearty-meal',
-        link: '/hearty-meal',
-        title: 'Hearty Meal',
-        description: 'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
-        image: '/img/hm-main.png',
-        github: 'https://github.com/aslamwebz/Portfolio/tree/main/resources/js/Pages/HeartyMeal',
-        technologies: ['php', 'laravel', 'vue', 'tailwind'],
-        category: 'Vue'
-    },
-    {
-        id: 'portfolio-site',
-        link: '/',
-        title: 'Developer Portfolio',
-        description: 'My personal portfolio website built with modern technologies to showcase my projects and skills in an interactive way.',
-        image: '/img/portfolio-main.png',
-        github: 'https://github.com/aslamwebz/portfolio',
-        technologies: ['php', 'laravel', 'vue', 'tailwind'],
-        category: 'Vue'
-    },
-    {
-        id: 'ai-projects',
-        link: '',
-        title: 'AI Projects',
-        description: 'A collection of AI projects using Python and Crew AI that use AI to enhance functionality and user experiences.',
-        image: '/img/ai-main.png',
-        github: 'https://github.com/aslamwebz/ai',
-        technologies: ['python', 'crewai', 'Ollama', 'openai', 'streamlit'],
-        category: 'AI'
-    },
-    {
-        id: 'laravel-ai',
-        link: '/ai',
-        title: 'AI Laravel Projects',
-        description: "A collection of Laravel projects that use AI to enhance functionality and user experiences.",
-        image: '/img/ai-main.png',
-        github: 'https://github.com/aslamwebz/Portfolio/blob/dev/app/Http/Controllers/AIController.php',
-        technologies: ['laravel', 'vue', 'openai', 'tailwind'],
-        category: 'AI'
-    },
-]);
+const projects = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('/api/portfolio-items');
+        console.log('API Response:', response.data); // Added for debugging
+        projects.value = response.data;
+    } catch (err) {
+        console.error('Error fetching portfolio items:', err);
+        error.value = 'Failed to load projects. Please try again later.';
+    } finally {
+        isLoading.value = false;
+    }
+});
 
 const nextProject = () => {
     currentIndex.value = (currentIndex.value + 1) % projects.value.length;
@@ -71,7 +46,23 @@ const handleImageError = (event) => {
             <div class="p-8 mx-auto my-10 text-center bg-gray-800 rounded-md shadow-2xl shadow-black">
                 <h2 class="text-xl font-bold text-white sm:text-2xl">My Projects</h2>
             </div>
-            <div class="relative space-y-4">
+            <!-- Loading State -->
+            <div v-if="isLoading" class="text-center text-white">
+                <p>Loading projects...</p>
+            </div>
+
+            <!-- Error State -->
+            <div v-else-if="error" class="text-center text-red-500">
+                <p>{{ error }}</p>
+            </div>
+
+            <!-- Empty State -->
+            <div v-else-if="projects.length === 0" class="text-center text-white">
+                <p>No projects found.</p>
+            </div>
+
+            <!-- Projects Display -->
+            <div v-else class="relative space-y-4">
                 <!-- Main Project Image Container -->
                 <div class="relative w-full p-8 overflow-hidden bg-gray-900 aspect-video rounded-xl ring-1 ring-gray-700">
                     <img :src="projects[currentIndex].image" :alt="projects[currentIndex].title"
