@@ -33,7 +33,8 @@ class PortfolioItemResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->directory('portfolio-images')
+                    ->directory('img')  // Changed from 'portfolio-images' to 'img'
+                    ->visibility('public')  // Make files publicly accessible
                     ->required(),
                 Forms\Components\TextInput::make('github')
                     ->label('GitHub URL')
