@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AIController;
 use App\Http\Controllers\HeartyMealController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 // Route::get('/', function () {
@@ -17,6 +18,11 @@ use Inertia\Inertia;
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+
+// Redirect /register to login page
+Route::get('/register', function () {
+    return redirect()->route('login');
+});
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
