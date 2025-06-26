@@ -29,17 +29,23 @@ class PortfolioItem extends Model
             return null;
         }
 
-        // If it's already a full URL, return it as is.
+        // If it's already a full URL, extract just the path
         if (str_starts_with($value, 'http')) {
-            return $value;
+            $parsed = parse_url($value);
+            return $parsed['path'] ?? $value; // Return just the path part
         }
 
-        // For seeded data, return the relative path. The browser will handle it.
+        // If it's already a relative path starting with /img/, return as is
         if (str_starts_with($value, '/img/')) {
             return $value;
         }
 
-        // For files uploaded via Filament, create a URL relative to the public storage.
-        return asset('storage/' . $value);
+        // For files uploaded via Filament, return the path relative to public
+        if (str_starts_with($value, 'img/')) {
+            return '/' . $value; // Ensure leading slash
+        }
+
+        // For any other case, assume it's a path relative to storage
+        return '/storage/' . ltrim($value, '/');
     }
 }

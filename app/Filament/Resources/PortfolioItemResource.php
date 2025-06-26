@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Http\File as TemporaryUploadedFile;
 
 class PortfolioItemResource extends Resource
 {
@@ -33,9 +34,13 @@ class PortfolioItemResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->directory('/img')  // Added leading slash for correct path
+                    ->directory('img')  // Store in public/img
                     ->visibility('public')  // Make files publicly accessible
-                    ->required(),
+                    ->preserveFilenames()  // Keep original filenames
+                    ->required()
+                    ->getUploadedFileNameForStorageUsing(
+                        fn (TemporaryUploadedFile $file): string => (string) 'img/' . $file->getClientOriginalName()
+                    ),
                 Forms\Components\TextInput::make('github')
                     ->label('GitHub URL')
                     ->url()
