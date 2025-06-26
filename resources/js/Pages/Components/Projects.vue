@@ -66,7 +66,7 @@ const handleImageError = (event) => {
                 <!-- Main Project Image Container -->
                 <div class="relative w-full p-8 overflow-hidden bg-gray-900 aspect-video rounded-xl ring-1 ring-gray-700">
                     <img :src="projects[currentIndex].image" :alt="projects[currentIndex].title"
-                        class="object-cover w-full h-full bg-gray-800" loading="eager" @error="handleImageError">
+                        class="object-contain w-full  bg-gray-800" loading="eager" @error="handleImageError">
                 </div>
 
                 <!-- Project Thumbnails Carousel -->
