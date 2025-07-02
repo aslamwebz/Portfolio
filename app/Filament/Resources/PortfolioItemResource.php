@@ -10,7 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Http\File as TemporaryUploadedFile;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PortfolioItemResource extends Resource
 {
@@ -39,7 +39,11 @@ class PortfolioItemResource extends Resource
                     ->preserveFilenames()  // Keep original filenames
                     ->required()
                     ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) 'img/' . $file->getClientOriginalName()
+                        function (TemporaryUploadedFile $file): string {
+                            $filename = $file->getClientOriginalName();
+                            $filename = preg_replace('/[^\w\d\.-]/', '_', $filename);
+                            return 'img/' . $filename;
+                        }
                     ),
                 Forms\Components\TextInput::make('github')
                     ->label('GitHub URL')

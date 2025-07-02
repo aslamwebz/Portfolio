@@ -43,12 +43,14 @@ class ViewPortfolioItem extends ViewRecord
                     ->schema([
                         TextEntry::make('link')
                             ->label('Live Demo')
-                            ->url(fn (string $state): string => $state)
-                            ->openUrlInNewTab(),
+                            ->url(fn (?string $state): ?string => $state ?: null)
+                            ->openUrlInNewTab()
+                            ->visible(fn (?string $state): bool => !empty($state)),
                         TextEntry::make('github')
                             ->label('GitHub')
-                            ->url(fn (string $state): string => $state)
-                            ->openUrlInNewTab(),
+                            ->url(fn (?string $state): ?string => $state ?: null)
+                            ->openUrlInNewTab()
+                            ->visible(fn (?string $state): bool => !empty($state)),
                         TextEntry::make('technologies')
                             ->badge()
                             ->columnSpanFull(),
