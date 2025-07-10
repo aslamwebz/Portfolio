@@ -11,7 +11,8 @@ const error = ref(null);
 onMounted(async () => {
     try {
         const response = await axios.get('/api/portfolio-items');
-        console.log('API Response:', response.data); // Added for debugging
+        console.log('API Response:', response.data);
+        console.log('Number of projects received:', response.data.length);
         projects.value = response.data;
     } catch (err) {
         console.error('Error fetching portfolio items:', err);
@@ -86,27 +87,31 @@ const handleImageError = (event) => {
                     </button>
 
                     <!-- Thumbnails -->
-                    <div class="flex justify-center gap-2 px-8 py-2">
-                        <button v-for="(project, index) in projects" :key="project.id" @click="setProject(index)"
-                            class="relative w-24 h-16 overflow-hidden transition-all duration-200 rounded-lg ring-1"
-                            :class="[
-                                currentIndex === index
-                                    ? 'ring-blue-500 ring-2 scale-105'
-                                    : 'ring-gray-700 hover:ring-gray-600'
-                            ]">
-                            <img :src="project.image" :alt="project.title" class="object-cover w-full h-full"
-                                loading="eager" @error="handleImageError">
-                            <div class="absolute inset-0" :class="[
-                                currentIndex === index
-                                    ? 'bg-black/30'
-                                    : 'bg-black/50'
-                            ]">
-                                <div
-                                    class="absolute bottom-0 w-full p-1 text-[10px] text-center text-white bg-black/70">
-                                    {{ project.title }}
-                                </div>
+                    <div class="relative w-full">
+                        <div class="px-8 py-2 overflow-x-auto">
+                            <div class="flex space-x-2 pb-2" style="min-width: max-content">
+                                <button v-for="(project, index) in projects" :key="project.id" @click="setProject(index)"
+                                    class="relative flex-shrink-0 w-24 h-16 overflow-hidden transition-all duration-200 rounded-lg ring-1"
+                                    :class="[
+                                        currentIndex === index
+                                            ? 'ring-blue-500 ring-2 scale-105'
+                                            : 'ring-gray-700 hover:ring-gray-600'
+                                    ]">
+                                    <img :src="project.image" :alt="project.title" class="object-cover w-full h-full"
+                                        loading="eager" @error="handleImageError">
+                                    <div class="absolute inset-0" :class="[
+                                        currentIndex === index
+                                            ? 'bg-black/30'
+                                            : 'bg-black/50'
+                                    ]">
+                                        <div
+                                            class="absolute bottom-0 w-full p-1 text-[10px] text-center text-white bg-black/70">
+                                            {{ project.title }}
+                                        </div>
+                                    </div>
+                                </button>
                             </div>
-                        </button>
+                        </div>
                     </div>
                 </div>
 
@@ -119,4 +124,34 @@ const handleImageError = (event) => {
     </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937; /* bg-gray-800 */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563; /* bg-gray-600 */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* bg-gray-500 */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1f2937; /* gray-600 gray-800 */
+}
+
+/* Container for all projects */
+.space-x-2 {
+    min-width: 100%;
+}
+</style>

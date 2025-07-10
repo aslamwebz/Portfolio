@@ -107,8 +107,8 @@ onUnmounted(() => {
                 </svg>
             </button>
 
-            <!-- AI Works Popup -->
-            <div v-if="showAIPopup" class="ai-popup">
+            <!-- AI Works Popup - Hidden on mobile -->
+            <div v-if="showAIPopup" class="ai-popup hidden sm:block">
                 <button @click="closeAIPopup" class="ai-popup-close">&times;</button>
                 <div class="ai-popup-content">
                     <div class="ai-popup-icon">
