@@ -107,7 +107,8 @@ onUnmounted(() => {
                 </svg>
             </button>
 
-            <!-- AI Works Popup - Hidden on mobile -->
+            <!-- AI Works Popup - Temporarily commented out -->
+            <!--
             <div v-if="showAIPopup" class="ai-popup hidden sm:block">
                 <button @click="closeAIPopup" class="ai-popup-close">&times;</button>
                 <div class="ai-popup-content">
@@ -122,6 +123,7 @@ onUnmounted(() => {
                     <button @click="goToAIWorks" class="ai-popup-button">View AI Works</button>
                 </div>
             </div>
+            -->
         </div>
     </AuthenticatedLayout>
 </template>

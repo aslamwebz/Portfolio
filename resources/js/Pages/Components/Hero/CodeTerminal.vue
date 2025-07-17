@@ -2,9 +2,9 @@
 import { ref, onMounted } from 'vue';
 
 const lines = [
-  { prefix: '$role = ', content: "'Backend / Full Stack Developer';" },
-  { prefix: '$techStack = ', content: "'LAMP - LEMP - PHP/Laravel';" },
-  { prefix: '$status = ', content: "'PHP Developer @DigitallEgg';" },
+  { prefix: '$role = ', content: "'Full Stack Developer';" },
+  { prefix: '$techStack = ', content: "'LAMP - LEMP - PHP/Laravel/Vue';" },
+  { prefix: '$status = ', content: "'Full Stack Developer @DigitallEgg';" },
 ];
 
 const visibleLines = ref<number[]>([]);
