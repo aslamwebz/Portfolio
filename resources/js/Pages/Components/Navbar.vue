@@ -1,7 +1,7 @@
 <template>
-    <Disclosure as="nav" class="sticky top-0 z-50 bg-white " v-slot="{ open }">
-        <div class="navbar">
-            <div class="relative flex items-center justify-between nav mx-[12%] sm:px-6 lg:px-8"
+    <Disclosure as="nav" class="sticky top-6 z-50" v-slot="{ open }">
+        <div class="navbar transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+            <div class="relative flex items-center justify-between nav px-6 max-w-5xl mx-auto w-[90%] sm:w-[85%]" :class="{ 'bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0,120,255,0.08)] rounded-full border border-gray-200/50': isScrolled }"
                 :style="{ height: navbarHeight + 'rem' }">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden ">
                     <!-- Mobile menu button-->
@@ -13,18 +13,18 @@
                         <XMarkIcon v-else class="block w-6 h-6" aria-hidden="true" />
                     </DisclosureButton>
                 </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start mx-[10%]  w-full">
-                    <div class="flex items-center flex-shrink-0">
+                <div class="flex flex-1 items-center justify-between w-full">
+                    <div class="flex items-center flex-shrink-0 px-2">
                         <span class="text-[30px] font-bold">
                             M Aslam
                         </span>
                     </div>
-                    <div class="hidden ml-auto sm:block">
-                        <div class="flex p-3 space-x-4">
+                    <div class="hidden sm:flex items-center">
+                        <div class="flex space-x-3">
                             <a v-for="item in navigation" :key="item.name" :href="item.href"
                                 :class="[item.current ? 'bg-gray-900 text-white' : 'text-black hover:text-[#f39c12]', 'rounded-md px-3 py-2 text-[16px] font-medium']"
                                 :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-                            <div class="right-0">
+                            <div class="ml-6">
                                 <Button @click="download" download
                                     class="px-4 py-2 text-[14px] tracking-wide text-white transition duration-200 ease-in-out rounded-full outline-none text-nowrap bg-gradient-to-b from-blue-600 to-blue-700 focus:outline-none hover:shadow-lg hover:from-blue-700">
                                     Download My Resume
@@ -53,8 +53,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 // Can change the height of the navbar when scrolled
 const scrollY = ref(0);
-const defaultHeight = 5; // default height of the navbar
-const scrolledHeight = 5;  // height of the navbar when scrolled
+const defaultHeight = 4.5; // default height of the navbar
+const scrolledHeight = 4.5;  // height of the navbar when scrolled
 
 
 onBeforeMount(() => {
@@ -76,10 +76,13 @@ const navigation = [
     { name: 'Contact', href: '#contact', current: false },
 ]
 
+const isScrolled = ref(false);
+
 function handleScroll() {
     scrollY.value = window.scrollY;
+    isScrolled.value = window.scrollY > 50;
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 0) {
+    if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
@@ -106,11 +109,28 @@ function download() {
 </script>
 
 <style scoped>
+.navbar {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0.75rem auto;
+    max-width: 100%;
+    will-change: transform, box-shadow, background;
+}
+
+.navbar.scrolled {
+    margin: 0.5rem auto;
+}
+
+@media (max-width: 640px) {
+    .navbar, .navbar.scrolled {
+        margin: 0.5rem auto;
+        width: calc(100% - 2rem) !important;
+        max-width: 100% !important;
+    }
+}
+
 .nav {
     transition: height 0.3s ease;
 }
 
-.scrolled {
-    border-bottom: 0.5px solid lightgray;
-}
+/* Removed HR when scrolled */
 </style>
