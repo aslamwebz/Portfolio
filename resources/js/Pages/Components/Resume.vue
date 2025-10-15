@@ -137,7 +137,7 @@ const experience = [
         title: 'WordPress and PHP Web Developer',
         company: 'REMOTE - OFFICE ONE',
         location: 'Remote',
-        period: '2019 - 2021',
+        period: '2018 - 2020',
         description: 'Specialized in transforming design mockups into functional WordPress websites and developing custom plugins to extend functionality. Worked closely with designers and clients to ensure project requirements were met with high-quality deliverables.',
         achievements: [
             'Built 10+ custom WordPress sites for clients across various industries',
@@ -150,7 +150,7 @@ const experience = [
         title: 'System Administrator',
         company: 'QATARLINE',
         location: 'Doha, Qatar',
-        period: '2017 - 2019',
+        period: '2017 - 2018',
         description: 'Managed network infrastructure and IT security administration. Responsible for maintaining server health, implementing security protocols, and providing technical support to ensure smooth operations across the organization.',
         achievements: [
             'Implemented a new backup system that reduced data recovery time by 70%',
@@ -163,7 +163,7 @@ const experience = [
         title: 'IT Administrator',
         company: 'AURA TECH SOLUTIONS',
         location: 'Colombo, Sri Lanka',
-        period: '2015 - 2017',
+        period: '2016 - 2017',
         description: 'Provided comprehensive system and network administration, technical support, and server installation services. Managed IT infrastructure and implemented solutions to improve operational efficiency.',
         achievements: [
 
@@ -175,7 +175,7 @@ const experience = [
         title: 'Technical Support Engineer',
         company: 'VG ENGINEERING',
         location: 'Doha, Qatar',
-        period: '2013 - 2015',
+        period: '2014 - 2015',
         description: 'Provided level 3 technical support and managed Active Directory in a large enterprise environment. Responsible for troubleshooting complex technical issues and maintaining system reliability.',
         achievements: [
 
