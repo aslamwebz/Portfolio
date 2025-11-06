@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\PortfolioItemResource\Pages;
 
 use App\Filament\Resources\PortfolioItemResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePortfolioItem extends CreateRecord

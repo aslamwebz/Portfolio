@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\HeartyMealController;
 use App\Http\Controllers\PdfController;
-use App\Http\Controllers\Api\RestaurantController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortfolioItemController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/resume/download', [PdfController::class, 'download']);
 

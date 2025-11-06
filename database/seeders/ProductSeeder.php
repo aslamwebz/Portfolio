@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -21,7 +23,9 @@ class ProductSeeder extends Seeder
                 ->where('name', $restaurant['name'])
                 ->value('id');
 
-            if (!$restaurantId) continue;
+            if (! $restaurantId) {
+                continue;
+            }
 
             foreach ($restaurant['menuCategories'] as $category) {
                 foreach ($category['items'] as $item) {

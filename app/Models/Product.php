@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +18,7 @@ class Product extends Model
         'description',
         'price',
         'image',
-        'stock'
+        'stock',
     ];
 
     protected $casts = [
@@ -47,7 +49,7 @@ class Product extends Model
     {
         parent::boot();
 
-        static::creating(function ($product) {
+        static::creating(function ($product): void {
             if (empty($product->slug)) {
                 $product->slug = Str::slug($product->name);
             }

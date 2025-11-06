@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -16,7 +18,7 @@ class restaurantSeeder extends Seeder
             // Insert restaurant
             $restaurantId = DB::table('restaurants')->insertGetId([
                 'name' => $restaurant['name'],
-                'about us' => 'Welcome to ' . $restaurant['name'],
+                'about us' => 'Welcome to '.$restaurant['name'],
                 'slug' => Str::slug($restaurant['name']),
                 'address' => '123 Food Street',
                 'working hours' => '9:00 AM - 10:00 PM',
@@ -32,7 +34,7 @@ class restaurantSeeder extends Seeder
                 if ($category) {
                     DB::table('restaurant_categories')->insert([
                         'restaurant_id' => $restaurantId,
-                        'category_id' => $category->id
+                        'category_id' => $category->id,
                     ]);
                 }
             }

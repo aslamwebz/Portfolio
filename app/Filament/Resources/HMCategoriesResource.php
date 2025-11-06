@@ -1,17 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\HMCategoriesResource\Pages;
-use App\Filament\Resources\HMCategoriesResource\RelationManagers;
 use App\Models\HMCategories;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class HMCategoriesResource extends Resource
 {
@@ -35,10 +34,10 @@ class HMCategoriesResource extends Resource
                     ->imagePreviewHeight('100')
                     ->directory('category-icons')
                     ->storeFileNamesIn('original_filename')
-                    ->afterStateUpdated(function ($state, Forms\Set $set) {
+                    ->afterStateUpdated(function ($state, Forms\Set $set): void {
                         if ($state && is_string($state)) {
                             $originalName = pathinfo($state, PATHINFO_BASENAME);
-                            $set('icon', json_encode(['url' => 'img/HeartyMeal/Categories/' . $originalName]));
+                            $set('icon', json_encode(['url' => 'img/HeartyMeal/Categories/'.$originalName]));
                         }
                     }),
             ]);
@@ -58,8 +57,10 @@ class HMCategoriesResource extends Resource
                     ->state(function ($record) {
                         if ($record->icon) {
                             $icon = json_decode($record->icon, true);
+
                             return $icon['url'] ?? null;
                         }
+
                         return null;
                     }),
                 Tables\Columns\TextColumn::make('created_at')

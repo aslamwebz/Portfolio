@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers;
 
-use Illuminate\Http\Response as HttpResponse;
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
 
 class PdfController extends Controller
 {

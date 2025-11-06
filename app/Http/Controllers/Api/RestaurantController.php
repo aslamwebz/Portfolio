@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
-use App\Models\Product;
-use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
@@ -17,11 +17,11 @@ class RestaurantController extends Controller
         $menuCategories = [];
         foreach ($restaurant->products as $product) {
             foreach ($product->categories as $category) {
-                if (!isset($menuCategories[$category->id])) {
+                if (! isset($menuCategories[$category->id])) {
                     $menuCategories[$category->id] = [
                         'id' => $category->id,
                         'name' => $category->name,
-                        'items' => []
+                        'items' => [],
                     ];
                 }
                 $menuCategories[$category->id]['items'][] = [
@@ -43,7 +43,7 @@ class RestaurantController extends Controller
                 'cuisine' => $restaurant->cuisine,
                 'deliveryTime' => $restaurant->delivery_time,
             ],
-            'menuCategories' => array_values($menuCategories)
+            'menuCategories' => array_values($menuCategories),
         ]);
     }
 }

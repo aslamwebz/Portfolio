@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\PortfolioItem;
-use Illuminate\Http\Request;
 
 class PortfolioItemController extends Controller
 {

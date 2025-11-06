@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PortfolioItem;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\PortfolioItem;
 
 class PortfolioItemSeeder extends Seeder
 {
@@ -24,7 +25,7 @@ class PortfolioItemSeeder extends Seeder
                 'image' => '/img/hm-main.png',
                 'github' => 'https://github.com/aslamwebz/Portfolio/tree/main/resources/js/Pages/HeartyMeal',
                 'technologies' => ['php', 'laravel', 'vue', 'tailwind'],
-                'category' => 'Vue'
+                'category' => 'Vue',
             ],
             [
                 'title' => 'Developer Portfolio',
@@ -33,7 +34,7 @@ class PortfolioItemSeeder extends Seeder
                 'image' => '/img/portfolio-main.png',
                 'github' => 'https://github.com/aslamwebz/portfolio',
                 'technologies' => ['php', 'laravel', 'vue', 'tailwind'],
-                'category' => 'Vue'
+                'category' => 'Vue',
             ],
             [
                 'title' => 'AI Projects',
@@ -42,17 +43,17 @@ class PortfolioItemSeeder extends Seeder
                 'image' => '/img/ai-main.png',
                 'github' => 'https://github.com/aslamwebz/ai',
                 'technologies' => ['python', 'crewai', 'Ollama', 'openai', 'streamlit'],
-                'category' => 'AI'
+                'category' => 'AI',
             ],
             [
                 'title' => 'AI Laravel Projects',
-                'description' => "A collection of Laravel projects that use AI to enhance functionality and user experiences.",
+                'description' => 'A collection of Laravel projects that use AI to enhance functionality and user experiences.',
                 'link' => '/ai',
                 'image' => '/img/ai-main.png',
                 'github' => 'https://github.com/aslamwebz/Portfolio/blob/dev/app/Http/Controllers/AIController.php',
                 'technologies' => ['laravel', 'vue', 'openai', 'tailwind'],
-                'category' => 'AI'
-            ]
+                'category' => 'AI',
+            ],
         ];
 
         foreach ($projects as $project) {
@@ -60,4 +61,3 @@ class PortfolioItemSeeder extends Seeder
         }
     }
 }
-

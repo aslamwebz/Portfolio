@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+declare(strict_types=1);
+
 use App\Http\Controllers\AIController;
 use App\Http\Controllers\HeartyMealController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 // Route::get('/', function () {
@@ -42,7 +40,7 @@ Route::get('/hearty-meal/orders', function () {
 
 Route::get('/hearty-meal/delivery/{orderId}', function ($orderId) {
     return Inertia::render('HeartyMeal/Components/DeliveryTracking', [
-        'orderId' => $orderId
+        'orderId' => $orderId,
     ]);
 });
 
@@ -60,14 +58,14 @@ Route::post('/ai/conversations', [AIController::class, 'saveConversation'])->nam
 
 Route::post('/ai/generate-image', [AIController::class, 'generateImage'])->name('ai.generateImage');
 
-Route::post('/ai/emoji-generator', [App\Http\Controllers\AIController::class, 'emojiGenerator']);
+Route::post('/ai/emoji-generator', [AIController::class, 'emojiGenerator']);
 
 Route::post('/ai/color-palette', [AIController::class, 'colorPalette'])->name('ai.colorPalette');
 
 Route::post('/ai/name-generator', [AIController::class, 'nameGenerator'])->name('ai.nameGenerator');
 Route::post('/ai/check-domains', [AIController::class, 'checkDomains'])->name('ai.checkDomains');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -77,4 +75,4 @@ Route::get('/api/restaurants/{id}', [HeartyMealController::class, 'getRestaurant
 
 Route::get('/api/search', [HeartyMealController::class, 'search']);
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

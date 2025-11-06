@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\HMCategories;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Restaurant;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Inertia\Inertia;
 
 class HeartyMealController extends Controller
 {
@@ -20,6 +20,7 @@ class HeartyMealController extends Controller
             ->get()
             ->map(function ($category) {
                 $category->icon = json_decode($category->icon)->url;
+
                 return $category;
             });
 
@@ -44,13 +45,13 @@ class HeartyMealController extends Controller
                         ->join('hmcategories', 'restaurant_categories.category_id', '=', 'hmcategories.id')
                         ->where('restaurant_id', $restaurant->id)
                         ->pluck('hmcategories.slug')
-                        ->toArray()
+                        ->toArray(),
                 ];
             });
 
         return Inertia::render('HeartyMeal/Index', [
             'restaurants' => $restaurants,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -60,7 +61,7 @@ class HeartyMealController extends Controller
             ->where('restaurants.id', $id)
             ->first();
 
-        if (!$restaurant) {
+        if (! $restaurant) {
             return redirect('/hearty-meal')->with('error', 'Restaurant not found');
         }
 
@@ -88,7 +89,7 @@ class HeartyMealController extends Controller
         return Inertia::render('HeartyMeal/Restaurant', [
             'id' => $id,
             'restaurant' => $restaurantData,
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
@@ -105,7 +106,7 @@ class HeartyMealController extends Controller
     public function delivery($id)
     {
         return Inertia::render('HeartyMeal/Delivery', [
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
@@ -116,7 +117,7 @@ class HeartyMealController extends Controller
             ->where('restaurants.id', $id)
             ->first();
 
-        if (!$restaurant) {
+        if (! $restaurant) {
             return response()->json(['error' => 'Restaurant not found'], 404);
         }
 
@@ -149,7 +150,7 @@ class HeartyMealController extends Controller
 
             foreach ($products as $product) {
                 $category = $product->category ?? 'Other';
-                if (!isset($groupedProducts[$category])) {
+                if (! isset($groupedProducts[$category])) {
                     $groupedProducts[$category] = [];
                 }
                 $groupedProducts[$category][] = $product;
@@ -158,13 +159,13 @@ class HeartyMealController extends Controller
             foreach ($groupedProducts as $category => $items) {
                 $menuCategories[] = [
                     'name' => $category,
-                    'items' => $items
+                    'items' => $items,
                 ];
             }
 
             return response()->json([
                 'restaurant' => $restaurantData,
-                'menuCategories' => $menuCategories
+                'menuCategories' => $menuCategories,
             ]);
         }
 
@@ -172,25 +173,28 @@ class HeartyMealController extends Controller
         return Inertia::render('HeartyMeal/Restaurant', [
             'id' => $id,
             'restaurant' => $restaurantData,
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
     public function indexByCategory(string $category)
     {
         $products = Product::where('category', $category)->get();
+
         return response()->json($products);
     }
 
     public function getCategories()
     {
         $categories = HMCategories::all();
+
         return response()->json($categories);
     }
 
     public function getCategory(string $categoryid)
     {
         $category = HMCategories::find($categoryid);
+
         return response()->json($category);
     }
 
@@ -228,10 +232,10 @@ class HeartyMealController extends Controller
     {
         $query = $request->input('q');
 
-        if (!$query) {
+        if (! $query) {
             return response()->json([
                 'restaurants' => [],
-                'categories' => []
+                'categories' => [],
             ]);
         }
 
@@ -265,12 +269,13 @@ class HeartyMealController extends Controller
             ->get()
             ->map(function ($category) {
                 $category->icon = json_decode($category->icon)->url;
+
                 return $category;
             });
 
         return response()->json([
             'restaurants' => $restaurants,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 }

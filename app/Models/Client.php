@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
-use App\Models\User;
 
 class Client extends Model
 {
@@ -17,7 +17,7 @@ class Client extends Model
         'phone',
         'company',
         'address',
-        'notes'
+        'notes',
     ];
 
     protected $casts = [
@@ -38,7 +38,7 @@ class Client extends Model
     {
         parent::boot();
 
-        static::creating(function ($client) {
+        static::creating(function ($client): void {
             if (auth()->check()) {
                 $client->user_id = auth()->id();
             }

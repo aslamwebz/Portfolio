@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PortfolioItemResource\Pages;
@@ -42,7 +44,8 @@ class PortfolioItemResource extends Resource
                         function (TemporaryUploadedFile $file): string {
                             $filename = $file->getClientOriginalName();
                             $filename = preg_replace('/[^\w\d\.-]/', '_', $filename);
-                            return 'img/' . $filename;
+
+                            return 'img/'.$filename;
                         }
                     ),
                 Forms\Components\TextInput::make('github')
@@ -86,7 +89,7 @@ class PortfolioItemResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->recordUrl(fn (PortfolioItem $record): string => Pages\ViewPortfolioItem::getUrl([$record]));
+            ->recordUrl(fn (PortfolioItem $record): string => ViewPortfolioItem::getUrl([$record]));
     }
 
     public static function getRelations(): array
@@ -106,4 +109,3 @@ class PortfolioItemResource extends Resource
         ];
     }
 }
-
