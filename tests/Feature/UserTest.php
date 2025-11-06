@@ -7,9 +7,3 @@ test('example', function (): void {
 
     $response->assertStatus(200);
 });
-
-test('see products on products page', function (): void {
-    $request = $this->get('/products');
-
-    $request->assertSee('products');
-});

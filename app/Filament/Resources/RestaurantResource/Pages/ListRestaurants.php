@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\restaurantResource\Pages;
+namespace App\Filament\Resources\RestaurantResource\Pages;
 
-use App\Filament\Resources\restaurantResource;
+use App\Filament\Resources\RestaurantResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class Listrestaurants extends ListRecords
+class ListRestaurants extends ListRecords
 {
-    protected static string $resource = restaurantResource::class;
+    protected static string $resource = RestaurantResource::class;
 
     protected function getHeaderActions(): array
     {

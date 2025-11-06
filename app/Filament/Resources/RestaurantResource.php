@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\restaurantResource\Pages;
-use App\Models\restaurant;
+use App\Filament\Resources\RestaurantResource\Pages;
+use App\Models\Restaurant;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class restaurantResource extends Resource
+class RestaurantResource extends Resource
 {
-    protected static ?string $model = restaurant::class;
+    protected static ?string $model = Restaurant::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -94,9 +94,9 @@ class restaurantResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\Listrestaurants::route('/'),
-            'create' => Pages\Createrestaurant::route('/create'),
-            'edit' => Pages\Editrestaurant::route('/{record}/edit'),
+            'index' => Pages\ListRestaurants::route('/'),
+            'create' => Pages\CreateRestaurant::route('/create'),
+            'edit' => Pages\EditRestaurant::route('/{record}/edit'),
         ];
     }
 }
