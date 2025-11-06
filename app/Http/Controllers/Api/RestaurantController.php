@@ -6,10 +6,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
+use Illuminate\Http\JsonResponse;
 
 class RestaurantController extends Controller
 {
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         $restaurant = Restaurant::with(['products.categories'])->findOrFail($id);
 

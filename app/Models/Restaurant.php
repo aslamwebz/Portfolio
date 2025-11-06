@@ -6,9 +6,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
-class restaurant extends Model
+/**
+ * @property int $id
+ * @property string $name
+ * @property string|null $about_us
+ * @property string $slug
+ * @property string|null $address
+ * @property string|null $phone
+ * @property array|null $working_hours
+ * @property string|null $image
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ */
+class Restaurant extends Model
 {
     use HasFactory;
 
@@ -26,23 +39,29 @@ class restaurant extends Model
         'working_hours' => 'array',
     ];
 
-    public function products()
+    /**
+     * @return BelongsToMany<Product>
+     */
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class)
             ->withTimestamps();
     }
 
-    public function categories()
+    /**
+     * @return BelongsToMany<HMCategories>
+     */
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(HMCategories::class)
             ->withTimestamps();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function ($restaurant): void {
+        static::creating(function (self $restaurant): void {
             if (empty($restaurant->slug)) {
                 $restaurant->slug = Str::slug($restaurant->name);
             }

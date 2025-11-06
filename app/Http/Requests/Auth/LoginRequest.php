@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<string>>
      */
     public function rules(): array
     {
@@ -39,11 +40,25 @@ class LoginRequest extends FormRequest
      *
      * @throws ValidationException
      */
+    /**
+     * Attempt to authenticate the request's credentials.
+     *
+     * @throws ValidationException
+     */
+    /**
+     * Attempt to authenticate the request's credentials.
+     *
+     * @throws ValidationException
+     */
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $email = (string) ($this->query('email') ?? $this->request->get('email', ''));
+        $password = (string) ($this->query('password') ?? $this->request->get('password', ''));
+        $remember = (bool) ($this->query('remember') ?? $this->request->get('remember', false));
+
+        if (! Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -80,8 +95,17 @@ class LoginRequest extends FormRequest
     /**
      * Get the rate limiting throttle key for the request.
      */
+    /**
+     * Get the rate limiting throttle key for the request.
+     */
+    /**
+     * Get the rate limiting throttle key for the request.
+     */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        $email = (string) ($this->query('email') ?? $this->request->get('email', ''));
+        $ip = (string) $this->server('REMOTE_ADDR', '127.0.0.1');
+
+        return Str::transliterate(Str::lower($email).'|'.$ip);
     }
 }

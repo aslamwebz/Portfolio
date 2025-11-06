@@ -13,13 +13,14 @@ use Inertia\Inertia;
 
 class HeartyMealController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
         $categories = DB::table('hmcategories')
             ->select('id', 'name', 'slug', 'icon')
             ->get()
             ->map(function ($category) {
-                $category->icon = json_decode($category->icon)->url;
+                $iconData = json_decode($category->icon, true);
+                $category->icon = is_array($iconData) ? $iconData['url'] ?? null : null;
 
                 return $category;
             });
@@ -55,7 +56,7 @@ class HeartyMealController extends Controller
         ]);
     }
 
-    public function restaurant($id)
+    public function restaurant(int $id): \Illuminate\Http\RedirectResponse|\Inertia\Response
     {
         $restaurant = DB::table('restaurants')
             ->where('restaurants.id', $id)
@@ -93,17 +94,17 @@ class HeartyMealController extends Controller
         ]);
     }
 
-    public function checkout()
+    public function checkout(): \Inertia\Response
     {
         return Inertia::render('HeartyMeal/Checkout');
     }
 
-    public function orders()
+    public function orders(): \Inertia\Response
     {
         return Inertia::render('HeartyMeal/Orders');
     }
 
-    public function delivery($id)
+    public function delivery(int $id): \Inertia\Response
     {
         return Inertia::render('HeartyMeal/Delivery', [
             'id' => $id,
@@ -111,7 +112,7 @@ class HeartyMealController extends Controller
     }
 
     // API endpoint to get restaurant data
-    public function getRestaurant($id)
+    public function getRestaurant(int $id): \Illuminate\Http\JsonResponse|\Inertia\Response
     {
         $restaurant = DB::table('restaurants')
             ->where('restaurants.id', $id)
@@ -177,58 +178,58 @@ class HeartyMealController extends Controller
         ]);
     }
 
-    public function indexByCategory(string $category)
+    public function indexByCategory(string $category): \Illuminate\Http\JsonResponse
     {
         $products = Product::where('category', $category)->get();
 
         return response()->json($products);
     }
 
-    public function getCategories()
+    public function getCategories(): \Illuminate\Http\JsonResponse
     {
         $categories = HMCategories::all();
 
         return response()->json($categories);
     }
 
-    public function getCategory(string $categoryid)
+    public function getCategory(string $categoryid): \Illuminate\Http\JsonResponse
     {
         $category = HMCategories::find($categoryid);
 
         return response()->json($category);
     }
 
-    public function create()
+    public function create(): void
     {
         //
     }
 
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
 
-    public function show(string $id)
+    public function show(string $id): void
     {
         //
     }
 
-    public function edit(string $id)
+    public function edit(string $id): void
     {
         //
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): void
     {
         //
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): void
     {
         //
     }
 
-    public function search(Request $request)
+    public function search(Request $request): \Illuminate\Http\JsonResponse
     {
         $query = $request->input('q');
 
@@ -242,8 +243,8 @@ class HeartyMealController extends Controller
         // Get restaurants that match the query
         $restaurants = DB::table('restaurants')
             ->select('restaurants.*')
-            ->where('restaurants.name', 'like', "%{$query}%")
-            ->orWhere('restaurants.description', 'like', "%{$query}%")
+            ->where('restaurants.name', 'like', '%'.$query.'%')
+            ->orWhere('restaurants.description', 'like', '%'.$query.'%')
             ->distinct()
             ->limit(5)
             ->get()
@@ -264,11 +265,12 @@ class HeartyMealController extends Controller
         // Get categories that match the query
         $categories = DB::table('hmcategories')
             ->select('id', 'name', 'slug', 'icon')
-            ->where('name', 'like', "%{$query}%")
+            ->where('name', 'like', '%'.$query.'%')
             ->limit(3)
             ->get()
             ->map(function ($category) {
-                $category->icon = json_decode($category->icon)->url;
+                $iconData = json_decode($category->icon, true);
+                $category->icon = is_array($iconData) ? $iconData['url'] ?? null : null;
 
                 return $category;
             });

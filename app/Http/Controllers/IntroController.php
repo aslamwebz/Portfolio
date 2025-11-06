@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+
 class IntroController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $role = 'Senior Web Developer & Tech Lead';
         $techStack = 'LAMP - LEMP - PHP/Laravel';

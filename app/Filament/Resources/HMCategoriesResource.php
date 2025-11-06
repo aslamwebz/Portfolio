@@ -55,10 +55,12 @@ class HMCategoriesResource extends Resource
                     ->circular()
                     ->size(40)
                     ->state(function ($record) {
-                        if ($record->icon) {
+                        if ($record->icon && is_string($record->icon)) {
                             $icon = json_decode($record->icon, true);
 
-                            return $icon['url'] ?? null;
+                            if (is_array($icon)) {
+                                return $icon['url'] ?? null;
+                            }
                         }
 
                         return null;

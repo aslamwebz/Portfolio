@@ -6,13 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Models\AiConversation;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class AIController extends Controller
 {
-    public function checkRateLimit()
+    public function checkRateLimit(): JsonResponse
     {
         try {
             $rateLimit = $this->getRateLimitInfo();
@@ -30,7 +31,7 @@ class AIController extends Controller
         }
     }
 
-    public function chat(Request $request)
+    public function chat(Request $request): JsonResponse
     {
         $request->validate([
             'message' => 'required|string',
@@ -38,7 +39,7 @@ class AIController extends Controller
 
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('OPENROUTER_API_KEY'),
+                'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
                 'HTTP-Referer' => config('app.url'),
                 'x-title' => 'AI Hub Chat',
                 'Content-Type' => 'application/json',
@@ -67,7 +68,15 @@ class AIController extends Controller
 
             $responseData = $response->json();
 
-            if (! isset($responseData['choices'][0]['message']['content'])) {
+            if (! is_array($responseData) ||
+                ! isset($responseData['choices']) ||
+                ! is_array($responseData['choices']) ||
+                ! isset($responseData['choices'][0]) ||
+                ! is_array($responseData['choices'][0]) ||
+                ! isset($responseData['choices'][0]['message']) ||
+                ! is_array($responseData['choices'][0]['message']) ||
+                ! isset($responseData['choices'][0]['message']['content']) ||
+                ! is_string($responseData['choices'][0]['message']['content'])) {
                 throw new Exception('Invalid response structure from API');
             }
 
@@ -96,7 +105,7 @@ class AIController extends Controller
         }
     }
 
-    public function getConversations()
+    public function getConversations(): JsonResponse
     {
         try {
             $conversations = AiConversation::latest()->get();
@@ -113,7 +122,7 @@ class AIController extends Controller
         }
     }
 
-    public function saveConversation(Request $request)
+    public function saveConversation(Request $request): JsonResponse
     {
         $request->validate([
             'messages' => 'required|array',
@@ -121,7 +130,7 @@ class AIController extends Controller
         ]);
 
         try {
-            $title = $request->title ?? $this->generateTitle($request->messages);
+            $title = $request->title ?? $this->generateTitle((array) $request->messages);
 
             $conversation = AiConversation::create([
                 'title' => $title,
@@ -140,7 +149,7 @@ class AIController extends Controller
         }
     }
 
-    public function generateImage(Request $request)
+    public function generateImage(Request $request): JsonResponse
     {
         $request->validate([
             'prompt' => 'required|string|max:1000',
@@ -148,7 +157,7 @@ class AIController extends Controller
 
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('HUGGINGFACE_API_KEY'),
+                'Authorization' => 'Bearer '.config('services.huggingface.api_key'),
             ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
                 'inputs' => $request->prompt,
                 'parameters' => [
@@ -164,7 +173,7 @@ class AIController extends Controller
 
             // The response is the image data
             $imageData = $response->body();
-            $base64Image = base64_encode($imageData);
+            $base64Image = base64_encode($imageData ?? '');
 
             return response()->json([
                 'success' => true,
@@ -179,7 +188,7 @@ class AIController extends Controller
         }
     }
 
-    public function emojiGenerator(Request $request)
+    public function emojiGenerator(Request $request): JsonResponse
     {
         $request->validate([
             'prompt' => 'required|string',
@@ -188,11 +197,11 @@ class AIController extends Controller
 
         try {
             // Create an enhanced prompt that specifies emoji style
-            $enhancedPrompt = "Create a simple emoji of {$request->prompt} in {$request->style} style. Make it cute, simple, and expressive. The image should be centered with a clean background.";
+            $enhancedPrompt = 'Create a simple emoji of '.($request->prompt ?? 'object').' in '.($request->style ?? 'flat').' style. Make it cute, simple, and expressive. The image should be centered with a clean background.';
 
             // Use the same image generation API that's already working in your app
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('HUGGINGFACE_API_KEY'),
+                'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
             ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
                 'inputs' => $enhancedPrompt,
                 'parameters' => [
@@ -210,7 +219,7 @@ class AIController extends Controller
 
             // Process the images
             $imageData = $response->body();
-            $base64Image = base64_encode($imageData);
+            $base64Image = base64_encode($imageData ?? '');
             $imageUrl = 'data:image/jpeg;base64,'.$base64Image;
 
             // Generate 4 variations by making additional API calls
@@ -226,7 +235,7 @@ class AIController extends Controller
             foreach ($variations as $variation) {
                 try {
                     $varResponse = Http::withHeaders([
-                        'Authorization' => 'Bearer '.env('HUGGINGFACE_API_KEY'),
+                        'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
                     ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
                         'inputs' => $enhancedPrompt.$variation,
                         'parameters' => [
@@ -240,7 +249,7 @@ class AIController extends Controller
 
                     if ($varResponse->successful()) {
                         $varImageData = $varResponse->body();
-                        $varBase64Image = base64_encode($varImageData);
+                        $varBase64Image = base64_encode($varImageData ?? '');
                         $emojis[] = ['url' => 'data:image/jpeg;base64,'.$varBase64Image];
                     }
                 } catch (Exception $e) {
@@ -263,7 +272,7 @@ class AIController extends Controller
         }
     }
 
-    public function colorPalette(Request $request)
+    public function colorPalette(Request $request): JsonResponse
     {
         $request->validate([
             'paletteSize' => 'required|integer|min:3|max:10',
@@ -280,11 +289,11 @@ class AIController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageData = file_get_contents($image->path());
-                $base64Image = base64_encode($imageData);
+                $base64Image = base64_encode($imageData ?? '');
 
                 // First, get a description of the image using Hugging Face
                 $descriptionResponse = Http::withHeaders([
-                    'Authorization' => 'Bearer '.env('HUGGINGFACE_API_KEY'),
+                    'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
                 ])->post('https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large', [
                     'inputs' => [
                         'image' => $base64Image,
@@ -292,7 +301,12 @@ class AIController extends Controller
                 ]);
 
                 if ($descriptionResponse->successful()) {
-                    $description = $descriptionResponse->json()[0]['generated_text'] ?? 'Image analysis';
+                    $descData = $descriptionResponse->json();
+                    if (is_array($descData) && isset($descData[0]['generated_text']) && is_string($descData[0]['generated_text'])) {
+                        $description = $descData[0]['generated_text'];
+                    } else {
+                        $description = 'Image analysis';
+                    }
                     Log::info('Image description: '.$description);
                 } else {
                     Log::warning('Failed to get image description: '.$descriptionResponse->body());
@@ -301,7 +315,7 @@ class AIController extends Controller
 
                 // Use OpenRouter to analyze the image and suggest colors
                 $response = Http::withHeaders([
-                    'Authorization' => 'Bearer '.env('OPENROUTER_API_KEY'),
+                    'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
                     'HTTP-Referer' => config('app.url'),
                     'x-title' => 'AI Hub Color Palette',
                     'Content-Type' => 'application/json',
@@ -310,19 +324,19 @@ class AIController extends Controller
                     'messages' => [
                         [
                             'role' => 'system',
-                            'content' => "You are a color palette expert. Extract exactly {$paletteSize} dominant or complementary colors from the image. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
+                            'content' => 'You are a color palette expert. Extract exactly '.($paletteSize ?? 5)." dominant or complementary colors from the image. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
                         ],
                         [
                             'role' => 'user',
                             'content' => [
                                 [
                                     'type' => 'text',
-                                    'text' => "Generate a color palette with {$paletteSize} colors from this image.",
+                                    'text' => 'Generate a color palette with '.($paletteSize ?? 5).' colors from this image.',
                                 ],
                                 [
                                     'type' => 'image_url',
                                     'image_url' => [
-                                        'url' => "data:image/jpeg;base64,{$base64Image}",
+                                        'url' => 'data:image/jpeg;base64,'.($base64Image ?? ''),
                                     ],
                                 ],
                             ],
@@ -337,7 +351,20 @@ class AIController extends Controller
                 }
 
                 $responseData = $response->json();
-                $content = $responseData['choices'][0]['message']['content'] ?? '';
+
+                if (! is_array($responseData) ||
+                    ! isset($responseData['choices']) ||
+                    ! is_array($responseData['choices']) ||
+                    ! isset($responseData['choices'][0]) ||
+                    ! is_array($responseData['choices'][0]) ||
+                    ! isset($responseData['choices'][0]['message']) ||
+                    ! is_array($responseData['choices'][0]['message']) ||
+                    ! isset($responseData['choices'][0]['message']['content']) ||
+                    ! is_string($responseData['choices'][0]['message']['content'])) {
+                    throw new Exception('Invalid response structure from API');
+                }
+
+                $content = $responseData['choices'][0]['message']['content'];
 
                 // Extract the JSON part from the response
                 preg_match('/\[.*\]/s', $content, $matches);
@@ -356,7 +383,7 @@ class AIController extends Controller
                 $prompt = $request->prompt;
 
                 $response = Http::withHeaders([
-                    'Authorization' => 'Bearer '.env('OPENROUTER_API_KEY'),
+                    'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
                     'HTTP-Referer' => config('app.url'),
                     'x-title' => 'AI Hub Color Palette',
                     'Content-Type' => 'application/json',
@@ -365,11 +392,11 @@ class AIController extends Controller
                     'messages' => [
                         [
                             'role' => 'system',
-                            'content' => "You are a color palette expert. Generate exactly {$paletteSize} colors that match the theme or description provided. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
+                            'content' => 'You are a color palette expert. Generate exactly '.($paletteSize ?? 5)." colors that match the theme or description provided. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
                         ],
                         [
                             'role' => 'user',
-                            'content' => "Generate a color palette with {$paletteSize} colors for this theme: {$prompt}",
+                            'content' => 'Generate a color palette with '.($paletteSize ?? 5).' colors for this theme: '.($prompt ?? 'default'),
                         ],
                     ],
                     'max_tokens' => 1000,
@@ -417,7 +444,7 @@ class AIController extends Controller
         }
     }
 
-    public function nameGenerator(Request $request)
+    public function nameGenerator(Request $request): JsonResponse
     {
         $request->validate([
             'type' => 'required|string|in:business,app,website,product,project',
@@ -433,16 +460,16 @@ class AIController extends Controller
             $count = (int) $request->count;
 
             // Create a prompt for the AI
-            $prompt = "Generate {$count} unique and creative names for a {$type} with the following description: {$description}.";
+            $prompt = 'Generate '.($count ?? 10).' unique and creative names for a '.($type ?? 'business').' with the following description: '.($description ?? 'default').'.';
 
             if (! empty($keywords)) {
-                $prompt .= " Consider these keywords or themes: {$keywords}.";
+                $prompt .= ' Consider these keywords or themes: '.($keywords ?? 'none').'.';
             }
 
             $prompt .= " For each name, provide a brief explanation of why it's appropriate. Format your response as a valid JSON array with objects containing 'name' and 'description' properties. Do not include any explanations or text outside the JSON array.";
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.env('OPENROUTER_API_KEY'),
+                'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
                 'HTTP-Referer' => config('app.url'),
                 'x-title' => 'AI Hub Name Generator',
                 'Content-Type' => 'application/json',
@@ -467,7 +494,20 @@ class AIController extends Controller
             }
 
             $responseData = $response->json();
-            $content = $responseData['choices'][0]['message']['content'] ?? '';
+
+            if (! is_array($responseData) ||
+                ! isset($responseData['choices']) ||
+                ! is_array($responseData['choices']) ||
+                ! isset($responseData['choices'][0]) ||
+                ! is_array($responseData['choices'][0]) ||
+                ! isset($responseData['choices'][0]['message']) ||
+                ! is_array($responseData['choices'][0]['message']) ||
+                ! isset($responseData['choices'][0]['message']['content']) ||
+                ! is_string($responseData['choices'][0]['message']['content'])) {
+                throw new Exception('Invalid response structure from API');
+            }
+
+            $content = $responseData['choices'][0]['message']['content'];
 
             // Extract the JSON part from the response
             preg_match('/\[.*\]/s', $content, $matches);
@@ -499,7 +539,7 @@ class AIController extends Controller
         }
     }
 
-    public function checkDomains(Request $request)
+    public function checkDomains(Request $request): JsonResponse
     {
         $request->validate([
             'names' => 'required|array|min:1',
@@ -534,7 +574,7 @@ class AIController extends Controller
         }
     }
 
-    private function getRateLimitInfo($response = null)
+    private function getRateLimitInfo(mixed $response = null): array
     {
         if ($response) {
             return [
@@ -548,7 +588,7 @@ class AIController extends Controller
 
         // If no response provided, make a HEAD request to get limits
         $checkResponse = Http::withHeaders([
-            'Authorization' => 'Bearer '.env('OPENROUTER_API_KEY'),
+            'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
             'HTTP-Referer' => config('app.url'),
             'x-title' => 'AI Hub Chat',
         ])->head('https://openrouter.ai/api/v1/auth/key');
@@ -562,13 +602,22 @@ class AIController extends Controller
         ];
     }
 
-    private function generateTitle($messages)
+    private function generateTitle(array $messages): string
     {
         // Get the first user message as the title
         $firstMessage = collect($messages)
             ->where('role', 'user')
             ->first();
 
-        return mb_substr($firstMessage['content'] ?? 'New Conversation', 0, 50).'...';
+        $content = '';
+        if (is_array($firstMessage) && isset($firstMessage['content'])) {
+            $content = $firstMessage['content'];
+        } elseif (is_object($firstMessage) && isset($firstMessage->content)) {
+            $content = $firstMessage->content;
+        } else {
+            $content = 'New Conversation';
+        }
+
+        return mb_substr((string) $content, 0, 50).'...';
     }
 }

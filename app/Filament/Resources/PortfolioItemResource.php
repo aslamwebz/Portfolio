@@ -89,7 +89,7 @@ class PortfolioItemResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->recordUrl(fn (PortfolioItem $record): string => ViewPortfolioItem::getUrl([$record]));
+            ->recordUrl(fn (PortfolioItem $record): string => ViewPortfolioItem::getUrl(['record' => $record]));
     }
 
     public static function getRelations(): array
