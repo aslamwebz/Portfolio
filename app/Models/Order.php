@@ -22,16 +22,14 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property array<string, mixed>|null $billing_address
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- *
  * @method static OrderFactory factory($count = null, $state = [])
- *
- * @mixin \Eloquent
  */
 class Order extends Model
 {
+    /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = [
         'user_id',
         'total_amount',
@@ -51,7 +49,7 @@ class Order extends Model
     /**
      * Get the user that owns the order.
      *
-     * @return BelongsTo<User, self>
+     * @return BelongsTo<User, Order>
      */
     public function user(): BelongsTo
     {
@@ -61,7 +59,7 @@ class Order extends Model
     /**
      * The products that belong to the order.
      *
-     * @return BelongsToMany<Product>
+     * @return BelongsToMany<Product, Order>
      */
     public function products(): BelongsToMany
     {
@@ -77,8 +75,6 @@ class Order extends Model
 
     /**
      * The factory instance for the model.
-     *
-     * @return OrderFactory<self>
      */
     protected static function newFactory(): Factory
     {
@@ -86,19 +82,3 @@ class Order extends Model
     }
 }
 
-/**
- * @property int $order_id
- * @property int $product_id
- * @property int $quantity
- * @property float $price
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- */
-class OrderProductPivot extends Pivot
-{
-    /** @var array<string, string> */
-    protected $casts = [
-        'price' => 'decimal:2',
-        'quantity' => 'integer',
-    ];
-}

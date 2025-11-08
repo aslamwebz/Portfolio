@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -31,13 +29,18 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = $request->user();
+        if (!$user) {
+            abort(401, 'Unauthorized');
         }
-
-        $request->user()->save();
+        
+        $validated = $request->validated();
+        
+        if ($user->email !== $validated['email']) {
+            $validated['email_verified_at'] = null;
+        }
+        
+        $user->update($validated);
 
         return Redirect::route('profile.edit');
     }
@@ -52,6 +55,9 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+        if (!$user) {
+            abort(401, 'Unauthorized');
+        }
 
         Auth::logout();
 

@@ -13,61 +13,67 @@ class RestaurantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
+     * @throws \JsonException
      */
     public function run(): void
     {
-        $jsonContent = file_get_contents(resource_path('js/Pages/HeartyMeal/Components/restaurants.json'));
+        $jsonPath = resource_path('js/Pages/HeartyMeal/Components/restaurants.json');
+        $jsonContent = file_get_contents($jsonPath);
 
         if ($jsonContent === false) {
             throw new RuntimeException('Failed to load restaurants.json');
         }
 
-        /** @var array{restaurants: array<array{name: string, image: string, categories: array<string>}>} $data */
+        /** 
+         * @var array{restaurants: array<array{name: string, image: string, categories: array<string>}>} $data 
+         */
         $data = json_decode($jsonContent, true, 512, JSON_THROW_ON_ERROR);
 
-        if (! isset($data['restaurants']) || ! is_array($data['restaurants'])) {
-            return;
-        }
-
         foreach ($data['restaurants'] as $restaurant) {
-            if (! is_array($restaurant) || ! isset($restaurant['name'], $restaurant['image'], $restaurant['categories'])) {
-                continue;
-            }
 
-            $name = (string) $restaurant['name'];
-            $image = (string) $restaurant['image'];
-            $categories = is_array($restaurant['categories']) ? $restaurant['categories'] : [];
+            $name = $restaurant['name'];
+            $image = $restaurant['image'];
+            $categories = $restaurant['categories'];
 
             // Insert restaurant
-            $restaurantId = DB::table('restaurants')->insertGetId([
+            $restaurantId = (int) DB::table('restaurants')->insertGetId([
                 'name' => $name,
-                'about_us' => 'Welcome to '.$name,
+                'about_us' => 'Welcome to ' . $name,
                 'slug' => Str::slug($name),
                 'address' => '123 Food Street',
-                'working_hours' => json_encode(['monday' => '9:00 AM - 10:00 PM']),
+                'working_hours' => json_encode(['monday' => '9:00 AM - 10:00 PM'], JSON_THROW_ON_ERROR),
                 'image' => $image,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-            // Insert restaurant categories relationship
-            foreach ($categories as $categorySlug) {
-                if (! is_string($categorySlug)) {
-                    continue;
-                }
+            $this->createRestaurantCategories($restaurantId, $categories);
+        }
+    }
 
-                $category = DB::table('hm_categories')
-                    ->where('slug', $categorySlug)
-                    ->first();
+    /**
+     * Create restaurant category relationships.
+     *
+     * @param int $restaurantId
+     * @param array<string> $categorySlugs
+     * @return void
+     */
+    private function createRestaurantCategories(int $restaurantId, array $categorySlugs): void
+    {
+        foreach ($categorySlugs as $categorySlug) {
+            $category = DB::table('hm_categories')
+                ->where('slug', $categorySlug)
+                ->first(['id']);
 
-                if ($category !== null && isset($category->id)) {
-                    DB::table('restaurant_categories')->insert([
-                        'restaurant_id' => $restaurantId,
-                        'category_id' => $category->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
+            if ($category !== null && property_exists($category, 'id') && is_numeric($category->id)) {
+                DB::table('restaurant_categories')->insert([
+                    'restaurant_id' => $restaurantId,
+                    'category_id' => (int) $category->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
         }
     }

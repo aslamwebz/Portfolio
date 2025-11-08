@@ -25,13 +25,13 @@ use Illuminate\Support\Str;
  *
  * @method static ProductFactory factory($count = null, $state = [])
  *
- * @mixin \Eloquent
  */
 class Product extends Model
 {
+    /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = [
         'name',
         'slug',
@@ -50,7 +50,7 @@ class Product extends Model
     /**
      * The restaurants that belong to the product.
      *
-     * @return BelongsToMany<Restaurant>
+     * @return BelongsToMany<Restaurant, Product>
      */
     public function restaurants(): BelongsToMany
     {
@@ -65,7 +65,7 @@ class Product extends Model
     /**
      * The orders that belong to the product.
      *
-     * @return BelongsToMany<Order>
+     * @return BelongsToMany<Order, Product>
      */
     public function orders(): BelongsToMany
     {
@@ -82,7 +82,7 @@ class Product extends Model
     /**
      * The categories that belong to the product.
      *
-     * @return BelongsToMany<HMCategories>
+     * @return BelongsToMany<HMCategories, Product>
      */
     public function categories(): BelongsToMany
     {
@@ -97,7 +97,7 @@ class Product extends Model
     /**
      * The factory instance for the model.
      *
-     * @return ProductFactory<self>
+     * @return Factory<Product>
      */
     protected static function newFactory(): Factory
     {

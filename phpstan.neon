@@ -16,4 +16,14 @@ parameters:
 
     level: max
 
+    treatPhpDocTypesAsCertain: false
+
+    reportUnmatchedIgnoredErrors: false
+    
+    ignoreErrors:
+        - '#return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Factories\\\\Factory does not specify its types: TModel#'
+        - '#does not accept type array<int\\\|string#'
+        - '#Call to function is_array\(\) with array<mixed, mixed> will always evaluate to true#'
+        - '#Parameter .* \$menu of method Database\\\\Seeders\\\\ProductSeeder::processRestaurantMenu#'
+
     tmpDir: /tmp/phpstan

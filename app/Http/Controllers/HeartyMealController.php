@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -19,8 +17,11 @@ class HeartyMealController extends Controller
             ->select('id', 'name', 'slug', 'icon')
             ->get()
             ->map(function ($category) {
-                $iconData = json_decode($category->icon, true);
-                $category->icon = is_array($iconData) ? $iconData['url'] ?? null : null;
+                $iconValue = $category->icon ?? '';
+                $iconData = is_string($iconValue) ? json_decode($iconValue, true) : null;
+                $category->icon = is_array($iconData) && isset($iconData['url']) && is_string($iconData['url']) 
+                    ? $iconData['url'] 
+                    : null;
 
                 return $category;
             });
@@ -32,19 +33,21 @@ class HeartyMealController extends Controller
             ->distinct()
             ->get()
             ->map(function ($restaurant) {
+                $restaurantId = $restaurant->id ?? 0;
+                
                 return [
-                    'id' => $restaurant->id,
-                    'name' => $restaurant->name,
-                    'slug' => $restaurant->slug,
-                    'image' => $restaurant->image,
-                    'rating' => 4.5, // Default value or from your data
-                    'deliveryTime' => 30, // Default value or from your data
-                    'minOrder' => 15, // Default value or from your data
-                    'distance' => 2.5, // Default value or from your data
-                    'cuisine' => ['Various'], // Default value or from your data
+                    'id' => $restaurant->id ?? null,
+                    'name' => $restaurant->name ?? null,
+                    'slug' => $restaurant->slug ?? null,
+                    'image' => $restaurant->image ?? null,
+                    'rating' => 4.5,  // Default value or from your data
+                    'deliveryTime' => 30,  // Default value or from your data
+                    'minOrder' => 15,  // Default value or from your data
+                    'distance' => 2.5,  // Default value or from your data
+                    'cuisine' => ['Various'],  // Default value or from your data
                     'categories' => DB::table('restaurant_categories')
                         ->join('hmcategories', 'restaurant_categories.category_id', '=', 'hmcategories.id')
-                        ->where('restaurant_id', $restaurant->id)
+                        ->where('restaurant_id', is_numeric($restaurantId) ? (int) $restaurantId : 0)
                         ->pluck('hmcategories.slug')
                         ->toArray(),
                 ];
@@ -58,11 +61,12 @@ class HeartyMealController extends Controller
 
     public function restaurant(int $id): \Illuminate\Http\RedirectResponse|\Inertia\Response
     {
+        /** @var object{id?: int, name?: string, image?: string}|null $restaurant */
         $restaurant = DB::table('restaurants')
             ->where('restaurants.id', $id)
             ->first();
 
-        if (! $restaurant) {
+        if ($restaurant === null || !isset($restaurant->id, $restaurant->name)) {
             return redirect('/hearty-meal')->with('error', 'Restaurant not found');
         }
 
@@ -79,12 +83,12 @@ class HeartyMealController extends Controller
             ->get();
 
         $restaurantData = [
-            'id' => $restaurant->id,
-            'name' => $restaurant->name,
-            'image' => $restaurant->image,
-            'rating' => 4.5, // Default value or from your data
-            'cuisine' => $categories,
-            'deliveryTime' => 30, // Default value or from your data
+            'id' => (int) $restaurant->id,
+            'name' => (string) $restaurant->name,
+            'image' => $restaurant->image ?? '',
+            'rating' => 4.5,  // Default value or from your data
+            'cuisine' => is_array($categories) ? $categories : [],
+            'deliveryTime' => 30,  // Default value or from your data
         ];
 
         return Inertia::render('HeartyMeal/Restaurant', [
@@ -114,11 +118,12 @@ class HeartyMealController extends Controller
     // API endpoint to get restaurant data
     public function getRestaurant(int $id): \Illuminate\Http\JsonResponse|\Inertia\Response
     {
+        /** @var object{id?: int, name?: string, image?: string}|null $restaurant */
         $restaurant = DB::table('restaurants')
             ->where('restaurants.id', $id)
             ->first();
 
-        if (! $restaurant) {
+        if ($restaurant === null || !isset($restaurant->id, $restaurant->name)) {
             return response()->json(['error' => 'Restaurant not found'], 404);
         }
 
@@ -135,12 +140,12 @@ class HeartyMealController extends Controller
             ->get();
 
         $restaurantData = [
-            'id' => $restaurant->id,
-            'name' => $restaurant->name,
-            'image' => $restaurant->image,
-            'rating' => 4.5, // Default value or from your data
-            'cuisine' => $categories,
-            'deliveryTime' => 30, // Default value or from your data
+            'id' => (int) $restaurant->id,
+            'name' => (string) $restaurant->name,
+            'image' => $restaurant->image ?? '',
+            'rating' => 4.5,  // Default value or from your data
+            'cuisine' => is_array($categories) ? $categories : [],
+            'deliveryTime' => 30,  // Default value or from your data
         ];
 
         // Check if this is an API request
@@ -151,7 +156,7 @@ class HeartyMealController extends Controller
 
             foreach ($products as $product) {
                 $category = $product->category ?? 'Other';
-                if (! isset($groupedProducts[$category])) {
+                if (!isset($groupedProducts[$category])) {
                     $groupedProducts[$category] = [];
                 }
                 $groupedProducts[$category][] = $product;
@@ -181,12 +186,14 @@ class HeartyMealController extends Controller
     public function indexByCategory(string $category): \Illuminate\Http\JsonResponse
     {
         $products = Product::where('category', $category)->get();
-
+        
+        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products */
         return response()->json($products);
     }
 
     public function getCategories(): \Illuminate\Http\JsonResponse
     {
+        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\HMCategories> $categories */
         $categories = HMCategories::all();
 
         return response()->json($categories);
@@ -194,6 +201,7 @@ class HeartyMealController extends Controller
 
     public function getCategory(string $categoryid): \Illuminate\Http\JsonResponse
     {
+        /** @var \App\Models\HMCategories|null $category */
         $category = HMCategories::find($categoryid);
 
         return response()->json($category);
@@ -232,8 +240,9 @@ class HeartyMealController extends Controller
     public function search(Request $request): \Illuminate\Http\JsonResponse
     {
         $query = $request->input('q');
+        $queryStr = is_string($query) ? $query : '';
 
-        if (! $query) {
+        if (!$queryStr) {
             return response()->json([
                 'restaurants' => [],
                 'categories' => [],
@@ -243,33 +252,34 @@ class HeartyMealController extends Controller
         // Get restaurants that match the query
         $restaurants = DB::table('restaurants')
             ->select('restaurants.*')
-            ->where('restaurants.name', 'like', '%'.$query.'%')
-            ->orWhere('restaurants.description', 'like', '%'.$query.'%')
+            ->where('restaurants.name', 'like', '%' . $queryStr . '%')
+            ->orWhere('restaurants.description', 'like', '%' . $queryStr . '%')
             ->distinct()
             ->limit(5)
             ->get()
             ->map(function ($restaurant) {
                 return [
-                    'id' => $restaurant->id,
-                    'name' => $restaurant->name,
-                    'slug' => $restaurant->slug,
-                    'image' => $restaurant->image,
-                    'rating' => 4.5, // Default value or from your data
-                    'deliveryTime' => 30, // Default value or from your data
-                    'minOrder' => 15, // Default value or from your data
-                    'distance' => 2.5, // Default value or from your data
-                    'cuisine' => ['Various'], // Default value or from your data
+                    'id' => $restaurant->id ?? null,
+                    'name' => $restaurant->name ?? null,
+                    'slug' => $restaurant->slug ?? null,
+                    'image' => $restaurant->image ?? null,
+                    'rating' => 4.5,  // Default value or from your data
+                    'deliveryTime' => 30,  // Default value or from your data
+                    'minOrder' => 15,  // Default value or from your data
+                    'distance' => 2.5,  // Default value or from your data
+                    'cuisine' => ['Various'],  // Default value or from your data
                 ];
             });
 
         // Get categories that match the query
         $categories = DB::table('hmcategories')
             ->select('id', 'name', 'slug', 'icon')
-            ->where('name', 'like', '%'.$query.'%')
+            ->where('name', 'like', '%' . $queryStr . '%')
             ->limit(3)
             ->get()
             ->map(function ($category) {
-                $iconData = json_decode($category->icon, true);
+                $iconValue = $category->icon ?? '';
+                $iconData = is_string($iconValue) ? json_decode($iconValue, true) : null;
                 $category->icon = is_array($iconData) ? $iconData['url'] ?? null : null;
 
                 return $category;

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -16,7 +14,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
         return Inertia::render('Orders/index');
     }
@@ -24,9 +22,9 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(): \Inertia\Response
     {
-        return response()->inertia('Orders/create');
+        return Inertia::render('Orders/create');
     }
 
     /**
@@ -40,17 +38,17 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order): Response
+    public function show(Order $order): \Inertia\Response
     {
-        return response()->inertia('Orders/show', ['order' => $order]);
+        return Inertia::render('Orders/show', ['order' => $order]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order): Response
+    public function edit(Order $order): \Inertia\Response
     {
-        return response()->inertia('Orders/edit', ['order' => $order]);
+        return Inertia::render('Orders/edit', ['order' => $order]);
     }
 
     /**

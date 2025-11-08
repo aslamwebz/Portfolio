@@ -30,7 +30,7 @@ class RestaurantController extends Controller
                     'name' => $product->name,
                     'description' => $product->description,
                     'price' => $product->price,
-                    'image' => $product->image_path,
+                    'image' => $product->image,
                 ];
             }
         }
@@ -39,10 +39,7 @@ class RestaurantController extends Controller
             'restaurant' => [
                 'id' => $restaurant->id,
                 'name' => $restaurant->name,
-                'image' => $restaurant->image_path,
-                'rating' => $restaurant->rating,
-                'cuisine' => $restaurant->cuisine,
-                'deliveryTime' => $restaurant->delivery_time,
+                'image' => $restaurant->image,
             ],
             'menuCategories' => array_values($menuCategories),
         ]);

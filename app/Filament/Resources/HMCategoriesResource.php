@@ -55,15 +55,25 @@ class HMCategoriesResource extends Resource
                     ->circular()
                     ->size(40)
                     ->state(function ($record) {
-                        if ($record->icon && is_string($record->icon)) {
-                            $icon = json_decode($record->icon, true);
-
-                            if (is_array($icon)) {
-                                return $icon['url'] ?? null;
-                            }
+                        $icon = null;
+                        if (is_object($record) && isset($record->icon)) {
+                            $icon = $record->icon;
+                        } elseif (is_array($record) && isset($record['icon'])) {
+                            $icon = $record['icon'];
+                        }
+                        
+                        if ($icon === null || !is_string($icon)) {
+                            return null;
                         }
 
-                        return null;
+                        /** @var array{url?: string}|null $iconData */
+                        $iconData = json_decode($icon, true);
+
+                        if (!is_array($iconData) || !isset($iconData['url']) || !is_string($iconData['url'])) {
+                            return null;
+                        }
+
+                        return $iconData['url'];
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

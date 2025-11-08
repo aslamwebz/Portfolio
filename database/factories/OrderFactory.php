@@ -9,14 +9,14 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<Order>
+ * @extends Factory<Order>
  */
 class OrderFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Order>
      */
     protected $model = Order::class;
 
@@ -35,16 +35,16 @@ class OrderFactory extends Factory
             'shipping_address' => [
                 'street' => $this->faker->streetAddress,
                 'city' => $this->faker->city,
-                'state' => $this->faker->state,
+                'state' => $this->faker->word,
                 'postal_code' => $this->faker->postcode,
-                'country' => $this->faker->country,
+                'country' => $this->faker->countryCode,
             ],
             'billing_address' => [
                 'street' => $this->faker->streetAddress,
                 'city' => $this->faker->city,
-                'state' => $this->faker->state,
+                'state' => $this->faker->word,
                 'postal_code' => $this->faker->postcode,
-                'country' => $this->faker->country,
+                'country' => $this->faker->countryCode,
             ],
         ];
     }

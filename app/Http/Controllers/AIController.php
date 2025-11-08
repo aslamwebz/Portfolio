@@ -1,15 +1,13 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Models\AiConversation;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Exception;
 
 class AIController extends Controller
 {
@@ -38,8 +36,14 @@ class AIController extends Controller
         ]);
 
         try {
+            $messageInput = $request->input('message');
+            $message = is_string($messageInput) ? $messageInput : '';
+            
+            $apiKey = config('services.openrouter.api_key');
+            $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+            
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
+                'Authorization' => 'Bearer ' . $apiKeyStr,
                 'HTTP-Referer' => config('app.url'),
                 'x-title' => 'AI Hub Chat',
                 'Content-Type' => 'application/json',
@@ -47,7 +51,7 @@ class AIController extends Controller
                 'model' => 'google/gemini-2.0-flash-exp:free',
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a helpful AI assistant.'],
-                    ['role' => 'user', 'content' => $request->message],
+                    ['role' => 'user', 'content' => (string) $message],
                 ],
                 'max_tokens' => 1000,
                 'temperature' => 0.7,
@@ -62,27 +66,27 @@ class AIController extends Controller
                 'headers' => $response->headers(),
             ]);
 
-            if (! $response->successful()) {
-                throw new Exception('API request failed: '.$response->body());
+            if (!$response->successful()) {
+                throw new Exception('API request failed: ' . $response->body());
             }
 
             $responseData = $response->json();
 
-            if (! is_array($responseData) ||
-                ! isset($responseData['choices']) ||
-                ! is_array($responseData['choices']) ||
-                ! isset($responseData['choices'][0]) ||
-                ! is_array($responseData['choices'][0]) ||
-                ! isset($responseData['choices'][0]['message']) ||
-                ! is_array($responseData['choices'][0]['message']) ||
-                ! isset($responseData['choices'][0]['message']['content']) ||
-                ! is_string($responseData['choices'][0]['message']['content'])) {
+            if (!is_array($responseData) ||
+                    !isset($responseData['choices']) ||
+                    !is_array($responseData['choices']) ||
+                    !isset($responseData['choices'][0]) ||
+                    !is_array($responseData['choices'][0]) ||
+                    !isset($responseData['choices'][0]['message']) ||
+                    !is_array($responseData['choices'][0]['message']) ||
+                    !isset($responseData['choices'][0]['message']['content']) ||
+                    !is_string($responseData['choices'][0]['message']['content'])) {
                 throw new Exception('Invalid response structure from API');
             }
 
             $content = $responseData['choices'][0]['message']['content'];
 
-            if (! $content) {
+            if (!$content) {
                 throw new Exception('Empty response from AI');
             }
 
@@ -130,11 +134,14 @@ class AIController extends Controller
         ]);
 
         try {
-            $title = $request->title ?? $this->generateTitle((array) $request->messages);
+            $messagesInput = $request->input('messages');
+            $messages = is_array($messagesInput) ? $messagesInput : [];
+            $titleInput = $request->input('title');
+            $title = is_string($titleInput) ? $titleInput : $this->generateTitle($messages);
 
             $conversation = AiConversation::create([
                 'title' => $title,
-                'messages' => $request->messages,
+                'messages' => $messages,
             ]);
 
             return response()->json([
@@ -156,8 +163,11 @@ class AIController extends Controller
         ]);
 
         try {
+            $apiKey = config('services.huggingface.api_key');
+            $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+            
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.config('services.huggingface.api_key'),
+                'Authorization' => 'Bearer ' . $apiKeyStr,
             ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
                 'inputs' => $request->prompt,
                 'parameters' => [
@@ -167,17 +177,21 @@ class AIController extends Controller
                 ],
             ]);
 
-            if (! $response->successful()) {
-                throw new Exception('Image generation failed: '.$response->body());
+            if (!$response->successful()) {
+                throw new Exception('Image generation failed: ' . $response->body());
             }
 
             // The response is the image data
             $imageData = $response->body();
-            $base64Image = base64_encode($imageData ?? '');
+            if (is_string($imageData)) {
+                $base64Image = base64_encode($imageData);
+            } else {
+                $base64Image = '';
+            }
 
             return response()->json([
                 'success' => true,
-                'image' => 'data:image/jpeg;base64,'.$base64Image,
+                'image' => 'data:image/jpeg;base64,' . $base64Image,
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -197,11 +211,19 @@ class AIController extends Controller
 
         try {
             // Create an enhanced prompt that specifies emoji style
-            $enhancedPrompt = 'Create a simple emoji of '.($request->prompt ?? 'object').' in '.($request->style ?? 'flat').' style. Make it cute, simple, and expressive. The image should be centered with a clean background.';
+            $promptInput = $request->input('prompt');
+            $styleInput = $request->input('style');
+            $prompt = is_string($promptInput) ? $promptInput : 'object';
+            $style = is_string($styleInput) ? $styleInput : 'flat';
+            
+            $enhancedPrompt = 'Create a simple emoji of ' . ((string) $prompt) . ' in ' . ((string) $style) . ' style. Make it cute, simple, and expressive. The image should be centered with a clean background.';
 
             // Use the same image generation API that's already working in your app
+            $apiKey = config('services.huggingface.api_key');
+            $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+            
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
+                'Authorization' => 'Bearer ' . $apiKeyStr,
             ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
                 'inputs' => $enhancedPrompt,
                 'parameters' => [
@@ -213,14 +235,18 @@ class AIController extends Controller
                 ],
             ]);
 
-            if (! $response->successful()) {
-                throw new Exception('Emoji generation failed: '.$response->body());
+            if (!$response->successful()) {
+                throw new Exception('Emoji generation failed: ' . $response->body());
             }
 
             // Process the images
             $imageData = $response->body();
-            $base64Image = base64_encode($imageData ?? '');
-            $imageUrl = 'data:image/jpeg;base64,'.$base64Image;
+            if (is_string($imageData)) {
+                $base64Image = base64_encode($imageData);
+            } else {
+                $base64Image = '';
+            }
+            $imageUrl = 'data:image/jpeg;base64,' . $base64Image;
 
             // Generate 4 variations by making additional API calls
             $emojis = [['url' => $imageUrl]];
@@ -234,10 +260,13 @@ class AIController extends Controller
 
             foreach ($variations as $variation) {
                 try {
+                    $apiKey = config('services.huggingface.api_key');
+                    $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+                    
                     $varResponse = Http::withHeaders([
-                        'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
+                        'Authorization' => 'Bearer ' . $apiKeyStr,
                     ])->post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0', [
-                        'inputs' => $enhancedPrompt.$variation,
+                        'inputs' => $enhancedPrompt . $variation,
                         'parameters' => [
                             'negative_prompt' => 'blurry, bad quality, distorted, text, words, letters, complex background, multiple subjects',
                             'num_inference_steps' => 25,
@@ -249,11 +278,15 @@ class AIController extends Controller
 
                     if ($varResponse->successful()) {
                         $varImageData = $varResponse->body();
-                        $varBase64Image = base64_encode($varImageData ?? '');
-                        $emojis[] = ['url' => 'data:image/jpeg;base64,'.$varBase64Image];
+                        if (is_string($varImageData)) {
+                            $varBase64Image = base64_encode($varImageData);
+                        } else {
+                            $varBase64Image = '';
+                        }
+                        $emojis[] = ['url' => 'data:image/jpeg;base64,' . $varBase64Image];
                     }
                 } catch (Exception $e) {
-                    Log::warning('Failed to generate emoji variation: '.$e->getMessage());
+                    Log::warning('Failed to generate emoji variation: ' . $e->getMessage());
                     // Continue with the ones we have
                 }
             }
@@ -263,11 +296,11 @@ class AIController extends Controller
                 'emojis' => $emojis,
             ]);
         } catch (Exception $e) {
-            Log::error('Emoji generation failed: '.$e->getMessage());
+            Log::error('Emoji generation failed: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'error' => 'Failed to generate emoji: '.$e->getMessage(),
+                'error' => 'Failed to generate emoji: ' . $e->getMessage(),
             ], 500);
         }
     }
@@ -281,7 +314,8 @@ class AIController extends Controller
         ]);
 
         try {
-            $paletteSize = $request->paletteSize;
+            $paletteSizeInput = $request->input('paletteSize');
+            $paletteSize = is_int($paletteSizeInput) ? $paletteSizeInput : 5;
             $colors = [];
             $description = '';
 
@@ -289,11 +323,18 @@ class AIController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageData = file_get_contents($image->path());
-                $base64Image = base64_encode($imageData ?? '');
+                if (is_string($imageData)) {
+                    $base64Image = base64_encode($imageData);
+                } else {
+                    $base64Image = '';
+                }
 
                 // First, get a description of the image using Hugging Face
+                $apiKey = config('services.huggingface.api_key');
+                $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+                
                 $descriptionResponse = Http::withHeaders([
-                    'Authorization' => 'Bearer '.config('services.huggingface.api_key', ''),
+                    'Authorization' => 'Bearer ' . $apiKeyStr,
                 ])->post('https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large', [
                     'inputs' => [
                         'image' => $base64Image,
@@ -302,21 +343,31 @@ class AIController extends Controller
 
                 if ($descriptionResponse->successful()) {
                     $descData = $descriptionResponse->json();
-                    if (is_array($descData) && isset($descData[0]['generated_text']) && is_string($descData[0]['generated_text'])) {
+                    if (is_array($descData) && 
+                        isset($descData[0]) && 
+                        is_array($descData[0]) && 
+                        isset($descData[0]['generated_text']) && 
+                        is_string($descData[0]['generated_text'])) {
                         $description = $descData[0]['generated_text'];
                     } else {
                         $description = 'Image analysis';
                     }
-                    Log::info('Image description: '.$description);
+                    Log::info('Image description: ' . $description);
                 } else {
-                    Log::warning('Failed to get image description: '.$descriptionResponse->body());
+                    Log::warning('Failed to get image description: ' . $descriptionResponse->body());
                     $description = 'Uploaded image';
                 }
 
                 // Use OpenRouter to analyze the image and suggest colors
+                $apiKey = config('services.openrouter.api_key');
+                $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+                
+                $referer = config('app.url');
+                $refererStr = is_string($referer) ? $referer : '';
+                
                 $response = Http::withHeaders([
-                    'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
-                    'HTTP-Referer' => config('app.url'),
+                    'Authorization' => 'Bearer ' . $apiKeyStr,
+                    'HTTP-Referer' => $refererStr,
                     'x-title' => 'AI Hub Color Palette',
                     'Content-Type' => 'application/json',
                 ])->post('https://openrouter.ai/api/v1/chat/completions', [
@@ -324,19 +375,19 @@ class AIController extends Controller
                     'messages' => [
                         [
                             'role' => 'system',
-                            'content' => 'You are a color palette expert. Extract exactly '.($paletteSize ?? 5)." dominant or complementary colors from the image. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
+                            'content' => 'You are a color palette expert. Extract exactly ' . (int) $paletteSize . " dominant or complementary colors from the image. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
                         ],
                         [
                             'role' => 'user',
                             'content' => [
                                 [
                                     'type' => 'text',
-                                    'text' => 'Generate a color palette with '.($paletteSize ?? 5).' colors from this image.',
+                                    'text' => 'Generate a color palette with ' . (int) $paletteSize . ' colors from this image.',
                                 ],
                                 [
                                     'type' => 'image_url',
                                     'image_url' => [
-                                        'url' => 'data:image/jpeg;base64,'.($base64Image ?? ''),
+                                        'url' => 'data:image/jpeg;base64,' . ((string) ($base64Image ?? '')),
                                     ],
                                 ],
                             ],
@@ -346,28 +397,29 @@ class AIController extends Controller
                     'temperature' => 0.2,
                 ]);
 
-                if (! $response->successful()) {
-                    throw new Exception('API request failed: '.$response->body());
+                if (!$response->successful()) {
+                    throw new Exception('API request failed: ' . $response->body());
                 }
 
                 $responseData = $response->json();
 
-                if (! is_array($responseData) ||
-                    ! isset($responseData['choices']) ||
-                    ! is_array($responseData['choices']) ||
-                    ! isset($responseData['choices'][0]) ||
-                    ! is_array($responseData['choices'][0]) ||
-                    ! isset($responseData['choices'][0]['message']) ||
-                    ! is_array($responseData['choices'][0]['message']) ||
-                    ! isset($responseData['choices'][0]['message']['content']) ||
-                    ! is_string($responseData['choices'][0]['message']['content'])) {
+                if (!is_array($responseData) ||
+                        !isset($responseData['choices']) ||
+                        !is_array($responseData['choices']) ||
+                        !isset($responseData['choices'][0]) ||
+                        !is_array($responseData['choices'][0]) ||
+                        !isset($responseData['choices'][0]['message']) ||
+                        !is_array($responseData['choices'][0]['message']) ||
+                        !isset($responseData['choices'][0]['message']['content']) ||
+                        !is_string($responseData['choices'][0]['message']['content'])) {
                     throw new Exception('Invalid response structure from API');
                 }
 
                 $content = $responseData['choices'][0]['message']['content'];
 
                 // Extract the JSON part from the response
-                preg_match('/\[.*\]/s', $content, $matches);
+                $matches = [];
+                preg_match('/\[.*\]/s', (string) $content, $matches);
                 if (empty($matches)) {
                     throw new Exception('Could not extract JSON from response');
                 }
@@ -376,15 +428,22 @@ class AIController extends Controller
                 $colors = json_decode($jsonStr, true);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
-                    throw new Exception('Invalid JSON response: '.json_last_error_msg());
+                    throw new Exception('Invalid JSON response: ' . json_last_error_msg());
                 }
             } else {
                 // Use text prompt to generate colors
-                $prompt = $request->prompt;
+                $promptInput = $request->input('prompt');
+                $prompt = is_string($promptInput) ? $promptInput : 'default';
 
+                $apiKey = config('services.openrouter.api_key');
+                $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+                
+                $referer = config('app.url');
+                $refererStr = is_string($referer) ? $referer : '';
+                
                 $response = Http::withHeaders([
-                    'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
-                    'HTTP-Referer' => config('app.url'),
+                    'Authorization' => 'Bearer ' . $apiKeyStr,
+                    'HTTP-Referer' => $refererStr,
                     'x-title' => 'AI Hub Color Palette',
                     'Content-Type' => 'application/json',
                 ])->post('https://openrouter.ai/api/v1/chat/completions', [
@@ -392,42 +451,58 @@ class AIController extends Controller
                     'messages' => [
                         [
                             'role' => 'system',
-                            'content' => 'You are a color palette expert. Generate exactly '.($paletteSize ?? 5)." colors that match the theme or description provided. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
+                            'content' => 'You are a color palette expert. Generate exactly ' . (int) $paletteSize . " colors that match the theme or description provided. For each color, provide the hex code, RGB values, and a descriptive name. Format your response as a valid JSON array with objects containing 'hex', 'rgb', and 'name' properties. Do not include any explanations or text outside the JSON array.",
                         ],
                         [
                             'role' => 'user',
-                            'content' => 'Generate a color palette with '.($paletteSize ?? 5).' colors for this theme: '.($prompt ?? 'default'),
+                            'content' => 'Generate a color palette with ' . (int) $paletteSize . ' colors for this theme: ' . ((string) $prompt),
                         ],
                     ],
                     'max_tokens' => 1000,
                     'temperature' => 0.7,
                 ]);
 
-                if (! $response->successful()) {
-                    throw new Exception('API request failed: '.$response->body());
+                if (!$response->successful()) {
+                    throw new Exception('API request failed: ' . $response->body());
                 }
 
                 $responseData = $response->json();
-                $content = $responseData['choices'][0]['message']['content'] ?? '';
+                
+                if (!is_array($responseData) ||
+                        !isset($responseData['choices']) ||
+                        !is_array($responseData['choices']) ||
+                        !isset($responseData['choices'][0]) ||
+                        !is_array($responseData['choices'][0]) ||
+                        !isset($responseData['choices'][0]['message']) ||
+                        !is_array($responseData['choices'][0]['message']) ||
+                        !isset($responseData['choices'][0]['message']['content']) ||
+                        !is_string($responseData['choices'][0]['message']['content'])) {
+                    throw new Exception('Invalid response structure from API');
+                }
+
+                $content = $responseData['choices'][0]['message']['content'];
 
                 // Extract the JSON part from the response
-                preg_match('/\[.*\]/s', $content, $matches);
+                $matches = [];
+                preg_match('/\[.*\]/s', (string) $content, $matches);
                 if (empty($matches)) {
                     throw new Exception('Could not extract JSON from response');
                 }
 
                 $jsonStr = $matches[0];
-                $colors = json_decode($jsonStr, true);
+                $decodedColors = json_decode($jsonStr, true);
 
                 if (json_last_error() !== JSON_ERROR_NONE) {
-                    throw new Exception('Invalid JSON response: '.json_last_error_msg());
+                    throw new Exception('Invalid JSON response: ' . json_last_error_msg());
                 }
 
+                $colors = is_array($decodedColors) ? $decodedColors : [];
                 $description = $prompt;
             }
 
             // Ensure we have exactly the requested number of colors
-            $colors = array_slice($colors, 0, $paletteSize);
+            $colors = is_array($colors) ? $colors : [];
+            $colors = array_slice($colors, 0, (int)$paletteSize);
 
             return response()->json([
                 'success' => true,
@@ -435,11 +510,11 @@ class AIController extends Controller
                 'description' => $description,
             ]);
         } catch (Exception $e) {
-            Log::error('Color palette generation failed: '.$e->getMessage());
+            Log::error('Color palette generation failed: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'error' => 'Failed to generate color palette: '.$e->getMessage(),
+                'error' => 'Failed to generate color palette: ' . $e->getMessage(),
             ], 500);
         }
     }
@@ -454,23 +529,34 @@ class AIController extends Controller
         ]);
 
         try {
-            $type = $request->type;
-            $description = $request->description;
-            $keywords = $request->keywords;
-            $count = (int) $request->count;
+            $typeInput = $request->input('type');
+            $descriptionInput = $request->input('description');
+            $keywordsInput = $request->input('keywords');
+            $countInput = $request->input('count');
+            
+            $type = is_string($typeInput) ? $typeInput : 'business';
+            $description = is_string($descriptionInput) ? $descriptionInput : 'default';
+            $keywords = is_string($keywordsInput) ? $keywordsInput : 'none';
+            $count = is_int($countInput) ? $countInput : 10;
 
             // Create a prompt for the AI
-            $prompt = 'Generate '.($count ?? 10).' unique and creative names for a '.($type ?? 'business').' with the following description: '.($description ?? 'default').'.';
+            $prompt = 'Generate ' . (int) $count . ' unique and creative names for a ' . ((string) $type) . ' with the following description: ' . ((string) $description) . '.';
 
-            if (! empty($keywords)) {
-                $prompt .= ' Consider these keywords or themes: '.($keywords ?? 'none').'.';
+            if (!empty($keywords)) {
+                $prompt .= ' Consider these keywords or themes: ' . ((string) $keywords) . '.';
             }
 
             $prompt .= " For each name, provide a brief explanation of why it's appropriate. Format your response as a valid JSON array with objects containing 'name' and 'description' properties. Do not include any explanations or text outside the JSON array.";
 
+            $apiKey = config('services.openrouter.api_key');
+            $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+            
+            $referer = config('app.url');
+            $refererStr = is_string($referer) ? $referer : '';
+            
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
-                'HTTP-Referer' => config('app.url'),
+                'Authorization' => 'Bearer ' . $apiKeyStr,
+                'HTTP-Referer' => $refererStr,
                 'x-title' => 'AI Hub Name Generator',
                 'Content-Type' => 'application/json',
             ])->post('https://openrouter.ai/api/v1/chat/completions', [
@@ -489,52 +575,55 @@ class AIController extends Controller
                 'temperature' => 0.8,
             ]);
 
-            if (! $response->successful()) {
-                throw new Exception('API request failed: '.$response->body());
+            if (!$response->successful()) {
+                throw new Exception('API request failed: ' . $response->body());
             }
 
             $responseData = $response->json();
 
-            if (! is_array($responseData) ||
-                ! isset($responseData['choices']) ||
-                ! is_array($responseData['choices']) ||
-                ! isset($responseData['choices'][0]) ||
-                ! is_array($responseData['choices'][0]) ||
-                ! isset($responseData['choices'][0]['message']) ||
-                ! is_array($responseData['choices'][0]['message']) ||
-                ! isset($responseData['choices'][0]['message']['content']) ||
-                ! is_string($responseData['choices'][0]['message']['content'])) {
+            if (!is_array($responseData) ||
+                    !isset($responseData['choices']) ||
+                    !is_array($responseData['choices']) ||
+                    !isset($responseData['choices'][0]) ||
+                    !is_array($responseData['choices'][0]) ||
+                    !isset($responseData['choices'][0]['message']) ||
+                    !is_array($responseData['choices'][0]['message']) ||
+                    !isset($responseData['choices'][0]['message']['content']) ||
+                    !is_string($responseData['choices'][0]['message']['content'])) {
                 throw new Exception('Invalid response structure from API');
             }
 
             $content = $responseData['choices'][0]['message']['content'];
 
             // Extract the JSON part from the response
-            preg_match('/\[.*\]/s', $content, $matches);
+            $matches = [];
+            preg_match('/\[.*\]/s', (string) $content, $matches);
             if (empty($matches)) {
                 throw new Exception('Could not extract JSON from response');
             }
 
             $jsonStr = $matches[0];
-            $names = json_decode($jsonStr, true);
+            $decodedNames = json_decode($jsonStr, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new Exception('Invalid JSON response: '.json_last_error_msg());
+                throw new Exception('Invalid JSON response: ' . json_last_error_msg());
             }
 
+            $names = is_array($decodedNames) ? $decodedNames : [];
+            
             // Limit to the requested count
-            $names = array_slice($names, 0, $count);
+            $names = array_slice($names, 0, (int)$count);
 
             return response()->json([
                 'success' => true,
                 'names' => $names,
             ]);
         } catch (Exception $e) {
-            Log::error('Name generation failed: '.$e->getMessage());
+            Log::error('Name generation failed: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'error' => 'Failed to generate names: '.$e->getMessage(),
+                'error' => 'Failed to generate names: ' . $e->getMessage(),
             ], 500);
         }
     }
@@ -547,13 +636,17 @@ class AIController extends Controller
         ]);
 
         try {
-            $names = $request->names;
+            $namesInput = $request->input('names');
+            $names = is_array($namesInput) ? $namesInput : [];
             $availability = [];
 
             // For each name, check if the .com domain is available
             foreach ($names as $name) {
                 // Convert to lowercase and remove spaces and special characters
-                $domainName = mb_strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $name));
+                $nameString = is_string($name) ? $name : '';
+                $cleanedName = preg_replace('/[^a-zA-Z0-9]/', '', (string) $nameString);
+                $cleanedNameStr = is_string($cleanedName) ? $cleanedName : '';
+                $domainName = mb_strtolower($cleanedNameStr);
 
                 // In a real implementation, you would use a domain availability API
                 // For this demo, we'll simulate with a random result
@@ -565,59 +658,86 @@ class AIController extends Controller
                 'availability' => $availability,
             ]);
         } catch (Exception $e) {
-            Log::error('Domain check failed: '.$e->getMessage());
+            Log::error('Domain check failed: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'error' => 'Failed to check domains: '.$e->getMessage(),
+                'error' => 'Failed to check domains: ' . $e->getMessage(),
             ], 500);
         }
     }
 
+    /**
+     * @return array{limit: int, remaining: int, reset: string, tokens_used: int, model_tokens_used: int}
+     */
     private function getRateLimitInfo(mixed $response = null): array
     {
         if ($response) {
+            $limit = $response->header('x-ratelimit-limit');
+            $remaining = $response->header('x-ratelimit-remaining');
+            $reset = $response->header('x-ratelimit-reset');
+            $tokensUsed = $response->header('openrouter-tokens-used');
+            $modelTokensUsed = $response->header('openrouter-model-tokens-used');
+            
             return [
-                'limit' => (int) $response->header('x-ratelimit-limit'),
-                'remaining' => (int) $response->header('x-ratelimit-remaining'),
-                'reset' => $response->header('x-ratelimit-reset'),
-                'tokens_used' => (int) $response->header('openrouter-tokens-used'),
-                'model_tokens_used' => (int) $response->header('openrouter-model-tokens-used'),
+                'limit' => is_numeric($limit) ? (int) $limit : 0,
+                'remaining' => is_numeric($remaining) ? (int) $remaining : 0,
+                'reset' => is_string($reset) ? $reset : '',
+                'tokens_used' => is_numeric($tokensUsed) ? (int) $tokensUsed : 0,
+                'model_tokens_used' => is_numeric($modelTokensUsed) ? (int) $modelTokensUsed : 0,
             ];
         }
 
         // If no response provided, make a HEAD request to get limits
+        $apiKey = config('services.openrouter.api_key');
+        $apiKeyStr = is_string($apiKey) ? $apiKey : '';
+        
+        $referer = config('app.url');
+        $refererStr = is_string($referer) ? $referer : '';
+        
         $checkResponse = Http::withHeaders([
-            'Authorization' => 'Bearer '.config('services.openrouter.api_key', ''),
-            'HTTP-Referer' => config('app.url'),
+            'Authorization' => 'Bearer '.$apiKeyStr,
+            'HTTP-Referer' => $refererStr,
             'x-title' => 'AI Hub Chat',
         ])->head('https://openrouter.ai/api/v1/auth/key');
 
+        $limit = $checkResponse->header('x-ratelimit-limit');
+        $limitValue = is_string($limit) ? $limit : '';
+        $remaining = $checkResponse->header('x-ratelimit-remaining');
+        $remainingValue = is_string($remaining) ? $remaining : '';
+        $reset = $checkResponse->header('x-ratelimit-reset');
+        $resetValue = is_string($reset) ? $reset : '';
+        
         return [
-            'limit' => (int) $checkResponse->header('x-ratelimit-limit'),
-            'remaining' => (int) $checkResponse->header('x-ratelimit-remaining'),
-            'reset' => $checkResponse->header('x-ratelimit-reset'),
+            'limit' => is_numeric($limitValue) ? (int) $limitValue : 0,
+            'remaining' => is_numeric($remainingValue) ? (int) $remainingValue : 0,
+            'reset' => is_string($resetValue) ? $resetValue : '',
             'tokens_used' => 0,
             'model_tokens_used' => 0,
         ];
     }
 
+    /**
+     * @param array<mixed, mixed> $messages
+     */
     private function generateTitle(array $messages): string
     {
         // Get the first user message as the title
         $firstMessage = collect($messages)
             ->where('role', 'user')
             ->first();
-
+        
         $content = '';
         if (is_array($firstMessage) && isset($firstMessage['content'])) {
-            $content = $firstMessage['content'];
+            $contentValue = $firstMessage['content'];
+            $content = is_string($contentValue) ? $contentValue : '';
         } elseif (is_object($firstMessage) && isset($firstMessage->content)) {
-            $content = $firstMessage->content;
+            $contentValue = $firstMessage->content;
+            $content = is_string($contentValue) ? $contentValue : '';
         } else {
             $content = 'New Conversation';
         }
-
-        return mb_substr((string) $content, 0, 50).'...';
+        
+        return mb_substr($content, 0, 50).'...';
     }
 }

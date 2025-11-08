@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -8,7 +6,6 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Inertia\Inertia;
 
 class ClientController extends Controller
@@ -16,7 +13,7 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
         return Inertia::render('Clients/index');
     }
@@ -24,9 +21,9 @@ class ClientController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(): \Inertia\Response
     {
-        return response()->inertia('Clients/create');
+        return Inertia::render('Clients/create');
     }
 
     /**
@@ -40,17 +37,17 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client): Response
+    public function show(Client $client): \Inertia\Response
     {
-        return response()->inertia('Clients/show', ['client' => $client]);
+        return Inertia::render('Clients/show', ['client' => $client]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client): Response
+    public function edit(Client $client): \Inertia\Response
     {
-        return response()->inertia('Clients/edit', ['client' => $client]);
+        return Inertia::render('Clients/edit', ['client' => $client]);
     }
 
     /**

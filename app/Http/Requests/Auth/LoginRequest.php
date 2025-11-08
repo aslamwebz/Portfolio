@@ -40,23 +40,18 @@ class LoginRequest extends FormRequest
      *
      * @throws ValidationException
      */
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @throws ValidationException
-     */
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @throws ValidationException
-     */
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
 
-        $email = (string) ($this->query('email') ?? $this->request->get('email', ''));
-        $password = (string) ($this->query('password') ?? $this->request->get('password', ''));
-        $remember = (bool) ($this->query('remember') ?? $this->request->get('remember', false));
+        $emailInput = $this->query('email') ?? $this->request->get('email', '');
+        $email = is_string($emailInput) ? $emailInput : '';
+        
+        $passwordInput = $this->query('password') ?? $this->request->get('password', '');
+        $password = is_string($passwordInput) ? $passwordInput : '';
+        
+        $rememberInput = $this->query('remember') ?? $this->request->get('remember', false);
+        $remember = is_bool($rememberInput) ? $rememberInput : false;
 
         if (! Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
             RateLimiter::hit($this->throttleKey());
@@ -95,16 +90,13 @@ class LoginRequest extends FormRequest
     /**
      * Get the rate limiting throttle key for the request.
      */
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
     public function throttleKey(): string
     {
-        $email = (string) ($this->query('email') ?? $this->request->get('email', ''));
-        $ip = (string) $this->server('REMOTE_ADDR', '127.0.0.1');
+        $emailInput = $this->query('email') ?? $this->request->get('email', '');
+        $email = is_string($emailInput) ? $emailInput : '';
+        
+        $ipInput = $this->server('REMOTE_ADDR') ?? '127.0.0.1';
+        $ip = is_string($ipInput) ? $ipInput : '127.0.0.1';
 
         return Str::transliterate(Str::lower($email).'|'.$ip);
     }

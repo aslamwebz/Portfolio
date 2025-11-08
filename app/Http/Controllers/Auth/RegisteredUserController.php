@@ -38,10 +38,19 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $nameInput = $request->input('name');
+        $name = is_string($nameInput) ? $nameInput : '';
+        
+        $emailInput = $request->input('email');
+        $email = is_string($emailInput) ? $emailInput : '';
+        
+        $passwordInput = $request->input('password');
+        $password = is_string($passwordInput) ? $passwordInput : '';
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => (string) $name,
+            'email' => (string) $email,
+            'password' => Hash::make((string) $password),
         ]);
 
         event(new Registered($user));
