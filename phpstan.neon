@@ -14,7 +14,7 @@ parameters:
         - routes
 
 
-    level: max
+    level: 5
 
     treatPhpDocTypesAsCertain: false
 

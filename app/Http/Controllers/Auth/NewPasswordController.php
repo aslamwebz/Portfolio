@@ -25,10 +25,10 @@ class NewPasswordController extends Controller
     {
         $emailInput = $request->email;
         $email = is_string($emailInput) ? $emailInput : '';
-        
+
         $tokenInput = $request->route('token');
         $token = is_string($tokenInput) ? $tokenInput : '';
-        
+
         return Inertia::render('Auth/ResetPassword', [
             'email' => (string) $email,
             'token' => (string) $token,
@@ -57,7 +57,7 @@ class NewPasswordController extends Controller
                 if ($user instanceof \App\Models\User) {
                     $passwordInput = $request->input('password');
                     $password = is_string($passwordInput) ? $passwordInput : '';
-                    
+
                     $user->forceFill([
                         'password' => Hash::make((string) $password),
                         'remember_token' => Str::random(60),

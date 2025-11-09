@@ -23,13 +23,13 @@ class PasswordController extends Controller
         ]);
 
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             abort(401, 'Unauthorized');
         }
-        
+
         $passwordInput = $request->input('password');
         $password = is_string($passwordInput) ? $passwordInput : '';
-        
+
         $user->update([
             'password' => Hash::make((string) $password),
         ]);

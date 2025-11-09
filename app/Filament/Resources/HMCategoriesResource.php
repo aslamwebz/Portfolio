@@ -61,15 +61,15 @@ class HMCategoriesResource extends Resource
                         } elseif (is_array($record) && isset($record['icon'])) {
                             $icon = $record['icon'];
                         }
-                        
-                        if ($icon === null || !is_string($icon)) {
+
+                        if ($icon === null || ! is_string($icon)) {
                             return null;
                         }
 
                         /** @var array{url?: string}|null $iconData */
                         $iconData = json_decode($icon, true);
 
-                        if (!is_array($iconData) || !isset($iconData['url']) || !is_string($iconData['url'])) {
+                        if (! is_array($iconData) || ! isset($iconData['url']) || ! is_string($iconData['url'])) {
                             return null;
                         }
 

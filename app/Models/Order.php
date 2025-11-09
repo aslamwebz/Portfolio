@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
  * @property int $id
@@ -22,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property array<string, mixed>|null $billing_address
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
+ *
  * @method static OrderFactory factory($count = null, $state = [])
  */
 class Order extends Model
@@ -81,4 +81,3 @@ class Order extends Model
         return OrderFactory::new();
     }
 }
-

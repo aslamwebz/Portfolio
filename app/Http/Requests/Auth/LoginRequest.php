@@ -46,10 +46,10 @@ class LoginRequest extends FormRequest
 
         $emailInput = $this->query('email') ?? $this->request->get('email', '');
         $email = is_string($emailInput) ? $emailInput : '';
-        
+
         $passwordInput = $this->query('password') ?? $this->request->get('password', '');
         $password = is_string($passwordInput) ? $passwordInput : '';
-        
+
         $rememberInput = $this->query('remember') ?? $this->request->get('remember', false);
         $remember = is_bool($rememberInput) ? $rememberInput : false;
 
@@ -94,7 +94,7 @@ class LoginRequest extends FormRequest
     {
         $emailInput = $this->query('email') ?? $this->request->get('email', '');
         $email = is_string($emailInput) ? $emailInput : '';
-        
+
         $ipInput = $this->server('REMOTE_ADDR') ?? '127.0.0.1';
         $ip = is_string($ipInput) ? $ipInput : '127.0.0.1';
 

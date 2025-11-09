@@ -40,10 +40,10 @@ class RegisteredUserController extends Controller
 
         $nameInput = $request->input('name');
         $name = is_string($nameInput) ? $nameInput : '';
-        
+
         $emailInput = $request->input('email');
         $email = is_string($emailInput) ? $emailInput : '';
-        
+
         $passwordInput = $request->input('password');
         $password = is_string($passwordInput) ? $passwordInput : '';
 

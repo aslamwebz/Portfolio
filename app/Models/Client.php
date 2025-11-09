@@ -8,8 +8,8 @@ use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -63,7 +63,7 @@ class Client extends Model
      */
     protected static function newFactory(): Factory
     {
-        return \Database\Factories\ClientFactory::new();
+        return ClientFactory::new();
     }
 
     protected static function boot()

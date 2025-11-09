@@ -24,7 +24,6 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon $updated_at
  *
  * @method static ProductFactory factory($count = null, $state = [])
- *
  */
 class Product extends Model
 {

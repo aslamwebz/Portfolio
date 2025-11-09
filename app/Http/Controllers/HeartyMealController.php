@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -19,8 +21,8 @@ class HeartyMealController extends Controller
             ->map(function ($category) {
                 $iconValue = $category->icon ?? '';
                 $iconData = is_string($iconValue) ? json_decode($iconValue, true) : null;
-                $category->icon = is_array($iconData) && isset($iconData['url']) && is_string($iconData['url']) 
-                    ? $iconData['url'] 
+                $category->icon = is_array($iconData) && isset($iconData['url']) && is_string($iconData['url'])
+                    ? $iconData['url']
                     : null;
 
                 return $category;
@@ -34,7 +36,7 @@ class HeartyMealController extends Controller
             ->get()
             ->map(function ($restaurant) {
                 $restaurantId = $restaurant->id ?? 0;
-                
+
                 return [
                     'id' => $restaurant->id ?? null,
                     'name' => $restaurant->name ?? null,
@@ -66,7 +68,7 @@ class HeartyMealController extends Controller
             ->where('restaurants.id', $id)
             ->first();
 
-        if ($restaurant === null || !isset($restaurant->id, $restaurant->name)) {
+        if ($restaurant === null || ! isset($restaurant->id, $restaurant->name)) {
             return redirect('/hearty-meal')->with('error', 'Restaurant not found');
         }
 
@@ -123,7 +125,7 @@ class HeartyMealController extends Controller
             ->where('restaurants.id', $id)
             ->first();
 
-        if ($restaurant === null || !isset($restaurant->id, $restaurant->name)) {
+        if ($restaurant === null || ! isset($restaurant->id, $restaurant->name)) {
             return response()->json(['error' => 'Restaurant not found'], 404);
         }
 
@@ -156,7 +158,7 @@ class HeartyMealController extends Controller
 
             foreach ($products as $product) {
                 $category = $product->category ?? 'Other';
-                if (!isset($groupedProducts[$category])) {
+                if (! isset($groupedProducts[$category])) {
                     $groupedProducts[$category] = [];
                 }
                 $groupedProducts[$category][] = $product;
@@ -186,14 +188,14 @@ class HeartyMealController extends Controller
     public function indexByCategory(string $category): \Illuminate\Http\JsonResponse
     {
         $products = Product::where('category', $category)->get();
-        
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products */
+
+        /** @var \Illuminate\Database\Eloquent\Collection<int, Product> $products */
         return response()->json($products);
     }
 
     public function getCategories(): \Illuminate\Http\JsonResponse
     {
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\HMCategories> $categories */
+        /** @var \Illuminate\Database\Eloquent\Collection<int, HMCategories> $categories */
         $categories = HMCategories::all();
 
         return response()->json($categories);
@@ -201,7 +203,7 @@ class HeartyMealController extends Controller
 
     public function getCategory(string $categoryid): \Illuminate\Http\JsonResponse
     {
-        /** @var \App\Models\HMCategories|null $category */
+        /** @var HMCategories|null $category */
         $category = HMCategories::find($categoryid);
 
         return response()->json($category);
@@ -242,7 +244,7 @@ class HeartyMealController extends Controller
         $query = $request->input('q');
         $queryStr = is_string($query) ? $query : '';
 
-        if (!$queryStr) {
+        if (! $queryStr) {
             return response()->json([
                 'restaurants' => [],
                 'categories' => [],
@@ -252,8 +254,8 @@ class HeartyMealController extends Controller
         // Get restaurants that match the query
         $restaurants = DB::table('restaurants')
             ->select('restaurants.*')
-            ->where('restaurants.name', 'like', '%' . $queryStr . '%')
-            ->orWhere('restaurants.description', 'like', '%' . $queryStr . '%')
+            ->where('restaurants.name', 'like', '%'.$queryStr.'%')
+            ->orWhere('restaurants.description', 'like', '%'.$queryStr.'%')
             ->distinct()
             ->limit(5)
             ->get()
@@ -274,7 +276,7 @@ class HeartyMealController extends Controller
         // Get categories that match the query
         $categories = DB::table('hmcategories')
             ->select('id', 'name', 'slug', 'icon')
-            ->where('name', 'like', '%' . $queryStr . '%')
+            ->where('name', 'like', '%'.$queryStr.'%')
             ->limit(3)
             ->get()
             ->map(function ($category) {

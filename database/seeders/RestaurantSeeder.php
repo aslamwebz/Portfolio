@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use JsonException;
 use RuntimeException;
 
 class RestaurantSeeder extends Seeder
@@ -14,8 +15,7 @@ class RestaurantSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function run(): void
     {
@@ -26,8 +26,8 @@ class RestaurantSeeder extends Seeder
             throw new RuntimeException('Failed to load restaurants.json');
         }
 
-        /** 
-         * @var array{restaurants: array<array{name: string, image: string, categories: array<string>}>} $data 
+        /**
+         * @var array{restaurants: array<array{name: string, image: string, categories: array<string>}>} $data
          */
         $data = json_decode($jsonContent, true, 512, JSON_THROW_ON_ERROR);
 
@@ -40,7 +40,7 @@ class RestaurantSeeder extends Seeder
             // Insert restaurant
             $restaurantId = (int) DB::table('restaurants')->insertGetId([
                 'name' => $name,
-                'about_us' => 'Welcome to ' . $name,
+                'about_us' => 'Welcome to '.$name,
                 'slug' => Str::slug($name),
                 'address' => '123 Food Street',
                 'working_hours' => json_encode(['monday' => '9:00 AM - 10:00 PM'], JSON_THROW_ON_ERROR),
@@ -56,9 +56,7 @@ class RestaurantSeeder extends Seeder
     /**
      * Create restaurant category relationships.
      *
-     * @param int $restaurantId
-     * @param array<string> $categorySlugs
-     * @return void
+     * @param  array<string>  $categorySlugs
      */
     private function createRestaurantCategories(int $restaurantId, array $categorySlugs): void
     {
