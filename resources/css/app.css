@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-orange: oklch(66.85% 0.208 60.35);
+}
 
 @layer components {
     .container {

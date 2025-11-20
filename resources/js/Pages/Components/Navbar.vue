@@ -101,7 +101,7 @@ function download() {
         })
         let link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
-        link.download = 'test.pdf'
+        link.download = 'M Aslam Resume.pdf'
         link.click()
     });
 }
